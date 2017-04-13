@@ -1,0 +1,19 @@
+.panel{
+  background-color: #ffffff;
+  display: block;
+  @include border-radius(5px);
+  @include box-shadow(0 1px 1px $gray-light);
+  .panel-header{
+    padding: 5px 5px 8px 0;
+    border-bottom: 1px solid lightgrey;
+    color: $black-light;
+  }
+  .panel-body{
+    padding: 10px;
+    &:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+  }
+}

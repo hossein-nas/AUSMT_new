@@ -1,0 +1,431 @@
+#panel_area{
+	background-color: $grayscale-2;
+	padding:30px 0;
+	@extend .clearfix;
+
+	/* sass @media query with min: 320 and max: 767 */
+	@media screen and (min-width: 320px) and (max-width: 767px){
+		padding: 0;
+	}
+	>.panel{
+		float: right;
+		width:380px;
+		background-color: $white;
+		margin-left:30px;
+		&:nth-child(3n){
+			margin-left: 0;
+		}
+		/* sass @media query with min: 320 and max: 767 */
+		@media screen and (min-width: 320px) and (max-width: 767px){
+			width: 100%;
+		}
+		>.headline{
+			@extend .clearfix;
+			color:$grayscale-4;
+			font-size:1.3rem;
+			position: relative;
+			margin:.5rem .75rem 1rem;
+			text-align: center;
+			@extend %no-select;
+			&::after{
+				content:'';
+				display: block;
+				width: 100%;
+				height:3px;
+				background-color: $grayscale-2;
+				float: right;
+				margin-top:-1rem;
+			}
+			span{
+				display: inline-block;
+				padding:0 .75rem;
+				background-color: $white;
+			}
+		}
+		>.body{
+			width: 100%;
+			@extend .clearfix;
+			position: relative;
+			.scrollbar{
+				width: 3px;
+				height: 100%;
+				left:7px;
+				position: absolute;
+				z-index: 99;
+				.handle{
+					width: 3px;
+					height: 2rem;
+					background-color: $grayscale-2;
+					cursor: pointer;
+					&:hover{
+						background-color: darken($grayscale-2,4);
+					}
+				}
+				/* sass @media query with min: 320 and max: 767 */
+				@media screen and (min-width: 320px) and (max-width: 767px){
+					display: none;
+				}
+			}
+		}
+
+		&.no-content{
+			>.body{
+				position: relative;
+				text-align: center;
+				&::before{
+					content:'فعلا محتوای ثبت نشده...';
+					display: inline-block;
+					padding:.75rem 1.5rem;
+					background-color: $grayscale-1;
+					border-radius:.5rem;
+					color:$grayscale-5;
+					font-size:1.1rem;
+					margin: 7rem 0;
+				}
+			}
+		}
+
+		&.timeline{
+			direction:ltr;
+			@extend %no-select;
+			padding:0 0 1rem;
+			>.body{
+				height:285px;
+				overflow: hidden;
+				position: relative;
+				.slidee{
+					width: 100%;
+					list-style: none;
+					position: relative;
+					@extend .clearfix;
+					&::before{
+						content:'';
+						width: 4px;
+						position: absolute;
+						right: 85px;
+						background-color: $grayscale-2;
+						height:97%;
+						/* sass @media query with min: 320 and max: 767 */
+						@media screen and (min-width: 320px) and (max-width: 767px){
+							right:60px;
+						}
+					}
+					.items{
+						direction: rtl;
+						float: right;
+						width: 100%;
+						position: relative;
+						@extend .clearfix;
+						margin-bottom:1rem;
+						margin-left:.5rem;
+						&:last-of-type{
+							margin-bottom:0;
+						}
+						&::before{
+							content:'';
+							border-radius: 2rem;
+							width: 1rem;
+							height: 1rem;
+							border:4px solid $grayscale-2;
+							position: absolute;
+							background-color: $white;
+							right:79px;
+							z-index: 5;
+							top: 50%;
+							transform:translateY(-50%);
+							/* sass @media query with min: 320 and max: 767 */
+							@media screen and (min-width: 320px) and (max-width: 767px){
+								right:54px;
+							}
+						}
+						.date{
+							position: absolute;
+							float: right;
+							width: 85px;
+							height: 100%;
+							padding:1rem 0;
+							text-align: center;
+							color:$grayscale-4;
+							vertical-align: middle;
+							/* sass @media query with min: 320 and max: 767 */
+							@media screen and (min-width: 320px) and (max-width: 767px){
+								width: 60px;
+							}
+							.day{
+								display: inline-block;
+								width: 100%;
+								font-size:2.5rem;
+								line-height:2.5rem;
+								color:$grayscale-5;
+								@extend %text-ellipse;
+								/* sass @media query with min: 320 and max: 767 */
+								@media screen and (min-width: 320px) and (max-width: 767px){
+									font-size:2rem;
+									line-height:2rem;
+								}
+							}
+							.month{
+								display: inline-block;
+								width: 100%;
+								@extend %text-ellipse;
+								/* sass @media query with min: 320 and max: 767 */
+								@media screen and (min-width: 320px) and (max-width: 767px){
+									font-size:.75rem;
+								}
+							}
+						}
+						.body{
+
+							margin-right:85px+25px;
+							float: right;
+							width: 245px;
+							background-color: $grayscale-1;
+							padding:.5rem 1rem;
+							border:2px solid rgba($black,.05);
+							border-radius: .5rem;
+							position: relative;
+							/* sass @media query with min: 320 and max: 767 */
+							@media screen and (min-width: 320px) and (max-width: 767px){
+								width: 215px;
+								margin-right:85px;
+							}
+							/* sass @media query with min: 480 and max: 767 */
+							@media screen and (min-width: 480px) and (max-width: 767px){
+								width: 325px;
+							}
+							&::before{
+								content:'';
+								position: absolute;
+								width: 1rem;
+								height:1rem;
+								left: 100%;
+								top: 50%;
+								background-color: $grayscale-1;
+								border:2px solid rgba($black,.05);
+								border-left-width:0;
+								border-bottom-width:0;
+								transform:translate(-48%,-50%) rotate(45deg) ;
+
+							}
+							&:hover{
+								box-shadow:-1px 1px 4px rgba($black,.15);
+							}
+							.address{
+								display: block;
+								color: $timeline-link-color;
+								font-weight: bold;
+								margin-bottom:.5rem;
+								font-size:.9rem;
+								max-height:2.4rem;
+								overflow: hidden;
+								line-height:1.2rem;
+								&:hover,&:active{
+									color:$timeline-link-hover-color;
+								}
+
+							}
+							.place{
+								display: block;
+								width: 100%;
+								color:$grayscale-5;
+								font-size:.75rem;
+								vertical-align: middle;
+								position: relative;
+								@extend %text-ellipse;
+								&::before{
+									content:'my_location';
+									font-family: $Material-icon;
+									width: 1rem;
+									display: inline-block;
+									float: right;
+									color:$grayscale-4;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		>.body.panel-horizontal-slideshow{
+			width: 100%;
+			overflow: hidden;
+			max-height:350px;
+			direction: ltr;
+			position: relative;
+			ul.slidee{
+				@extend .clearfix;
+				li.items{
+					list-style-type: none;
+					float: right;
+					padding:0 1rem;
+					width:380px;
+					.image-area{
+						height: 270px;
+						text-align: center;
+						width: 100%;
+						overflow: hidden;
+						.image-wrapper{
+							width: 200%;
+							transform:translateX(25%);
+							img{
+								display: inline-block;
+								height:100%;
+								width:auto;
+							}
+						}
+					}
+					.title{
+						direction: rtl;
+						text-align: center;
+						display: block;
+						color:$au-darkblue;
+						margin:.75rem 0;
+						a{
+							font-size:1rem;
+							line-height:1.3rem;
+							max-height:3rem;
+							display: block;
+						}
+
+					}
+				}
+			}
+			.pages{
+				position: absolute;
+				top: 255px;
+				right: 50%;
+				transform:translateX(50%);
+				z-index: 99;
+				direction: ltr;
+				.item{
+
+					display: inline-block;
+					border-radius: 2rem;
+					background-color: rgba($white,.8);
+					padding: .4rem;
+					margin:0 .2rem;
+					cursor: pointer;
+					&.active{
+						background-color: $au-blue;
+					}
+				}
+			}
+		}
+
+		&.seminar{
+			/* sass @media query with min: 320 and max: 480 */
+			@media screen and (min-width: 320px) and (max-width: 480px){
+				display: none;
+			}
+
+			/* sass @media query with min: 480 and max: 767 */
+			@media screen and (min-width: 480px) and (max-width: 767px){
+				.body.panel-horizontal-slideshow{
+					max-width: 380px;
+					margin:0 auto;
+				}
+			}
+		}
+
+		//--------------------------------
+		//  Publications area...
+		//--------------------------------
+		&.publications{
+
+			/* sass @media query with min: 320 and max: 480 */
+			@media screen and (min-width: 320px) and (max-width: 1200px){
+				display: none;
+			}
+			>.body{
+				padding:0 1rem .5rem 1.5rem;
+				max-height:335px;
+				min-height:335px;
+				.wrapper{
+					max-height:315px;
+					overflow: hidden;
+					width: 100%;
+					direction: ltr;
+					@extend .clearfix;
+					.slidee{
+						@extend .clearfix;
+						width: 100%;
+						.items{
+							@extend .clearfix;
+							@extend %no-select;
+							list-style-type: none;
+							float: right;
+							direction: rtl;
+							width: 100%;
+							height:5rem;
+							border-bottom: 1px dashed $grayscale-2;
+							padding:.5rem 0;
+							.nth{
+								width: 25%;
+								max-width:4rem;
+								height: 4rem;
+								background-color: $grayscale-2;
+								border-radius: .5rem;
+								color:$publications-nth-color;
+								font-size:2.5rem;
+								text-align: center;
+								line-height:2.5rem;
+								float: right;
+								margin-left:2%;
+								&:before{
+									content:'شماره';
+									display: block;
+									font-size:.85rem;
+									padding:.5rem 0 0 0;
+								}
+							}
+							.body{
+								float: right;
+								width: 73%;
+								a.address{
+									display: block;
+									padding:.5rem 0 1rem 0;
+									font-size:1.15rem;
+									font-weight: bold;
+									line-height:1.5rem;
+									@extend %text-ellipse;
+									overflow: hidden;
+									color:$grayscale-7;
+								}
+								ul.details{
+									width: 100%;
+									@extend .clearfix;
+									@extend %text-ellipse;
+									li.item{
+										list-style-type: none;
+										display: inline-block;
+										font-size:.8rem;
+										color:$grayscale-4;
+										line-height:1rem;
+										max-width: 6rem;
+										overflow: hidden;
+										&.author,&.date{
+											padding:0  0 0 .3rem;
+											border-left:1px solid $grayscale-3;
+
+										}
+
+										&.readmore{
+											color:$grayscale-5;
+											a{
+												display: block;
+												&:hover,&:active{
+													color:$grayscale-7;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

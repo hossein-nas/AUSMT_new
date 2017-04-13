@@ -1,0 +1,155 @@
+section#main-area{
+	float: right;
+	width: (800px-16px);
+	margin-left:16px;
+	#postcontent{
+		background-color: $white;
+		border:2px solid darken($grayscale-2,1);
+		border-radius:1rem;
+		overflow: hidden;
+		padding-bottom:2rem;
+		#header-section{
+			h1.headline{
+				margin: 0;
+				padding:0;
+				a{
+					display: block;
+					padding:1.5rem 3rem 1.5rem;
+					color:$post-title-color;
+					font-size:2.2rem;
+					line-height:2.9rem;
+					&:hover,&:active{
+						color:$post-title-color-hover;
+					}
+				}
+			}
+			section#details{
+				@extend %no-select;
+				ul{
+					padding:0 0 .5rem;
+					margin:0 3rem 2rem;
+					display: block;
+					border-bottom:1px solid $grayscale-2;
+					vertical-align: middle;
+					li{
+						vertical-align: middle;
+						display: inline-block;
+						font-size:.9rem;
+						font-weight: bold;
+						color:$grayscale-5;
+						margin-left:1rem;
+						&::before{
+							font-weight: normal;
+							font-size:.8rem;
+							color:$grayscale-4;
+						}
+						&.author::before{
+							content:'نوشته شده توسط '
+						}
+						&.date::before{
+							content:'در تاریخ '
+						}
+						&.time::before{
+							content:'در ساعت '
+						}
+					}
+				}
+			}
+			section#thumbnail-area{
+				@extend .clearfix;
+				display: block;
+				img{
+					width: 100%;
+					height:auto;
+				}
+			}
+
+		}
+		#text-area{
+			display: block;
+			margin:0 3rem;
+			*{
+				font-size: 1.1rem !important;;
+				color:$post-text-color;
+				line-height: 2.2rem !important;
+				text-align: justify;
+				font-weight: normal ;
+			}
+
+			p{
+				margin-bottom:1rem;
+			}
+			a{
+				display: inline-block;
+				margin:0 .2rem;
+				color:$au-red;
+			}
+			blockquote{
+				padding: .5rem 3rem;
+				font-size:1.25rem !important;
+				border-right:6px solid $grayscale-2;
+				margin-bottom:1rem;
+			}
+			img{
+				width: 100%;
+				height:auto;
+				margin:.5rem 0 1.5rem;
+			}
+			strong{
+				font-weight: bold;
+			}
+			ul{
+				margin-bottom:1rem;
+				padding: 0;
+				li{
+					list-style-type: none;
+					margin: 0 .5rem 0 0 ;
+					display: block;
+					padding:0 2rem 0;
+					position: relative;
+					&::before{
+						content:'remove';
+						font-family:$Material-icon;
+						position: absolute;
+						right: 0;
+						font-size:1.4rem;
+						top:.5rem;
+						color:$grayscale-7;
+						text-transform: none;
+						letter-spacing: normal;
+						word-wrap: normal;
+						white-space: nowrap;
+						overflow: hidden;
+						vertical-align: middle;
+					}
+				}
+				&.tick{
+					li::before{
+						content:'done';
+					}
+				}
+				&.round{
+					li::before{
+						content:'lens';
+						font-size:.5rem;
+						top:10px;
+					}
+				}
+				&.arrow{
+					li::before{
+						content:'chevron_left';
+						font-size:1.3rem;
+						top:10px;
+					}
+				}
+				&.star{
+					li::before{
+						content:'star';
+						font-size:1rem;
+						top:9px;
+					}
+				}
+			}
+		}
+	}
+}

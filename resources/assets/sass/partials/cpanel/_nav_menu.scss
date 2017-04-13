@@ -1,0 +1,55 @@
+.nav-menu{
+  display: block;
+  width: 100%;
+  margin-bottom:20px;
+  .header{
+    ul{
+      display: block;
+      width: 100%;
+      @include clear-fix;
+      margin-bottom: 25px;
+      @include box-shadow(0 -3px 0  $gray-light inset);
+      li{
+        float: right;
+
+        font-size:1.2em;
+        position: relative;
+        a{
+          display: block;
+          width: 100%;
+          color:inherit;
+          height: 100%;
+          padding: 10px 30px;
+          &::before{
+            content: '';
+            width: 0;
+            height: 0;
+            border: 7px solid transparent;
+            //border-top-color:$flat-greensea;
+            position: absolute;
+            top: 100%;
+            margin:auto;
+            right:0;
+            left:0;
+          }
+          &:hover{
+            cursor: pointer;
+            background-color: $gray-lighter;
+          }
+          &.active{
+            background-color: $gray-lighter;
+            border-bottom:3px solid $flat-greensea;
+            &::before{
+              border-top-color:$flat-greensea;
+            }
+          }
+        }
+      }
+    }
+  }
+  .body{
+    >div{
+      display: none;
+    }
+  }
+}

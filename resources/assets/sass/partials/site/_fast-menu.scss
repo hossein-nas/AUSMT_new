@@ -1,0 +1,174 @@
+section.fast-menu{
+      width: 100%;
+      height: 250px;
+      background-color: $grayscale-2;
+      @extend .clearfix;
+      @extend %no-select;
+      @media screen and (min-width: 768px) and (max-width: 1200px){
+            height: 180px;
+      }
+      /* sass @media query with min: 320 and max: 767 */
+      @media screen and (min-width: 320px) and (max-width: 767px){
+            max-height: 190px;
+            background-color: $white;
+      }
+      >section{
+            float: right;
+            height: 250px;
+            @media screen and (min-width: 768px) and (max-width: 1200px){
+                  height: 180px;
+            }
+            /* sass @media query with min: 320 and max: 767 */
+            @media screen and (min-width: 320px) and (max-width: 767px){
+                  max-height: 190px;
+            }
+            &.arrow-forward,&.arrow-backward{
+                  width: 100px;
+                  vertical-align: middle;
+                  text-align: center;
+                  padding:110px 0;
+                  /* sass @media query with min: 768 and max: 1200 */
+                  @media screen and (min-width: 768px) and (max-width: 1200px){
+                        display: none;
+                  }
+
+                  /* sass @media query with min: 320 and max: 767 */
+                  @media screen and (min-width: 320px) and (max-width: 767px){
+                        display: none;
+                  }
+                  i.material-icons{
+                        font-size:1.6rem;
+                        line-height:1.4rem;
+                        background-color: darken($grayscale-2,3);
+                        color:$grayscale-4;
+                        padding: .4rem .3rem;
+                        border-radius: 2rem;
+                        cursor: pointer;
+                        height:initial;
+                        width:initial;
+                        &:hover{
+                              background-color: darken($grayscale-2,5);
+                        }
+                  }
+            }
+            &.content{
+                  width: 1000px;
+                  direction: ltr;
+                  padding:2.5rem 0;
+                  /* sass @media query with min: 768 and max: 1200 */
+                  @media screen and (min-width: 768px) and (max-width: 1200px){
+                        width: 100%;
+                        padding:1.4rem 2rem;
+                  }
+
+                  /* sass @media query with min: 320 and max: 767 */
+                  @media screen and (min-width: 320px) and (max-width: 767px){
+                        width: 100%;
+                        padding:0;
+                  }
+                  ul.slidee{
+                        min-width:100%;
+                        min-height:100%;
+                        display: block;
+                        @extend .clearfix;
+                        li{
+                              margin: 0 20px;
+                              float: right;
+                              display: block;
+                              height: 170px;
+                              width: 160px;
+                              border-radius:1rem;
+                              background-color: $white;
+                              box-shadow:0 3px 2px rgba(black,.08);
+                              overflow: hidden;
+                              /* sass @media query with min: 768 and max: 1200 */
+                              @media screen and (min-width: 768px) and (max-width: 1200px){
+                                    margin: 0 .5rem;
+                                    height: 135px;
+                                    width: 120px;
+                              }
+                              /* sass @media query with min: 320 and max: 767 */
+                              @media screen and (min-width: 320px) and (max-width: 767px){
+                                    margin:0;
+                                    height: 95px;
+                                    width:33%;
+                                    box-shadow:none;
+                                    border-radius: 0;
+                                    &:hover,&:active{
+                                          box-shadow:none;
+                                    }
+                              }
+                              a{
+                                    display: block;
+                                    width: 100%;
+                                    height: 100%;
+                                    >.icon{
+                                          display: block;
+                                          width: 100%;
+                                          height: 110px;
+                                          text-align: center;
+                                          vertical-align: middle;
+                                          line-height:13rem;
+                                          margin-bottom:.25rem;
+                                          >img{
+                                                display: inline;
+                                                width: 75px;
+                                                height: 75px;
+
+                                          }
+                                          /* sass @media query with min: 768 and max: 1200 */
+                                          @media screen and (min-width: 768px) and (max-width: 1200px){
+                                                height: 85px;
+                                                line-height: 10.5rem;
+                                                >img{
+                                                      width: 55px;
+                                                      height: 55px;
+                                                }
+                                          }
+
+                                          /* sass @media query with min: 320 and max: 767 */
+                                          @media screen and (min-width: 320px) and (max-width: 767px){
+                                                height: 55px;
+                                                line-height: 6.5rem;
+                                                >img{
+                                                      width: 40px;
+                                                      height: 40px;
+                                                }
+                                          }
+                                    }
+                                    >h1.title{
+                                          transition: all 200ms;
+                                          margin: 0;
+                                          padding:0;
+                                          font-size:.95rem;
+                                          color:$grayscale-5;
+                                          text-align: center;
+                                          line-height:1.4rem;
+                                          max-height:2.7rem;
+                                          overflow: hidden;
+                                          /* sass @media query with min: 768 and max: 1200 */
+                                          @media screen and (min-width: 768px) and (max-width: 1200px){
+                                                font-size: .8rem;
+                                                line-height:1.25rem;
+                                          }
+                                          /* sass @media query with min: 320 and max: 767 */
+                                          @media screen and (min-width: 320px) and (max-width: 767px){
+                                                font-size: .7rem;
+                                                line-height:.95rem;
+                                                max-height:1.9rem;
+                                          }
+                                    }
+                              }
+                              &:hover,&:active{
+                                    box-shadow:0 3px 2px rgba(black,.12);
+                                    h1.title{
+                                          transition: all 100ms;
+                                          color:$grayscale-6;
+                                    }
+                              }
+                        }
+                  }
+            }
+
+      }
+}

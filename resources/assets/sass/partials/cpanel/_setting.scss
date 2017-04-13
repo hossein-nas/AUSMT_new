@@ -1,0 +1,185 @@
+.allsetting {
+
+      @include clear-fix();
+      %struc {
+            @include box-shadow(0px 2px 3px $gray-light);
+            background-color: $gray-lighter;
+		width: 49%;
+            padding: 10px;
+            float: right;
+            @include clear-fix();
+            &::before{
+                  content: attr(sub);
+                  display: block;
+                  text-align: center;
+                  padding:0px 10px 5px 10px;
+                  font-size: 1.1em;
+                  color: $black-light;
+                  font-weight: bold;
+                  border-bottom:2px solid darken($gray-lighter,5);
+                  margin-bottom: 5px;
+            }
+            .item{
+                  margin-bottom:5px;
+                  ul{
+                        display: block;
+                        @include clear-fix();
+                        width: 100%;
+                        li{
+                              display: block;
+                              float: right;
+                              height: 40px;
+                              overflow: hidden;
+                              white-space: nowrap;
+                              text-overflow:ellipsis;
+                              &:nth-child(1){
+                                    width: 10%;
+                                    text-align: center;
+                                    font-size:1.8em;
+                                    line-height:1.3em;
+                                    color: darken($gray-lighter,12);
+                              }
+                              &:nth-child(2){
+                                    width: 65%;
+                                    a{
+                                          padding: 5px 10px;
+                                          font-weight: bold;
+                                          font-size:.95em;
+                                          @include ellips();
+                                    }
+                              }
+                              &:nth-child(3){
+                                    @include no-text_selection();
+                                    width: 25%;
+                                    padding: 10px 0;
+                                    .actions{
+                                          opacity: .65;
+                                          float: left;
+                                          display: block;
+                                          font-size: .65em;
+                                          padding: 3px 5px;
+                                          color: darken($gray-light,10);
+                                          line-height:1.1em;
+                                          cursor: pointer;
+                                          &:hover{
+                                                @include border-radius(5px);
+                                                &.delete{
+                                                      background-color: $flat-red;
+                                                      color:white;
+                                                }
+                                                &.edit{
+                                                      background-color: $flat-blue;
+                                                      color:white;
+                                                }
+                                          }
+                                    }
+
+                              }
+                        }
+                  }
+            }
+      }
+      .quick-access {
+            @extend %struc;
+
+            margin-left:2%;
+            &::before{
+                  color:$flat-blue;
+            }
+      }
+      .links {
+            @extend %struc;
+            &::before{
+                  color:$flat-greensea;
+            }
+
+      }
+
+      .add-new-item{
+            margin-top:10px;
+            display: block;
+            width: 100%;
+            padding:4px 0;
+            color: darken($gray-light,8);
+            cursor: pointer;
+            @include no-text_selection();
+            &:hover{
+                  background-color: darken($gray-lighter,2);
+                  color: darken($gray-light,13);
+                  &::before{
+                        color: darken($gray-lighter,14);
+                  }
+            }
+            &:active{
+                  background-color: darken($gray-lighter,3);
+            }
+            &::before{
+                  content: "\f067";
+                  font-family:'FontAwesome';
+                  margin:0px 11px 0 19px;
+                  font-size:1.7em;
+                  color: darken($gray-lighter,10);
+                  display: block;
+                  float: right;
+
+            }
+      }
+      .setting-edit-form{
+            margin-top:50px;
+            margin-bottom:20px;
+            float: right;
+            display: block;
+            display: none;
+            width: 100%;
+            @include clear-fix();
+            .item{
+                  display: block;
+                  float: right;
+                  width: 44%;
+                  label{
+                        font-size:.8em;
+                        color:$gray;
+                        margin-left:5px;
+                  }
+                  input[type="text"]{
+                        padding: 5px 10px;
+                        color: $black-light;
+                        border: 1px solid $gray-light;
+                        font-size:1em;
+                        line-height:1.5em;
+                        @include  border-radius(7px);
+                        width: 82%;
+                        &.ltr{
+                              direction: ltr;
+                              text-align: left;
+                        }
+                  }
+
+            }
+            .submit-btn{
+                   line-height:1.4em;
+                   background-color: $flat-blue;
+                   color:white;
+                  font-weight: bold;
+                  @include border-radius(7px);
+                  padding: 7px 16px;
+                  width: 100px;
+                  font-size:.85em;
+                  border:none;
+                  cursor: pointer;
+                  &:hover{
+                        opacity:.9;
+                  }
+             }
+      }
+      .setting-add-new-item{
+            @extend .setting-edit-form;
+            .submit-btn{
+                  background-color: $flat-greensea;
+            }
+
+            &.active{
+                  display: block;
+            }
+      }
+}

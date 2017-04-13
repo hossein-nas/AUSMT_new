@@ -1,0 +1,142 @@
+nav{
+      background-color: $au-header-light-green;
+      color:white;
+      @extend %no-select;
+      &.box-shadow{
+            box-shadow:0 3px 5px rgba($black,.25);
+      }
+      /* sass @media query with min: 320 and max: 767 */
+      @media screen and (min-width: 320px) and (max-width: 767px){
+            display: none;
+            position: fixed;
+            width: 80%;
+            right: 0;
+            top: 0;
+            height: 100%;
+            z-index: 99999;
+      }
+      .container{
+            ul#navbar{
+                  position: relative;
+                  @extend .clearfix;
+                  white-space: nowrap;
+                  width: 100%;
+                  >li{
+                        display: block;
+                        float: right;
+                        list-style-type: none;
+                        >.item{
+                              height: 60px;
+                              vertical-align: middle;
+                              font-size:1rem;
+                              font-weight:bold !important;
+                              line-height:1rem;
+                              padding: 1.35rem 1.1rem;
+                              cursor: pointer;
+                              display: block;
+                              width: 100%;
+                              &:hover{
+                                    background-color: $white-hover;
+                              }
+                              &:active{
+                                    background-color: rgba($white,.08);
+                              }
+                              >i.material-icons{
+                                    margin:0 0.5rem 0 0;
+                              }
+                              /* sass @media query with min: 768 and max: 1200 */
+                              @media screen and (min-width: 768px) and (max-width: 1200px){
+                                    font-size:.875rem;
+                                    line-height:.875rem;
+                                    padding: 1.15rem .85rem;
+                                    height:auto;
+                                    >i.material-icons{
+                                          margin:0 0 0 -.85rem;
+                                          line-height:.6rem;
+                                    }
+                              }
+                        }
+                        &:hover .dropdown-content{
+                              display: block;
+                              opacity:1;
+                        }
+                        .dropdown-content{
+                              display: none;
+                              opacity: 0;
+                              position: absolute;
+                              min-width: 220px;
+                              padding: 1rem 0px;
+                              max-width: 250px;
+                              background-color: $white;
+                              box-shadow: 0 3px 8px rgba($grayscale-5,.8);
+                              z-index: 999;
+                              /* sass @media query with min: 768 and max: 1200 */
+                              @media screen and (min-width: 768px) and (max-width: 1200px){
+                                    min-width: 180px;
+                                    padding: .5rem 0px;
+                                    max-width: 210px;
+                                    box-shadow: 0 4px 8px rgba($black,.2);
+                              }
+                              .item{
+                                    padding: .2rem 1.5rem;
+                                    color:$dropdown-item-color;
+                                    cursor: pointer;
+                                    font-size:1rem;
+                                    line-height:1.5rem;
+                                    display: block;
+                                    width: 100%;
+                                    -ms-text-overflow: ellipsis;
+                                    text-overflow: ellipsis;
+                                    white-space: nowrap;
+                                    overflow: hidden;
+                                    &:hover{
+                                          background-color: rgba($au-darkblue-light,.12);
+                                    }
+                                    /* sass @media query with min: 768 and max: 1200 */
+                                    @media screen and (min-width: 768px) and (max-width: 1200px){
+                                          font-size:.95rem;
+                                          line-height:1.5rem;
+                                          padding: .2rem 1rem;
+                                    }
+                              }
+                              .group{
+                                    @extend .clearfix;
+                                    position: relative;
+                                    .group-name{
+                                          font-size:.875rem;
+                                          color:$grayscale-4;
+                                          font-weight: normal;
+                                          background-color: $white;
+                                          float: right;
+                                          padding: 0 .7rem;
+                                          position: absolute;
+                                          margin: 0;
+                                          right: .8rem;
+                                          line-height: 1rem;
+                                          top: -.65rem;
+                                          @media screen and (min-width: 768px) and (max-width: 1200px){
+                                                font-size:.825rem;
+                                                right: .5rem;
+                                                padding: 0 .5rem;
+                                          }
+                                    }
+                                    margin-top:1.2rem;
+                                    background-color: transparent;
+                                    border-top:1px solid $grayscale-2;
+                                    padding: .8rem 0px 0 0;
+                                    >ul{
+                                          display: block;
+                                          @extend .clearfix;
+                                          >li{
+                                                display: block;
+                                                padding: 0;
+                                                margin: 0;
+
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+}

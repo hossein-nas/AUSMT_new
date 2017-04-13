@@ -1,0 +1,124 @@
+.slider-cpanel {
+      margin-top: 10px;
+      article.item {
+            height: 120px;
+            background-color: lighten($gray-lighter,1);
+            display: block;
+            width: 100%;
+            @include box-shadow(2px 3px 4px darken($gray-lighter, 5));
+            margin-bottom: 15px;
+            overflow: hidden;
+            section.img {
+                  display: block;
+                  float: right;
+                  width: 210px;
+                  height: 120px;
+                  overflow: hidden;
+                  img {
+                        display: table;
+                        margin: 0 auto;
+                        width: 100%;
+                        min-height: 100%;
+                        max-height: 115%;
+                  }
+            }
+            section.content {
+                  display: block;
+                  float: right;
+                  width: 590px;
+                  height: 120px;
+                  padding: 10px;
+                  h1{
+                        display: block;
+                        width: 100%;
+                        font-size:1.1em;
+                        margin: 0;
+                        a{
+                              display: block;
+                              width: 100%;
+                              white-space:nowrap;
+                              text-overflow: ellipsis;
+                              overflow:hidden;
+                        }
+                        margin-bottom:5px;
+                  }
+                  p.content{
+                        display: block;
+                        width: 100%;
+                        font-size:.8em;
+                        line-height:1.3em;
+                        color:$gray;
+                        margin-right:15px;
+                        height: 40px;
+                        overflow: hidden;
+
+                  }
+                  .detail{
+                        @include clear-fix();
+                        ul{
+                              display: block;
+                              width: 82%;
+                              float: right;
+                              padding-top:5px;
+                              li{
+                                    color: darken($gray-light, 10);
+                                    display: block;
+                                    float: right;
+                                    width: 38%;
+                                    font-size:.65em;
+                                    text-align: center;
+                                    white-space:nowrap;
+                                    text-overflow: ellipsis;
+                                    overflow:hidden;
+                                    &::before{
+                                          content: attr(title);
+                                    }
+                                    &:last-child{
+                                          width: 24%;
+                                    }
+                              }
+                        }
+                        .delete-from-slider{
+                              display: block;
+                              width: 18%;
+                              float: right;
+                              @include border-radius(5px);
+                              background-color:darken($gray-lighter,6);
+                              line-height:1.2em;
+                              font-size:.7em;
+                              color:$gray;
+                              padding: 5px;
+                              text-align: center;
+                              &:hover{
+                                    background-color: $flat-red;
+                                    color:white;
+                              }
+                        }
+                  }
+
+            }
+            section.index {
+                  overflow: hidden;
+                  display: block;
+                  float: right;
+                  width: 125px;
+                  height: 120px;
+                  font-size:3em;
+                  text-align: left;
+                  color: darken($gray-lighter, 8);
+                  padding: 20px;
+                  direction: ltr;
+                  letter-spacing: -.1em;
+            }
+            &:hover{
+                  @include box-shadow(3px 3px 5px darken($gray-lighter, 8));
+                  .img{
+                        opacity:.8;
+                  }
+                  section.index {
+                        color: $gray-light;
+                  }
+            }
+      }
+
+}

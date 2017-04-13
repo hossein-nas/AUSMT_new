@@ -1,0 +1,61 @@
+//font names
+$ISANS                        : 'IRANSans-web';
+$Material-icon                : 'Material-icons';
+$iransans-font-path           : "../font/Iran Sans/";
+$material-icon-font-path      : "../font/Material Icons Fonts/";
+$base-font 				: $ISANS, SEGOE UI, tahoma, arial, 'sans serif';
+
+
+//grayscale colors...
+$white                        : rgb(255,255,255);
+$grayscale-1                  : rgb(242,242,242);
+$grayscale-2                  : rgb(230,230,230);
+$grayscale-3                  : rgb(214,214,214);
+$grayscale-4                  : rgb(189,189,189);
+$grayscale-5                  : rgb(165,165,165);
+$grayscale-6                  : rgb(135,135,135);
+$grayscale-7                  : rgb(105,105,105);
+$grayscale-8                  : rgb(75,75,75);
+$grayscale-9                  : rgb(50,50,50);
+$grayscale-10                 : rgb(26,26,26);
+$black                        : rgb(0,0,0);
+
+//flat colors...
+$au-header-green              : #0F595E;
+$au-header-light-green        : #1D6466;
+$au-green                     : #00BFA5;
+$au-green-light               : #24CEB1;
+$au-lightgreen                : #7CB342;
+$au-lightgreen-light          : #8BC34A;
+$au-red                       : #EF5350;
+$au-red-light                 : #F26B6B;
+$au-blue                      : #03A9F4;
+$au-blue-light                : #11C5D3;
+$au-darkblue                  : #043D5D;
+$au-darkblue-light            : #144960;
+$au-brown                     : #8D6E63;
+$au-brown-light               : #A1887F;
+$au-orange                    : #FF9100;
+$au-orange-light              : #FFA726;
+$au-deeporange                : #FF7043;
+$au-deeporange-light          : #FF8A65;
+$au-lime                      : #AFB42B;
+$au-lime-light                : #C1C152;
+
+
+// special elements colors...
+$link                         : $au-red;
+$text                         : $grayscale-9;
+$white-hover                  : rgba(white,.05);
+$dark-hover                   : rgba(black,.05);
+$dropdown-item-color          : $au-darkblue;
+$timeline-link-color          : #6694a8;
+$timeline-link-hover-color    : #4689a7;
+$publications-nth-color       : #cc706e;
+$post-text-color              : #565656;
+$post-title-color             : darken($au-brown,5);
+$post-title-color-hover       : $au-brown;
+$comment-replier-text-color   : #4a8e96;
+$comment-replier-name-color   : #9EC5C6;
+$comment-text-color           : #676767;
+$comment-writer-color         : #C2BD9B;

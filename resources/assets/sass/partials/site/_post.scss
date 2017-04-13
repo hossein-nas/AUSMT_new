@@ -1,0 +1,7 @@
+#post-page{
+	padding: 3rem 0;
+	@extend .clearfix;
+	@import "posts/main_area";
+	@import "posts/comments";
+	@import "posts/sidebar";
+}

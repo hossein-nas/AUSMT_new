@@ -1,0 +1,271 @@
+
+
+
+
+
+a{
+  text-decoration: none;
+  color:$fl-blue;
+  display: inline-block;
+  padding: 0 2px;
+  //    &:hover{
+  //        color:darken($fl-blue,5);
+  //    }
+}
+
+a,img{
+  border: 0;
+  outline: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  display: block;
+  color: $black;
+}
+
+h1{    font-size: 1.5em;    margin: 10px 20px 15px 5px;    }
+h2{    font-size: 1.25em;    margin: 10px 15px 13px 5px;   }
+h3{    font-size: 1.05em;    margin: 10px 12px 11px 5px;    }
+h4{    font-size: .95em;    margin: 5px 9px 9px 5px;        }
+h5{    font-size: .8em;    margin: 5px 7px 7px 5px;       }
+h6{    font-size: .7em;    margin: 5px 5px 5px 5px;       }
+
+
+.btn{
+  border: 0;
+  @include border-radius(4px);
+  font-family: $base-font;
+  padding: 5px 10px;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  margin: 3px 5px;
+  @include no-text_selection();
+}
+button.btn,input[type=submit].btn,button[type=submit].btn,.btn{
+  padding-right: 20px;
+  padding-left: 20px;
+}
+input[type=submit].btn,button[type=submit].btn,.btn{
+  padding-right: 40px;
+  padding-left: 40px;
+}
+.btn-small{
+  padding: 2px 8px;
+  font-size: .7em;
+}
+.btn-medium{
+  padding: 4px 15px;
+  font-size: .8em;
+}
+.btn-large{
+  padding: 7px 25px;
+  font-size: .90em;
+  font-weight:bold;
+}
+.btn-wide{
+  padding-right: 35px;
+  padding-left: 35px;
+}
+
+.btn-default{
+  background-image: linear-gradient(#fafafa, #e1e1e1);
+  cursor: pointer;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid #bbb;
+  margin-bottom: 4px;
+  color: $black-light;
+  &:hover{
+	border-color: #acacac;
+	background-image: linear-gradient(#f5f5f5, #dedede);
+	color: $black-light;
+  }
+  &:active{
+	border-color: #acacac;
+	background-image: linear-gradient(#ececec, #dadada);
+	margin-top: 4px;
+	margin-bottom: 3px;
+  }
+}
+
+.btn-flat-red{
+  background-color: $flat-red;
+  color: white;
+  border-bottom: 2px solid darken($flat-red,15);
+  &:hover{
+	color: white;
+	background-color: darken($flat-red,3);
+  }
+  &:active{
+	color: white;
+	background-color: darken($flat-red,5.5);
+  }
+}
+.btn-flat-blue{
+  background-color: $flat-blue;
+  color: white;
+  border-bottom: 2px solid darken($flat-blue,15);
+  &:hover{
+	color: white;
+	background-color: darken($flat-blue,3);
+  }
+  &:active{
+	color: white;
+	background-color: darken($flat-blue,5.5);
+  }
+}
+.btn-flat-green{
+  background-color: $flat-greensea;
+  color: white;
+  border-bottom: 2px solid darken($flat-greensea,15);
+  &:hover{
+	color: white;
+	background-color: darken($flat-greensea,3);
+  }
+  &:active{
+	color: white;
+	background-color: darken($flat-greensea,5.5);
+  }
+}
+
+.btn-flat-yellow{
+  background-color: darken($flat-yellow,3);
+  color: white;
+  border-bottom: 2px solid darken($flat-yellow,10);
+  &:hover{
+	color: white;
+	background-color: darken($flat-yellow,4.5);
+  }
+  &:active{
+	color: white;
+	background-color: darken($flat-yellow,6);
+  }
+}
+
+.btn-flat-default{
+  background-color: lighten($flat-silver,11);
+  color: $gray-dark;
+  border-bottom: 2px solid lighten($flat-silver,3);
+  &:hover{
+	color: $gray-dark;
+	background-color: lighten($flat-silver,10);
+  }
+  &:active{
+	color: $gray-dark;
+	background-color: lighten($flat-silver,8);
+  }
+}
+.btn-margin-horizontal{
+  margin-left:10px;
+  margin-right:10px;
+}
+.btn-margin-vertical{
+  margin-top:10px;
+  margin-bottom:10px;
+}
+
+.float-right{
+  float: right;
+}
+.float-left{
+  float: left;
+}
+
+.inline{
+  display: inline-block;
+}
+.block{
+  display: block;
+}
+.hidden{
+  display: none;
+  visibility: hidden;
+}
+
+.danger{        color: lighten($flat-red,5);    }
+.success{       color: lighten($flat-green,5);  }
+.okay{          color: lighten($flat-blue,5);   }
+.poor{          color: $flat-yellow;            }
+.warning{       color: lighten($flat-orange,10);}
+.disable{       color: $gray-light }
+
+.danger-bg{     background-color: lighten($flat-red,5);    color:white;     }
+.success-bg{    background-color: lighten($flat-green,5);  color:white;     }
+.okay-bg{       background-color: lighten($flat-blue,5);   color:white;     }
+.poor-bg{       background-color: $flat-yellow;            color:white;     }
+.warning-bg{    background-color: lighten($flat-orange,10);color:white;     }
+.disable-bg{       background-color: $gray-lighter;color:$gray}
+
+.btn-group {
+  display: block;
+  @include clear-fix;
+  margin:10px 0;
+  font-size:.7em;
+  @extend .btn-gp-default;
+  .btn-gp {
+	  font-size: 1em;
+	  cursor: pointer;
+	  @include no-text_selection();
+	&:first-child{
+	  @include border-radius(0 5px 5px 0);
+	}
+	&:last-child{
+	  @include border-radius( 5px 0 0 5px );
+	  border-left-width:1px;
+	}
+	display: block;
+	float: right;
+	line-height:1.2em;
+	padding: 6px 14px;
+	outline: none;
+	border:{
+	  width : 1px ;
+	  style: solid;
+	}
+	border-left-width:0;
+  }
+  &.btn-gp-default {
+	.btn-gp{
+      background-color: $gray-lighter;
+      color:$gray;
+      border-color:darken($gray-lighter,6);
+      &:hover{
+        background-color: darken($gray-lighter,3);
+        color: darken($gray,5);
+      }
+    }
+  }
+  &.btn-gp-red {
+	.btn-gp{
+      background-color: lighten($flat-red,7);
+      color:whitesmoke;
+      border-color:lighten($flat-red,3);
+      &:hover{
+        background-color: lighten($flat-red,4);
+        color: white;
+      }
+    }
+  }
+  &.btn-gp-blue {
+	.btn-gp{
+      background-color: lighten($flat-blue,7);
+      color:whitesmoke;
+      border-color:lighten($flat-blue,3);
+      &:hover{
+        background-color: lighten($flat-blue,4);
+        color: white;
+      }
+    }
+  }
+  &.btn-gp-green {
+	.btn-gp{
+      background-color: lighten($flat-greensea,7);
+      color:whitesmoke;
+      border-color:lighten($flat-greensea,4);
+      &:hover{
+        background-color: lighten($flat-greensea,5);
+        color: white;
+      }
+    }
+  }
+}

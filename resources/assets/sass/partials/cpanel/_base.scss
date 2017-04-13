@@ -1,0 +1,136 @@
+.container {
+	width: 1200px;
+	@include box-shadow(0px 3px 5px $gray-light);
+	color: $gray-dark;
+	background-color: $content-bg-color;
+	margin: 0px auto;
+	margin-bottom: 30px;
+	background-color: #fff;
+	height: 100%;
+	//min-height: 100vh;
+	&:after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+}
+
+* {
+	font-family: $base-font;
+	padding: 0px;
+	margin: 0px;
+	list-style-type: none;
+	box-sizing: border-box;
+	direction: rtl;
+}
+
+a {
+	outline: none;
+	font-family: $base-font;
+	color: inherit;
+}
+
+body {
+	text-align: right;
+	color: $black;
+	font-size: $base-font-size;
+	//background-color: $body-background-color;
+	background: url(../img/bg.png);
+	.flashMsg {
+		position: fixed;
+		bottom: -100px;
+		min-width: 500px;
+		max-height: 100px;
+		overflow: hidden;
+		font-family: $base-font;
+		@include border-radius(7px 7px 0 0);
+		background-color: $flat-yellow;
+		right: 0;
+		left: 0;
+		margin: 0 auto;
+		display: table;
+		padding: 10px 15px;
+		color: $black-light;
+		line-height: 1.4em;
+		font-size:.9em;
+		.gotIt {
+			float: left;
+			cursor: pointer;
+			@include border-radius(7px);
+			background-color: $flat-orange;
+			padding: 2px 15px;
+			line-height: 1.2em;
+			font-size:.8em;
+			color: white;
+			margin-right:10px;
+			&::before{
+				content:'متوجه شدم!';
+			}
+		}
+	}
+}
+
+#content {
+	//background-color: $content-bg-color;
+	height: 100%;
+	min-height: 100%;
+	> div {
+		padding: 10px 20px;
+	}
+	span#heading {
+		display: block;
+		//background-color: $whitesmoke;
+		padding: 10px 30px 15px 20px;
+		font-size: 1.5em;
+		font-weight: bold;
+		background-color: $gray-lighter;
+		border-bottom: 1px solid darken($gray-lighter, 5);
+	}
+	.no-text {
+		text-align: center;
+		font-size: 1.1em;
+		color: $gray;
+		margin: 30px;
+		display: block;
+		&::before {
+			content: 'محتوایی برای نمایش نیست...';
+		}
+	}
+	.ltr{
+		direction: ltr;
+		text-align: left;
+	}
+	.direction-left{
+		text-align: left;
+	}
+}
+
+.errors {
+	margin: 10px;
+	padding: 15px;
+	display: block;
+	@include border-radius(7px);
+	background-color: $flat-red;
+	color: white;
+	font-size: .85em;
+	li {
+		position: relative;
+		margin-right: 25px;
+		&::before {
+			position: absolute;
+			content: '\f071';
+			font-family: FontAwesome;
+			right: -23px;
+			top: 3px;
+		}
+	}
+	&::before {
+		content: 'خطایی رخ داده است. لطفا موارد ذکر شده را رعایت بفرمائید';
+		display: block;
+		width: 100%;
+		font-weight: bold;
+		margin: 0 5px 8px 5px;
+		padding-bottom: 6px;
+		border-bottom: 2px solid rgba(black, .05);
+	}
+}

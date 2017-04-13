@@ -1,0 +1,282 @@
+#comment-area {
+	//background-color: red;
+	margin-top: 5rem;
+	> .item {
+		@extend .clearfix;
+		display: block;
+		width: 100%;
+		padding: 0 2rem 0 4rem;
+		margin: 0 0 2rem;
+		> .body {
+			float: right;
+			width: 100%;
+			background-color: $white;
+			//box-shadow:-2px 5px 8px rgba($black,.1);
+			min-height: 10rem;
+			border-radius: 1rem;
+			position: relative;
+			border: 2px solid darken($grayscale-2, 1);
+			&::before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 1.75rem;
+				height: 1.75rem;
+				background-color: $white;
+				border: 2px solid darken($grayscale-2, 1);
+				border-top-width: 0;
+				border-left-width: 0;
+				transform: rotate(-45deg) translateY(-50%);
+				right: -1.6rem;
+				top: 50%;
+			}
+			> .headline {
+				@extend %no-select;
+				display: block;
+				margin: 0;
+				padding: 0 2rem;
+				text-align: center;
+				margin-bottom: .5rem;
+				&::after {
+					content: '';
+					clear: both;
+					display: block;
+					width: 100%;
+					height: .25rem;
+					background-color: $grayscale-2;
+					float: right;
+					margin-top: -1.75rem;
+				}
+				> span {
+					display: inline-block;
+					padding: 1.1rem .75rem;
+					background-color: $white;
+					font-weight: normal;
+					color: $grayscale-5;
+					line-height: 1rem !important;
+					font-size: .9rem;
+					span.writer {
+						color: $comment-writer-color;
+						font-size: 1rem;
+						font-weight: bold;
+						margin: 0 0 0 .3rem;
+						cursor: pointer;
+					}
+					span.in-reply {
+						margin: 0 0 0 .3rem;
+						color: $comment-replier-name-color;
+						font-size: 1rem;
+						font-weight: bold;
+						cursor: pointer;
+						&::before {
+							display: inline-block;
+							margin: 0 0 0 .3rem;
+							font-weight: normal;
+							color: $grayscale-5;
+							font-size: .9rem;
+							content: ' درپاسخ به ';
+						}
+					}
+					&.headline-box::after {
+						content: ' گفته :';
+					}
+				}
+			}
+			> .replier {
+				display: block;
+				margin: 0 2rem;
+				padding: 0 3.5rem 0 0;
+				text-align: justify;
+				color: $comment-replier-text-color;
+				font-size: .85rem;
+				line-height: 1.2rem;
+				position: relative;
+				margin-bottom: 1rem;
+				&::before {
+					content: 'comment';
+					font-family: $Material-icon;
+					display: block;
+					position: absolute;
+					top: .3rem;
+					right: .25rem;
+					font-size: 1.5rem;
+					color: $grayscale-3;
+				}
+				&:hover {
+					background-color: $dark-hover;
+					cursor: pointer;
+				}
+			}
+			.comment-text {
+				@extend .replier; // hamin balaii ro extend kardam...
+				color: $comment-text-color;
+				font-size: 1.05rem;
+				line-height: 1.55rem;
+				&::before {
+					content: 'format_quote';
+				}
+				&:hover {
+					background-color: transparent;
+					cursor: default;
+				}
+			}
+			.bottom-details {
+				@extend .headline;
+				height: 1.5rem;
+				text-align: right;
+				position: relative;
+				&::after {
+					margin-top: -.65rem;
+				}
+				span.date-and-time {
+					margin-right: 1rem;
+					padding: 0 .75rem;
+					font-size: .95rem;
+					color: $grayscale-5;
+				}
+				span.reply-btn {
+					float: left;
+					padding: 0 .5rem;
+					position: absolute;
+					left: 3rem;
+					top: -1px;
+					cursor: pointer;
+					color: darken($grayscale-4, 3);
+					> i.material-icons {
+						font-size: 1.5rem;
+						width: 1.5rem;
+					}
+					&:hover {
+						> i.material-icons {
+							transition-duration: 400ms;
+							transform: rotate(-360deg);
+						}
+					}
+				}
+			}
+		}
+
+	}
+
+	> #write-comment {
+		display: block;
+		width: 100%;
+		border-radius: 1rem;
+		border: 2px solid darken($grayscale-2, 1);
+		background-color: $white;
+		padding-bottom:1rem;
+		> .headline {
+			display: block;
+			margin: 0 0 1rem 0;
+			padding: 0 2rem;
+			text-align: center;
+			font-size: 1.1rem;
+			line-height: 1.5rem;
+			color: $grayscale-4;
+			&::after {
+				content: '';
+				display: block;
+				width: 100%;
+				background-color: $grayscale-2;
+				height: 4px;
+				margin-top: -2.05rem;
+			}
+			> span.headline-box {
+				background-color: $white;
+				padding: 1.5rem .5rem;
+				display: inline-block;
+				&::before {
+					content: 'نوشتن دیدگاه جدید';
+				}
+			}
+		}
+
+		> .form-box {
+			padding: 0 2rem;
+
+			form {
+				display: block;
+				margin: 0;
+				padding: 0;
+				.form-group-item {
+					@extend .clearfix;
+					display: block;
+					width: 100%;
+					padding: .5rem 0;
+					color: $grayscale-4;
+					vertical-align: baseline;
+					label {
+						min-width: 8rem;
+						max-width: 12rem;
+						display: block;
+						padding: .5rem .5rem .5rem 0;
+					}
+					input[type='text'], textarea {
+						outline: none;
+						border: none;
+						appearance: none;
+						padding: 0;
+						margin: 0;
+						color: $grayscale-7;
+					}
+					button, input[type='button'], input[type='submit'] {
+						outline: none;
+						border: none;
+						appearance: none;
+					}
+					input[type='text'] {
+						display: block;
+						width: 100%;
+						border: 1px solid $grayscale-2;
+						border-radius: .5rem;
+						padding: .95rem 1rem;
+					}
+					textarea {
+						display: block;
+						width: 100%;
+						border: 1px solid $grayscale-2;
+						border-radius: .5rem;
+						padding: .95rem 1rem;
+						resize: vertical;
+						min-height: 10rem;
+					}
+				}
+			}
+		}
+		> .error-box {
+			@extend .clearfix;
+			display: block;
+			ul {
+				padding: 1rem 2rem;
+				li {
+					list-style-type: none;
+					font-size: .95rem;
+					padding: .3rem 0.5rem .3rem 0;
+					&::before {
+						@extend .material-icons;
+						margin-left: .5rem;
+					}
+
+					&.error {
+						color: $au-red;
+						&::before {
+							content: 'error';
+						}
+					}
+					&.success {
+						color: $au-lightgreen;
+						&::before {
+							content: 'done';
+						}
+					}
+					&.warning {
+						color: $au-orange;
+						&::before {
+							content: 'warning';
+						}
+					}
+				}
+			}
+		}
+	}
+}

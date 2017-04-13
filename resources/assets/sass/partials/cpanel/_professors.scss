@@ -1,0 +1,96 @@
+.prof {
+	padding: 10px 0;
+	border-bottom: 1px solid darken($gray-lighter, 4);
+	@include clear-fix();
+	.img {
+		width: 160px;
+		height: 140px;
+		padding: 15px 15px;
+		float: right;
+		img {
+			width: 110px;
+			height: 110px;
+			@include border-radius(100px);
+			overflow: hidden;
+			display: table;
+			margin: 0 auto;
+		}
+	}
+	.detail {
+		float: right;
+		width: 765px;
+		height: 140px;
+		.heading {
+			margin: 0 20px;
+			display: block;
+			a {
+				font-size: .9em;
+			}
+			a.edit {
+				margin-top: 6px;
+				float: left;
+				font-size: .45em;
+				font-weight: normal;
+				padding: 1px 7px;
+				@include border-radius(5px);
+				background-color: $gray-lighter;
+				color: $gray;
+				opacity: .8;
+				&:hover {
+					background-color: $flat-greensea;
+					color: white;
+				}
+				&::before {
+					content: '\F044';
+					font-family: 'FontAwesome';
+					padding: 4px 0 0 7px;
+					font-size: 1.15em;
+					display: block;
+					float: right;
+				}
+			}
+		}
+		table {
+			width: 100%;
+			td {
+				padding: 0px 10px;
+				display: inline-block;
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				&:nth-child(2n-1) {
+					color: lighten($gray, 10);
+					font-size: .8em;
+					padding-right: 20px;
+					width: 130px;
+				}
+				&:nth-child(2n) {
+					color: $flat-red;
+					text-align: left;
+					font-size: .9em;
+					width: 240px;
+					a {
+						width: 100%;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+						border: none;
+						display: block;
+						direction: ltr;
+						border-bottom: 1px dashed lighten($flat-blue, 30);
+					}
+				}
+
+                        input[type="email"],input[type="text"]{
+                              width: 100%;
+                              border: none;
+                              display: block;
+                              direction: ltr;
+                              text-align: left;
+                              font-size:1em;
+                              color: $flat-red;
+                        }
+			}
+		}
+	}
+}

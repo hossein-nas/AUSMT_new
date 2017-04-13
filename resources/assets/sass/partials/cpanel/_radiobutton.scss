@@ -1,0 +1,38 @@
+.radiobtn{
+  display: block;
+  float: right;
+  cursor: pointer;
+  input[type='radio']{
+    display: none;
+  }
+  &.block{
+    width: 100%;
+  }
+  &.sep{
+    margin-bottom:10px;
+  }
+  label{
+    padding: 2px 35px 2px 10px;
+    cursor: pointer;
+    position: relative;
+    &::before{
+      display: block;
+      content:  '\f111';
+      font-family: FontAwesome;
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      color: $radio_button_unchecked_bg_color;
+    }
+    display: block;
+    //width: 100%;
+  }
+
+  &:hover label::before{
+    color: darken($radio_button_unchecked_bg_color,8);
+  }
+  &.active label::before{
+    color: $fl-blue;
+  }
+
+}

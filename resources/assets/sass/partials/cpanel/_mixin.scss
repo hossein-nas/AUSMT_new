@@ -1,0 +1,49 @@
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow; // iOS <4.3 & Android <4.1
+    box-shadow: $shadow;
+    -ms-box-shadow: $shadow;
+    -moz-box-shadow: $shadow;
+    -o-box-shadow: $shadow;
+}
+
+@mixin border-radius($radius...) {
+    border-radius: $radius;
+    -moz-border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -o-border-radius: $radius;
+}
+
+@mixin transition-duration($time) {
+    -webkit-transition-duration: $time; // iOS <4.3 & Android <4.1
+    -moz-transition-duration: $time;
+    -o-transition-duration: $time;
+    transition-duration: $time;
+}
+@mixin clear-fix(){
+    &:after{
+        content:'';
+        display: block;
+        clear:both;
+    }
+}
+
+@mixin no-text_selection{
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;
+}
+@mixin transition-duration($a:1s){
+    -moz-transition-duration: $a;
+    -o-transition-duration: $a;
+    -webkit-transition-duration: $a;
+    transition-duration: $a;
+}
+
+@mixin ellips(){
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+}

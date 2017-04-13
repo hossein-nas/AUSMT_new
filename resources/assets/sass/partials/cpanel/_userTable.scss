@@ -1,0 +1,32 @@
+.userTable{
+	width: 100%;
+	margin:15px 0;
+	border-collapse: collapse;
+	@include no-text_selection();
+	tr{
+		cursor: default;
+		th{
+			text-align: center;
+			font-weight:bold;
+			font-size:.8em;
+			color:whitesmoke;
+			padding:10px 3px;
+			background-color: lighten($flat-blue,7);
+		}
+		td{
+			text-align: center;
+			font-size:.75em;
+			color:$gray;
+			padding:7px 3px;
+			line-height:1.4em;
+			@include ellips;
+		}
+		&:hover{
+			background-color: lighten($flat-blue,43);
+		}
+		&:nth-of-type(2n+1){
+			background-color: lighten($flat-blue,44);
+		}
+	}
+
+}

@@ -1,0 +1,162 @@
+.allcomments{
+    %sectionStyle{
+        display: block;
+        float: right;
+        width: 50%;
+        padding: 10px;
+        &::before{
+            content:attr(data-title);
+            display: block;
+            font-weight: bold;
+            text-align: center;
+            font-size:1.1em;
+            @include border-radius(10px);
+            background-color: $gray-lighter;
+            padding: 5px 0;
+            margin-bottom:15px;
+        }
+        .item{
+            position: relative;
+            @include border-radius(7px);
+            padding: 10px 15px;
+            font-size:.9em;
+            &::before{
+                position: absolute;
+                content:'';
+                width: 0;
+                height: 0;
+                border : {
+                    width: 7px 12px;
+                    style: solid;
+                    color:transparent;
+                }
+                top: 20%;
+                left: 100%;
+                border-left-color:$gray-lighter;
+
+            }
+            margin:0 15px 15px 0;
+            background-color: $gray-lighter;
+            color: $gray;
+            .detail{
+                margin-bottom:8px;
+                >ul{
+                    @include clear-fix();
+                    >li{
+                        @include ellips();
+                        display: block;
+                        float: right;
+                        &.name{
+                            width: 40%;
+                            font-weight:bold;
+                        }
+                        &.email{
+                            width: 60%;
+                            text-align: left;
+                            direction: ltr;
+                        }
+                    }
+                }
+            }
+            .text{
+                font-size:.9em;
+                padding:0 10px ;
+                line-height:1.3em;
+            }
+            .actions{
+                margin-top:10px;
+                .date{
+                    font-size:.8em;
+                    color: $gray-light;
+                }
+                a{
+                    float: left;
+                    font-size:1.2em;
+                    width:27px;
+                    height: 30px;
+                    padding: 2px 0;
+                    @include border-radius(3px);
+                    color:$gray-light;
+                    text-align: center;
+                    &::before{
+                        font-family:FontAwesome;
+                        line-height:1.2em;
+                    }
+                    &:hover{
+                        background-color: darken($gray-lighter,4);
+                    }
+                    &.delete{
+                        &::before{
+                            content: '\F014';
+                        }
+                        &:hover{ color:lighten($flat-red,15); }
+                    }
+                    &.edit{
+                        &::before{
+                            content: '\F040';
+                        }
+                        &:hover{ color:lighten($flat-blue,15); }
+                    }
+                    &.verify{
+                        &::before{
+                            content: '\F00C';
+                        }
+                        &:hover{ color:lighten($flat-green,15); }
+                    }
+                    &.link-to-post{
+                        &::before{
+                            content: '\F08E';
+                        }
+                        padding-top:4px;
+                        font-size:1.15em;
+                        &:hover{ color:lighten($flat-orange,15); }
+                    }
+                }
+            }
+        }
+    }
+    .unverifiedComments{
+        @extend %sectionStyle;
+        &::before{
+            color:lighten($flat-red,10);
+        }
+
+    }
+    .last10{
+        @extend %sectionStyle;
+        &::before{
+            color:lighten($flat-greensea,10);
+        }
+    }
+}
+
+#show-single-comment{
+    table{
+        width: 100%;
+        border-collapse: collapse;
+        tr{
+            line-height:1.2em;
+            td{
+                line-height:1.4em;
+                &:first-of-type{
+                    width : 20%;
+                    font-size:.85em;
+                    color: $gray-light;
+                    text-align: left;
+                    padding: 20px 15px;
+
+                }
+                &:last-of-type{
+                    width : 80%;
+                    font-size:1.2em;
+                    padding: 20px 15px;
+                    color:$gray;
+                }
+
+            }
+            &:nth-of-type(2n){
+                background-color: lighten($gray-lighter,3);
+            }
+        }
+    }
+}

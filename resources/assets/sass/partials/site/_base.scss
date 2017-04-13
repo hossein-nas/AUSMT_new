@@ -1,0 +1,113 @@
+*,*::before,*::after{
+	box-sizing:border-box;
+	direction: rtl;
+	font-family: $base-font;
+	margin: 0; 
+	padding: 0;
+	line-height:1rem;
+}
+a{
+	text-decoration:none;
+	color:inherit;
+	outline: none;
+	display: inline-block;
+}
+body{
+	font-size:16px;
+	background-color: $grayscale-2;
+}
+.container{
+	position:relative;
+	width:1200px;
+	margin: 0 auto;
+// 	padding: 10px;
+	@extend .clearfix;
+	@media screen and (min-width: 320px ) and (max-width:1200px){
+		width: 100%;
+	}
+}
+p {
+    display: block;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+::selection{
+	background-color: rgba($au-blue, 0.6);
+	color:white;
+}
+
+.clearfix::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+%no-select {
+	user-select: none;
+	cursor: default;
+}
+%text-ellipse {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.btn{
+	outline:none;
+	appearance:none;
+	border: none;
+	background-color: transparent;
+	color:$grayscale-6;
+	font-size:1rem;
+	line-height:1rem;
+	padding:.75rem 1.25rem;
+	vertical-align: middle;
+	font-weight: bold;
+	cursor: pointer;
+	@extend %no-select;
+	&:hover{
+		background-color: rgba($black,.04);
+	}
+	&:active{
+		background-color: rgba($black,.07);
+	}
+	i.material-icons{
+	}
+
+
+	&.small{
+		font-size:.75rem;
+		line-height: .75rem;
+		padding:.6rem .8rem;
+		font-weight: normal;
+		i.material-icons{
+			font-size:.9rem;
+			font-weight: normal;
+		}
+	}
+
+
+	&.danger{
+		background-color: $au-red-light;
+		color: $white;
+		&:hover{
+			background-color: $au-red;
+		}
+	}
+	&.success{
+		background-color: $au-green-light;
+		color: $white;
+		&:hover{
+			background-color: $au-green;
+		}
+	}
+	&.warning{
+		background-color: $au-orange-light;
+		color: $white;
+		&:hover{
+			background-color: $au-orange;
+		}
+	}
+
+}

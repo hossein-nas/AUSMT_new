@@ -1,0 +1,27 @@
+/*!
+	AUSMT website stylesheet
+	by: Hossein Nasiri
+	email: hossein.nasiri.sovari
+	version 1.0
+*/
+/*
+*/
+// paritals
+@import "partials/site/normalize"; 
+@import "partials/site/variables";
+@import "partials/site/fonts";
+@import "partials/site/_material-icons";
+@import "partials/site/mixins";
+@import "partials/site/base";
+@import "partials/site/header";
+@import "partials/site/navigation";
+@import "partials/site/fast-menu";
+@import "partials/site/hot-news";
+@import "partials/site/content";
+@import "partials/site/footer";
+@import "partials/site/slider";
+@import "partials/site/errorpages";
+@import "partials/site/panel_area";
+
+
+@import "partials/site/post";

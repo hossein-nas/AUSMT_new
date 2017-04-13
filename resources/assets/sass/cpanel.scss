@@ -1,0 +1,400 @@
+
+@import "partials/cpanel/colors";
+@import "partials/cpanel/fonts";
+@import "partials/cpanel/mixin";
+@import "partials/cpanel/base";
+@import "partials/cpanel/baseui";
+@import "partials/cpanel/grid";
+@import "partials/cpanel/sidebar";
+@import "partials/cpanel/panel";
+@import "partials/cpanel/radiobutton";
+@import "partials/cpanel/checkbox";
+@import "partials/cpanel/sepcial_posts_table_ui";
+@import "partials/cpanel/nav_menu";
+@import "partials/cpanel/file_selection";
+@import "partials/cpanel/professors";
+@import "partials/cpanel/navigation_list";
+@import "partials/cpanel/fast_menu_cpanel";
+@import "partials/cpanel/slider";
+@import "partials/cpanel/setting";
+@import "partials/cpanel/comments";
+@import "partials/cpanel/userTable";
+
+
+
+//-------------------------- Table ------------------------------
+
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: .8em;
+    thead {
+        tr {
+            background-color: #f6f6f6;
+            text-align: center;
+            padding: 5px 0;
+            font-weight: bold;
+            th{
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 5px 4px;
+            }
+            @for $n from 1 through 16{
+                th.unit-#{$n}{
+                    width : ($n/16)*100%;
+                }
+            }
+            &.header{
+                background-color: #ededed;
+            }
+        }
+    }
+    tbody {
+        tr {
+            text-align: center;
+            td {
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                padding: 2px 4px;
+                position: relative;
+                font-weight: 300;
+                .set{
+                    display: inline-block;
+                    padding: 0px 5px;
+                    float: left;
+                    font-size: .8em;
+                    margin: 4px 2px;
+                    opacity: .3;
+                    @include border-radius(5px);
+                    &:hover{
+                        opacity: .75;
+                    }
+                }
+            }
+            &:hover {
+                background-color: #fafafa;
+            }
+
+        }
+        @for $n from 1 through 12{
+            td.unit-#{$n}{
+                width : ($n/12)*100%;
+            }
+        }
+    }
+    &.strip {
+        tbody{
+            tr:nth-child(2n+1) {
+                background-color: rgba(249, 249, 249, 1.0);
+            }
+            tr:hover {
+                background-color: #f9ffef;
+            }
+        }
+    }
+    td.alignleft{
+        text-align: left !important;
+    }
+    td.alignright{
+        text-align: right;
+    }
+
+}
+//-------------------------- Table End --------------------------
+
+
+
+
+//-------------------------- Form --------------------------
+
+.form-group{
+    @include clear-fix();
+    margin: 0 10px 10px 10px;
+    .item{
+        position: relative;
+        margin-bottom: 20px;
+        font-size: .8em;
+        margin-top: 20px;
+        p{
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            color: $gray-dark;
+        }
+        //p.input{
+        //    position: absolute;
+        //    color: $gray-light;
+        //    top:15px;
+        //    font-size:1.3em;
+        //}
+        input[type='text'],input[type='email'],input[type='password']{
+            display: block;
+            width: 100%;
+            height: 60px;
+            border:none;
+            border-bottom: 2px solid $gray-light;
+            outline: none;
+            //@include border-radius(5px);
+            padding:5px 10px ;
+            font-family: $base-font;
+            font-size: 1.6em;
+            color: $black;
+            &:focus:not(:readonly){
+                border-color: lighten($flat-blue,10);
+                //@include box-shadow(0 0 4px lighten($flat-blue,10));
+            }
+        }
+        input[type='email'].ltr,input[type='text'].ltr,input[type='password'].ltr{
+            direction: ltr;
+            text-align: left;
+        }
+
+        textarea{
+            display: block;
+            width: 100%;
+            height: 300px;
+            border:none;
+            border-bottom: 2px solid $gray-light;
+            outline: none;
+            padding:5px 10px ;
+            font-family: $base-font;
+            font-size: 1.6em;
+            color: $black;
+            resize: vertical;
+            &:focus{
+                border-color: lighten($flat-blue,10);
+                //@include box-shadow(0 0 4px lighten($flat-blue,10));
+            }
+        }
+        .tooltip{
+            color:white;
+            position: absolute;
+            background-color: rgba($flat-red,.8);
+            width:200px;
+            display: block;
+            @include border-radius(5px);
+            min-height: 30px;
+            right:101%;
+            top: 50%;
+            padding: 5px 7px;
+            line-height: 19px;
+            &::after{
+                content:'';
+                display: block;
+                width: 0;
+                height: 0;
+                border:7px solid transparent;
+                border-left-color:rgba($flat-red,.8);
+                position: absolute;
+                left:100%;
+                top:9px;
+            }
+            &::before{
+                content: '\f057';
+                font-family: FontAwesome;
+                display: inline-block;
+                float:left;
+                //margin:5px 5px 2px 1px;
+                font-size:1.1em;
+                color: rgba(white,.8);
+                cursor: pointer;
+            }
+        }
+    }
+
+    .categoiesList{
+        .cadr{
+            display: block;
+            width: 100%;
+            height: 200px;
+            max-height: 200px;
+            overflow: hidden;
+            border: 1px solid $gray-light;
+            padding: 5px 10px;
+            padding-left: 5px;
+            font-family: $base-font;
+            font-size: 1.1em;
+            @include border-radius(5px);
+            input{
+                display: none;
+            }
+            .child{
+                margin-right: 50px;
+            }
+            .nicecheck{
+                margin-left: 5px;
+            }
+        }
+    }
+    .date{
+        &::before{
+            content:'تاریخ انتشار را تنظیم نمایید:';
+            display: block;
+            width: 100%;
+            text-align: center;
+            color:white;
+            font-size:.8em;
+            padding: 5px;
+            margin-bottom:5px;
+        }
+        margin: auto;
+        display: table;
+        background-color: lighten($flat-red,10);
+        //min-width: 400px;
+        padding: 10px 0 10px 10px;
+        @include border-radius(15px);
+        text-align: center;
+        input[type="text"]{
+            //float:right;
+            float: left;
+            padding: 10px;
+            border:none;
+            @include border-radius(10px);
+            margin-right:10px;
+            display: inline;
+            font-size:1.55em;
+            width: 60px;
+            text-align: center;
+            color: $black-light;
+        }
+    }
+
+}
+
+//-------------------------- Form End --------------------------
+
+//-------------------------- Log in --------------------------
+.login-panel{
+    width: 400px;
+    height: auto;
+    padding: 20px;
+    background-color: white;
+    margin: -400px auto;
+    .submit{
+        padding: 10px 20px;
+        margin: 20px 0 0 0;
+        width: 100%;
+        &:focus{
+            opacity: .9;
+        }
+    }
+    input{
+        text-align: center;
+        padding: 7px !important;
+        height: auto !important;
+    }
+    @include box-shadow(2px 3px 3px darken($gray-lighter,2));
+    @include border-radius(10px);
+    .error{
+        text-align: center;
+        font-size: .85em;
+        color: $flat-red;
+        margin-top: 20px;
+        display: block;
+    }
+
+}
+//-------------------------- Log in End --------------------------
+
+//-------------------------- Window --------------------------
+.window {
+    display: none;
+    position: absolute;
+    top:150px;
+    width: 700px;
+    height: 500px;
+    background-color: #f9f9f9;
+    border:2px solid #f5f5f5;
+    overflow: hidden;
+    @include box-shadow(2px 2px 2px $gray-light);
+    @include border-radius(5px);
+    padding: 10px;
+    .tab{
+        border-bottom: 2px solid #e8e8e8;
+        ul{
+            display: block;
+            width: 100%;
+            padding:0;
+            margin: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            li{
+                float: left;
+                padding: 3px 10px;
+                font-size: .8em;
+                background-color: #f1f1f1;
+                margin: 0 1px;
+                cursor: pointer;
+                @include border-radius(5px 5px 0 0);
+                &:hover{
+                    background-color: #f6f6f6;
+                }
+                &.active{
+                    background-color: #e8e8e8;
+                }
+            }
+        }
+        &:after{
+            content: '';
+            display: block;
+            clear: both;
+        }
+    }
+    .content{
+        height: 400px;
+        margin-bottom: 10px;
+        padding: 15px;
+        .imagedir{
+            .dir {
+                display: block;
+                padding: 10px;
+                padding-left: 0px;
+                border: 1px solid $gray-light;
+                background-color: white;
+                height: 340px;
+                max-height: 340px;
+                overflow: hidden;
+                @include border-radius(5px);
+                img{
+                    cursor: pointer;
+                    width: 95px;
+                    height: 95px;
+                    padding: 5px;
+                    &:hover{
+                        opacity: .7;
+                    }
+                    &.active{
+                        border: 2px solid rgba(112, 221, 255, 0.76);
+                        background-color: rgba(112, 221, 255, 0.1);
+                    }
+                    &.active:hover{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        .uploadimage{
+            .msg{
+                width: 440px;
+                height: 32px;
+                margin: 3px 0;
+                float: left;
+                padding: 0 5px;
+                display: block;
+            }
+        }
+    }
+    >.btn{
+        width: 60px;
+        text-align: center;
+    }
+}
+
+//-------------------------- Window End --------------------------
+
+//-----------------------------------------------------------------------
+@import "partials/cpanel/fawesome";
+@import "partials/cpanel/mCustomScrollbar";

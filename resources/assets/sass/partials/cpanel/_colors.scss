@@ -1,0 +1,48 @@
+$gray-dark:                 darken(#888, 20%) !default;     // #333
+$gray:                      lighten(#888, 0) !default;      // #888
+$gray-light:                lighten(#888, 25%) !default;    // #999
+$gray-lighter:              lighten(#888, 40%) !default;    // #999
+$black:                     #343434;
+$black-light:               lighten($black,10%);
+$black-dark:                darken($black,10%);
+$whitesmoke:                darken(whitesmoke,10);
+
+$fl-blue:       rgb(0,115,164);
+$fl-red:        rgb(255,5,5);
+$fl-orange:     rgb(238,113,86);
+$fl-green:       rgb(2,129,3);
+
+$flat-red:              #e74c3c;
+$flat-green:            #2ecc71;
+$flat-blue:             #3498db;
+$flat-greensea:         #1abc9c;
+$flat-yellow:           #f1c40f;
+$flat-orange:           #e67e22;
+$flat-silver:           #bdc3c7;
+$flat-midnightblue:     #34495e;
+
+
+$main-light-grey				: #ddd;
+$main-grey					: #999;
+$main-dark-grey				: #666;
+$main-bg-green				: #2F544D;
+$main-green					: #37C2A5;
+$main-light-green		      	: #51CF86;
+$main-nav-green				: #14bc9c;
+$main-yellow				: #EDC937;
+$main-red					: #E47063;
+$main-blue					: #00afef;
+$main-dark-blue				: #5E6E7D;
+$main-hover					: rgba(black,.06);
+
+
+$body-background-color:#E1E1E1;
+$content-bg-color : #F9FBFD;
+
+
+$base-font:             "IRANSans-web" ,Helvetica,Arial,sans-serif,"Segue UI";
+$base-font-size:        18px;
+$border-radius-base:    5px;
+
+
+$radio_button_unchecked_bg_color:     rgb(220, 220, 220);
