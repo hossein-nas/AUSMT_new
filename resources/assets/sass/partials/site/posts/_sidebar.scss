@@ -2,8 +2,126 @@
 	float: right;
 	@extend .clearfix;
 	width: 400px;
-	background-color: $white;
-	border:2px solid darken($grayscale-2,2);
-	border-radius:1rem;
-	overflow: hidden;
+
+	.sidebar-panel{
+		margin-bottom:1rem;
+		background-color: $white;
+		border:2px solid darken($grayscale-2,2);
+		border-radius:1rem;
+		overflow: hidden;
+		&.post-fastmenu{
+			overflow: hidden;
+			.body{
+				.menu{
+					@extend .clearfix;
+					@extend %no-select;
+					display: block;
+					.item{
+						float: right;
+						width: 198px;
+						height:123px;
+						transition: all .15s;
+						&:hover{
+							background-color: rgba($grayscale-2,.7);
+							.thumbnail{
+								transform: rotate(-3deg) scale(.98,.98);
+								transition: all .15s;
+							}
+						}
+						list-style-type: none;
+						a{
+							display: block;
+							width: 100%;
+							height: 100%;
+							.thumbnail{
+								text-align: center;
+								padding:1rem 0 0rem;
+								>img{
+									display: inline-block;
+									width:65px;
+									height:65px;
+								}
+							}
+							.title{
+								text-align: center;
+								font-weight:bold;
+								font-size:.9rem;
+								color: $grayscale-5;
+								max-height:2rem;
+								overflow: hidden;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		&.hot-news{
+			.headline{
+				display: block;
+				margin: 0 0 1rem 0;
+				padding: 0 .8rem;
+				text-align: center;
+				font-size: 1.25rem;
+				line-height: 1.1rem;
+				font-weight:bold;
+				color: $grayscale-4;
+				&::after {
+					content: '';
+					display: block;
+					width: 100%;
+					background-color: $grayscale-2;
+					height: 4px;
+					margin-top: -2.05rem;
+				}
+				> span.headline-box {
+					background-color: $white;
+					padding: 1.5rem .5rem;
+					display: inline-block;
+					&::before {
+						content: 'اخبــار مهم';
+					}
+				}
+			}
+			.body{
+				ul{
+					li.item{
+						@extend .clearfix;
+						list-style-type:none;
+						display: block;
+						padding:.5rem 0rem;
+						border-bottom:1.5px dashed $grayscale-3;
+						margin:0 .7rem .3rem;
+						&:last-of-type{
+							margin-bottom:1rem;
+							border-bottom:none;
+						}
+						.thumbnail{
+							width: 120px;
+							height:80px;
+							overflow: hidden;
+							float: right;
+							>img{
+								width: 100%;
+								height: 100%;
+							}
+						}
+						a{
+							display: block;
+							float: right;
+							width: 250px;
+							//background-color: rgba(red,.1);
+							padding:0 1rem 0 0;
+							font-weight:bold;
+							font-size:.96rem;
+							//text-align: justify;
+							line-height:1.35rem;
+							color:$hot-news-title-color;
+						}
+					}
+				}
+			}
+		}
+	}
+
 }

@@ -3,7 +3,7 @@
     var bLazy = new Blazy({
         selector: 'img',
         breakpoints: [{
-                width: 480, // max-width
+                width: 320, // max-width
                 src: 'data-src-small'
             },
             {

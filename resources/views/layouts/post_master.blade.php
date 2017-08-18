@@ -31,11 +31,11 @@
 				</section>
 
 				<section id="attachments">
-
+					@yield('attachments')
 				</section>
 
 				<section id="related-posts">
-
+					@yield('related-posts')
 				</section>
 
 				<section id="categories">
@@ -117,12 +117,63 @@
 
 		</section>
 		<aside id="sidebar">
-			<article class="sidebar-panel">
-				<h2 class="headline">
-					سلام
-				</h2>
+			<article class="sidebar-panel post-fastmenu">
 				<div class="body">
+					<ul class="menu">
+						<li class="item">
+							<a href="">
+								<div class="thumbnail">
+									<img src="./media/fastmenu/001_monitor_system.svg" alt="">
+								</div>
+								<div class="title"> سامانه سما</div>
+							</a>
+						</li>
+						<li class="item">
+							<a href="">
+								<div class="thumbnail">
+									<img src="./media/fastmenu/136_chikent_food_self_serving.svg" alt="">
+								</div>
+								<div class="title">سامانه تغذیه</div>
+							</a>
+						</li>
+						<li class="item">
+							<a href="">
+								<div class="thumbnail">
+									<img src="./media/fastmenu/022_calender.svg" alt="">
+								</div>
+								<div class="title">تقویم آموزشی</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</article>
 
+			<article class="sidebar-panel hot-news">
+				<div class="headline">
+					<span class="headline-box"></span>
+				</div>
+				<div class="body">
+					<ul class="">
+						<li class="item">
+								<div class="thumbnail">
+									<img src="./media/photos/small/2.png" alt="">
+								</div>
+								<a href="" class="title">بازدید معاون اداری مالی و مدیریت منابع وزارت علوم تحقیقات وفناوری از دانشگاه دولتی تخصصی فناوری های نوین آمل </a>
+						</li>
+						<li class="item">
+							<div class="thumbnail">
+								<img src="./media/photos/small/3.png" alt="">
+							</div>
+							<a href="" class="title">حضور جناب پروفسور دومیری گنجی در مراسم تجلیل از اساتید نمونه دانشگاه مازندران با حضور وزیرعلوم تحقیقات و فناوری</a>
+						</li>
+						<li class="item">
+							<div class="thumbnail">
+								<img src="./media/photos/small/2.png" alt="">
+							</div>
+							<a href="" class="title">بازدید معاون اداری مالی و مدیریت منابع وزارت علوم تحقیقات وفناوری از دانشگاه دولتی تخصصی فناوری های نوین آمل </a>
+						</li>
+
+					</ul>
 				</div>
 			</article>
 		</aside>

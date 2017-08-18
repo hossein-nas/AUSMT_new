@@ -29,6 +29,7 @@ section.slider{
                         height: 100%;
                         img{
                               display: block;
+                              width: 100%;
                               /* sass @media query with min: 768 and max: 1200 */
                               @media screen and (min-width: 768px) and (max-width: 1200px){
                                     width: 100%;

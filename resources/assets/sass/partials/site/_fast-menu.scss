@@ -14,7 +14,7 @@ section.fast-menu{
       }
       >section{
             float: right;
-            height: 250px;
+            //height: 250px;
             @media screen and (min-width: 768px) and (max-width: 1200px){
                   height: 180px;
             }
@@ -112,8 +112,8 @@ section.fast-menu{
                                           margin-bottom:.25rem;
                                           >img{
                                                 display: inline;
-                                                width: 75px;
-                                                height: 75px;
+                                                width: 85px;
+                                                height: 85px;
 
                                           }
                                           /* sass @media query with min: 768 and max: 1200 */

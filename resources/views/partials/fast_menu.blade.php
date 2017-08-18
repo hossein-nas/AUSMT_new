@@ -4,54 +4,17 @@
 	</section>
 	<section class="wrapper content frame">
 		<ul class="slidee">
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
-			<li class="item">
-				<a href="#">
-					<span class="icon">
-						<img src="assets/img/education.svg" alt="">
-					</span>
-					<h1 class="title">سیستم آموزش</h1>
-				</a>
-			</li>
+			<?php $fastmenu = File::files('media/fastmenu'); ?>
+			@foreach($fastmenu as $menu)
+				<li class="item">
+					<a href="#">
+				<span class="icon">
+					<img src="{{$menu}}" alt="">
+				</span>
+						<h1 class="title">سیستم آموزش</h1>
+					</a>
+				</li>
+			@endforeach
 		</ul>
 	</section>
 	<section class="arrow-backward">

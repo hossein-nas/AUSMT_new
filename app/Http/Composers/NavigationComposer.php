@@ -57,9 +57,8 @@ class NavigationComposer {
         $view->with($arr);
     }
     public function fastmenu($view) {
-	    $f_menu = getFastMenuItems();
-	    ksort($f_menu);
-	    $view->with('f_menu',$f_menu);
+	    $fastmenu = File::files('media/fastmenu');
+	    $view->with('fastmenu',$fastmenu);
     }
     public function unverifiedCommentsCount($view) {
 	    $unverifiedCommentsCount = Comment::unverifiedCm()->get()->count();
