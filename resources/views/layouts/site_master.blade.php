@@ -10,8 +10,13 @@
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
 	<link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+<<<<<<< HEAD
 	<meta name="theme-color" content="#0F595E">
 
+=======
+	<meta name="theme-color" content="#C91021">
+	
+>>>>>>> 621ecd325b172ba5492f6f3cb8d00caac56e3d85
 </head>
 <body>
 
