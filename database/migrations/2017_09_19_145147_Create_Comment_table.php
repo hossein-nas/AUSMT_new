@@ -17,7 +17,9 @@ class CreateCommentTable extends Migration
 	        $table->string('name',30)->nullable(false);
 	        $table->string('email',30);
 	        $table->string('content',300)->nullable(false);
-	        $table->boolean('verified')->nullable(false)->default(0);
+			$table->boolean('verified')->nullable(false)->default(0);
+			$table->boolean('is_admin')->nullable(false)->default(0);
+			$table->ipAddress('ip')->nullable(false);
 	        $table->timestamp('verified_at')->nullable();
 	        $table->integer('post_id')->unsigned()->nullable(false);
 	        $table->integer('parent_cm_id')->unsigned()->nullable();
