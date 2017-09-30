@@ -15,7 +15,7 @@ class AddForeignKeyExtensionIdToAuFileTable extends Migration
         Schema::table('au_file', function (Blueprint $table) {
             $table->foreign('extension_id')
 	            ->references('id')
-	            ->on('au_file');
+	            ->on('au_file_extension');
         });
     }
 
