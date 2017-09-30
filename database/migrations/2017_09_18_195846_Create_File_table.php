@@ -20,7 +20,6 @@ class CreateFileTable extends Migration
 	        $table->string('description', 200)->nullable();
 	        $table->boolean('responsive_image')->default(0)->nullable(false);
 	        $table->integer('extension_id')->unsigned()->nullable(false);
-	        $table->integer('file_type_id')->unsigned()->nullable(false);
 	        $table->integer('file_category_id')->unsigned()->nullable(false);
             $table->timestamps();
         });
