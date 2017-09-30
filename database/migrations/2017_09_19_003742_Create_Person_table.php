@@ -21,8 +21,6 @@ class CreatePersonTable extends Migration {
 			$table->string('telephone', 10);
 			$table->string('extension', 4);
 			$table->string('bio', 300);
-			$table->string('duty_description', 300);
-			$table->json('duties')->nullable();
 			$table->integer('thumbnail_id')->unsigned()->nullable();
 			$table->integer('room_id')->unsigned()->nullable();
 			$table->timestamps();

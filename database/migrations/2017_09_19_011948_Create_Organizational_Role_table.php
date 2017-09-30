@@ -19,6 +19,8 @@ class CreateOrganizationalRoleTable extends Migration {
 			$table->text('description')->nullable(false);
 			$table->integer('superior_role_id')->unsigned()->nullable();
 			$table->integer('org_unit_id')->unsigned()->nullable(false);
+			$table->string('duty_description', 300);
+			$table->json('duties')->nullable();
 			$table->timestamps();
 		});
 		
