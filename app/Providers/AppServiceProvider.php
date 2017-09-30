@@ -6,6 +6,8 @@ use App\Post;
 use App\Setting;
 use Illuminate\Support\ServiceProvider;
 use Morilog\Jalali\jDate;
+use Faker\Factory as FakerFactory;
+use Faker\Generator as FakerGenerator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +36,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->singleton(FakerGenerator::class, function () {
+            return FakerFactory::create('fa_IR');
+        });
     }
 }

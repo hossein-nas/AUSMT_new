@@ -110,6 +110,8 @@ return [
 
     'log' => env('APP_LOG', 'single'),
 
+    'faker_locale' => 'fa_IR',
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

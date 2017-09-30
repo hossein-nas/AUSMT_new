@@ -14,33 +14,33 @@
 use Morilog\Jalali\jDate;
 
 Route::get('/', function () {
-	return view('test');
+    return view('test');
 });
 Route::get('/posts', function () {
-	return view('post');
+    return view('post');
 });
 Route::get('/server', function () {
-	var_dump($GLOBALS);
+    var_dump($GLOBALS);
 });
 
 Route::get("/phpinfo/", function () {
-	phpinfo();
+    phpinfo();
 });
 
 Route::post("/getLocalTime/", function (Illuminate\Http\Request $request) {
-	$i = 0;
-	while ( $i ++ < 60 ) {
-		$date = jDate::forge();
-		$now['day'] = toPersianNums($date->reforge('now')->format('%d'));
-		$now['weekDayName'] = $date->reforge('now')->format('%A');
-		$now['hour'] = toPersianNums($date->reforge('now')->format('%H'));
-		$now['min'] = toPersianNums($date->reforge('now')->format('%M'));
-		if ( count(array_diff($now, $request->toArray())) > 0 )
-			return json_encode($now);
-		sleep(1);
-		unset($date);
-	}
-	
-	return response()->json(['error' => 'no-change'], 500);
+    $i = 0;
+    while ($i++ < 60) {
+        $date = jDate::forge();
+        $now['day'] = toPersianNums($date->reforge('now')->format('%d'));
+        $now['weekDayName'] = $date->reforge('now')->format('%A');
+        $now['hour'] = toPersianNums($date->reforge('now')->format('%H'));
+        $now['min'] = toPersianNums($date->reforge('now')->format('%M'));
+        if (count(array_diff($now, $request->toArray())) > 0)
+            return json_encode($now);
+        sleep(1);
+        unset($date);
+    }
+
+    return response()->json(['error' => 'no-change'], 500);
 });
 
