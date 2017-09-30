@@ -26,6 +26,9 @@ class CreatePrivilegeTable extends Migration
             $table->foreign('parent_privilege')
                 ->references('id')
                 ->on('au_privilege');
+            $table->foreign('privilege_dependency')
+                ->references('id')
+                ->on('au_privilege');
         });
 
         $tuples = [
@@ -66,7 +69,7 @@ class CreatePrivilegeTable extends Migration
                     'description' => 'با این اختیار قادر به حذف، ویرایش و افزودن هر انواع پست‌ها (خبر، اطلاعیه، سمینار، پیشآمد) خواهید بود.'
                 ],
                     [
-                        'id' => 23, 'parent_privilege' => 6, 'privilege_dependency' => 2,
+                        'id' => 23, 'parent_privilege' => 6, 'privilege_dependency' => null,
                         'id_name' => 'addNewPost', 'privilege_name_en' => 'Add new post',
                         'privilege_name' => 'افزودن پست جدید',
                         'description' => 'با این اختیار قادر خواهید بود پست‌های مختلفی (خبر، اطلاعیه، پیشآمد، سمینار و متفرقه) به سیستم وارد کنید. توجه داشته باشید با داشتن این اختیار فقط حق ایجاد پست جدید را خواهید داشت و حق ویرایش یا حذف نخواهید داشت.'
@@ -91,7 +94,7 @@ class CreatePrivilegeTable extends Migration
                     'description' => 'با این اختیار قادر به حذف، ویرایش و افزودن هر انواع برگه‌ها (برگه ساده یا برگه پیچیده) خواهید بود.'
                 ],
                     [
-                        'id' => 26, 'parent_privilege' => 7, 'privilege_dependency' => 3,
+                        'id' => 26, 'parent_privilege' => 7, 'privilege_dependency' => null,
                         'id_name' => 'addNewPage', 'privilege_name_en' => 'Add new pages',
                         'privilege_name' => 'افزودن برگه جدید',
                         'description' => 'با این اختیار قادر خواهید بود برگه (برگه ساده یا پیچیده) به سیستم اضافه کنید. توجه داشته باشید با داشتن این اختیار فقط حق ایجاد برگه جدید را خواهید داشت و حق ویرایش یا حذف نخواهید داشت.'
@@ -115,7 +118,7 @@ class CreatePrivilegeTable extends Migration
                     'description' => 'با این اختیار قادر به حذف، ویرایش و افزودن هر انواع مجلات (مجله یا نشریه) خواهید بود.'
                 ],
                     [
-                        'id' => 29, 'parent_privilege' => 8, 'privilege_dependency' => 4,
+                        'id' => 29, 'parent_privilege' => 8, 'privilege_dependency' => null,
                         'id_name' => 'addNewMag', 'privilege_name_en' => 'Add new pages',
                         'privilege_name' => 'افزودن مجله جدید',
                         'description' => 'با این اختیار قادر خواهید بود  مجله یا نشریه جدید به سیستم اضافه کنید. توجه داشته باشید با داشتن این اختیار فقط حق افزودن مجله یا نشریه را خواهید داشت و حق ویرایش یا حذف نخواهید داشت.'
@@ -157,7 +160,7 @@ class CreatePrivilegeTable extends Migration
                 'description' => 'با این اختیار قادر خواهید بود کامنت‌های سیستم را مشاهده کنید. ولی قادر به اعمال تغییرات بروی آن‌ها نخواهید بود.'
             ],
             [
-                'id' => 13, 'parent_privilege' => null, 'privilege_dependency' => 12,
+                'id' => 13, 'parent_privilege' => 12, 'privilege_dependency' => null,
                 'id_name' => 'viewComment', 'privilege_name_en' => 'View comment',
                 'privilege_name' => 'مشاهده دیدگاه‌ با جزئیات',
                 'description' => 'با این اختیار قادر خواهید بود کامنت‌های سیستم را بصورت تکی با جزئیات بیشتری مشاهده کنید. ولی قادر به اعمال تغییرات بروی آن‌ها نخواهید بود.'
@@ -175,7 +178,7 @@ class CreatePrivilegeTable extends Migration
                     'description' => 'با این اختیار قادر خواهید بود دیدگاه‌های جدیدی که ارسال می‌شوند را به عنوان مدیر تأیید کنید. توجه داشته باشید با این اختیار فقط می‌توانید تأیید کنید ویرایش یا حتی حذف دیدگاه ارسال شده از اختیار شما خارج خواهد بود.'
                 ],
                 [
-                    'id' => 33, 'parent_privilege' => 14, 'privilege_dependency' => 12,
+                    'id' => 33, 'parent_privilege' => 14, 'privilege_dependency' => null,
                     'id_name' => 'addNewComment', 'privilege_name_en' => 'Add new comment',
                     'privilege_name' => 'افزودن دیدگاه جدید',
                     'description' => 'با این اختیار قادر خواهید بود که دیدگاه جدیدی را ارسال کنید. این دیدگاه می‌تواند در پاسخ به پرسش کاربران یا به صورت اختیاری مورد پست‌ها ارسال بشوند.'
@@ -300,35 +303,42 @@ class CreatePrivilegeTable extends Migration
                     'privilege_name' => 'ویرایش مشخصات ساختمان‌ها',
                     'description' => 'با این اختیار قادر خواهید بود مشخصات ساختمان‌ها را ویرایش کنید. باید توجه داشته باشید که با این اختیار قادر نخواهید بود که ساختار تودرتو یی ساختمان‌ها را تغییر بدهید.'
                 ],
+                [
+                    'id' => 65, 'parent_privilege' => 20, 'privilege_dependency' => 19,
+                    'id_name' => '‫‪manageRooms‬‬', 'privilege_name_en' => '‫‪Manage‬‬ ‫‪structure‬‬ ‫‪rooms‬‬',
+                    'privilege_name' => 'مدیریت فضاهای ساختمان‌ها',
+                    'description' => 'با این اختیار قادر خواهید بود فضاهای ساختمان‌ها را مدیریت کنید.'
+                ],
+
             [
                 'id' => 21, 'parent_privilege' => null, 'privilege_dependency' => null,
                 'id_name' => 'viewPeoples', 'privilege_name_en' => 'View peoples',
-                'privilege_name' => 'مشاهده‌ی افراد سیستم',
-                'description' => 'با این اختیار قادر خواهید بود افراد سیستم را مشاهده کنید. ولی قادر به اعمال تغییرات بروی آن‌ها نخواهید بود.'
+                'privilege_name' => 'مشاهده‌ی اشخاص سیستم',
+                'description' => 'با این اختیار قادر خواهید بود اشخاص سیستم را مشاهده کنید. ولی قادر به اعمال تغییرات بروی آن‌ها نخواهید بود.'
             ],
             [
                 'id' => 22, 'parent_privilege' => null, 'privilege_dependency' => 21,
                 'id_name' => 'managePeoples', 'privilege_name_en' => 'Manage peoples',
-                'privilege_name' => 'مدیریت افراد سیستم',
-                'description' => 'با این اختیار قادر خواهید بود افراد سیستم را حذف، ویرایش و حتی می‌توانید فرد جدیدی را به سیستم اضافه کنید.'
+                'privilege_name' => 'مدیریت اشخاص سیستم',
+                'description' => 'با این اختیار قادر خواهید بود اشخاص سیستم را حذف، ویرایش و حتی می‌توانید شخص جدیدی را به سیستم اضافه کنید.'
             ],
                 [
                     'id' => 48, 'parent_privilege' => 22, 'privilege_dependency' => 21,
                     'id_name' => 'addNewPerson', 'privilege_name_en' => 'Add new person',
-                    'privilege_name' => 'افزودن فرد جدید',
-                    'description' => 'با این اختیار قادر خواهید بود فرد جدیدی به سیستم اضافه کنید. ولی حذف یا ویرایش مشخصات افراد از اختیار شما خارج خواهد بود.'
+                    'privilege_name' => 'افزودن شخص جدید',
+                    'description' => 'با این اختیار قادر خواهید بود شخص جدیدی به سیستم اضافه کنید. ولی حذف یا ویرایش مشخصات اشخاص از اختیار شما خارج خواهد بود.'
                 ],
                 [
                     'id' => 49, 'parent_privilege' => 22, 'privilege_dependency' => 21,
                     'id_name' => 'deletePersons', 'privilege_name_en' => 'Delete persons',
-                    'privilege_name' => 'حذف افراد',
-                    'description' => 'با این اختیار قادر خواهید بود افراد را از  سیستم حذف کنید.'
+                    'privilege_name' => 'حذف اشخاص',
+                    'description' => 'با این اختیار قادر خواهید بود اشخاص را از  سیستم حذف کنید.'
                 ],
                 [
                     'id' => 50, 'parent_privilege' => 22, 'privilege_dependency' => 21,
                     'id_name' => 'editPersons', 'privilege_name_en' => 'Edit persons specs',
-                    'privilege_name' => 'ویرایش مشخصات افراد',
-                    'description' => 'با این اختیار قادر خواهید بود مشخصات افراد را ویرایش کنید.'
+                    'privilege_name' => 'ویرایش مشخصات اشخاص',
+                    'description' => 'با این اختیار قادر خواهید بود مشخصات اشخاص را ویرایش کنید.'
                 ],
             [
                 'id' => 51, 'parent_privilege' => null, 'privilege_dependency' => null,
@@ -355,6 +365,19 @@ class CreatePrivilegeTable extends Migration
                     'description' => 'با این اختیار قادر خواهید بود کاربران سیستم را حذف کنید.'
                 ],
                 [
+                    'id' => 63, 'parent_privilege' => 52, 'privilege_dependency' => 51,
+                    'id_name' => 'suspendUsers', 'privilege_name_en' => 'Suspend users',
+                    'privilege_name' => 'مسدود کردن کاربران',
+                    'description' => 'با این اختیار قادر خواهید بود کاربران سیستم را به صورت موقتی مسدود کنید. در اصل کاربران به صورت مسدود در میآیند و در آینده می‌توان کاربر را از حالت مسدود در آورد کرد.'
+                ],
+                [
+                    'id' => 64, 'parent_privilege' => 52, 'privilege_dependency' => 51,
+                    'id_name' => 'resumeSuspendedUsers', 'privilege_name_en' => 'Resume suspended users',
+                    'privilege_name' => 'آزاد کردن کاربران مسدود شده',
+                    'description' => 'با این اختیار قادر خواهید بود کاربران سیستم را از حالت مسدودی در آورد.'
+                ],
+
+                [
                     'id' => 55, 'parent_privilege' => 52, 'privilege_dependency' => 51,
                     'id_name' => 'editUsers', 'privilege_name_en' => 'Edit users specs',
                     'privilege_name' => 'ویرایش مشخصات کاربران',
@@ -362,10 +385,48 @@ class CreatePrivilegeTable extends Migration
                 ],
                 [
                     'id' => 56, 'parent_privilege' => 52, 'privilege_dependency' => 51,
-                    'id_name' => 'updateUserPhoto', 'privilege_name_en' => 'Update user photo',
-                    'privilege_name' => 'بروزرسانی تصویر کاربر',
-                    'description' => 'با این اختیار قادر خواهید بود تصویر کاربر را بروزرسانی کنید.'
+                    'id_name' => 'editUsersRole', 'privilege_name_en' => 'Edit user role',
+                    'privilege_name' => 'تغییر نقش کاربران',
+                    'description' => 'با این اختیار قادر خواهید بود مشخصات افراد را ویرایش کنید. توجه داشته باشید که با این اختیار قادر نخواهید بود که نقش کابران را تغییر دهید. به منظور این کار می‌بایست اختیار «تغییر نقش کاربران» را داشته باشید.'
                 ],
+            [
+                    'id' => 57, 'parent_privilege' => null, 'privilege_dependency' => null,
+                    'id_name' => 'viewFiles', 'privilege_name_en' => 'View files',
+                    'privilege_name' => 'مشاهده فایل‌ها',
+                    'description' => 'با این اختیار قادر خواهید بود فایل‌ها را (اعم از تصاویر، ویدئوها، صوت‌ها و...) مشاهده کنید. ولی قادر به افزودن ، پاک کردن یا ویرایش فایل‌ها نخواهید بود.'
+            ],
+            [
+                    'id' => 58, 'parent_privilege' => null, 'privilege_dependency' => 57,
+                    'id_name' => 'manageFiles', 'privilege_name_en' => 'Manage files',
+                    'privilege_name' => 'مدیریت فایل‌ها',
+                    'description' => 'با این اختیار قادر خواهید بود فایل‌ها را حذف، ویرایش و حتی می‌توانید فایل جدیدی را به سیستم اضافه کنید.'
+            ],
+                [
+                        'id' => 59, 'parent_privilege' => 58, 'privilege_dependency' => null,
+                        'id_name' => 'addNewFile', 'privilege_name_en' => 'Add new file',
+                        'privilege_name' => 'افزودن فایل جدید',
+                        'description' => 'با این اختیار قادر خواهید بود فایل جدیدی به سیستم اضافه کنید. ولی حذف یا ویرایش مشخصات فایل از اختیار شما خارج خواهد بود.'
+                ],
+                [
+                        'id' => 60, 'parent_privilege' => 58, 'privilege_dependency' => 57,
+                        'id_name' => 'deleteFiles', 'privilege_name_en' => 'Delete files',
+                        'privilege_name' => 'حذف فایل‌ها',
+                        'description' => 'با این اختیار قادر خواهید بود فایل‌ها را حذف کنید.'
+                ],
+                [
+                        'id' => 61, 'parent_privilege' => 58, 'privilege_dependency' => 57,
+                        'id_name' => 'editFiles', 'privilege_name_en' => 'Edit files specs',
+                        'privilege_name' => 'ویرایش مشخصات فایل‌ها',
+                        'description' => 'با این اختیار قادر خواهید بود مشخصات فایل‌ها را ویرایش کنید.'
+                ],
+                [
+                        'id' => 62, 'parent_privilege' => 58, 'privilege_dependency' => 57,
+                        'id_name' => 'manageFilesCat', 'privilege_name_en' => 'Manage files category',
+                        'privilege_name' => 'مدیریت دسته‌بندی فایل‌ها',
+                        'description' => 'با این اختیار قادر خواهید بود دسته‌بندی فایل‌ها را مدیریت کنید.'
+                ],
+
+
 
         ];
         DB::table('au_privilege')->insert($tuples);
