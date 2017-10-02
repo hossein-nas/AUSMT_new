@@ -1,0 +1,10 @@
+homestead.yaml
+Homestead.json
+.*
+!.env
+!.gitignore
+!.htaccess
+/vendor
+/node_modules
+_ide_helper.php
+
