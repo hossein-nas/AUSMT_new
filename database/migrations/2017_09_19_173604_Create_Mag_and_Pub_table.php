@@ -13,12 +13,11 @@ class CreateMagAndPubTable extends Migration
     public function up()
     {
         Schema::create('au_mag_and_pub', function (Blueprint $table) {
-            $table->increments('id');
+            $table->integer('id')->primary()->unsigned()->nullable(false);
 	        $table->string('title')->nullable(false);
 	        $table->text('description')->nullable(false);
 	        $table->integer('pub_no');
 	        $table->integer('publication_group_id')->unsigned()->nullable();
-            $table->timestamps();
         });
 	    
 	    // adding foreign key to 'au_publication_group' table

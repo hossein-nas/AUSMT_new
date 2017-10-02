@@ -17,7 +17,7 @@ class CreateVisitTable extends Migration
         	$table->integer('record_id')->unsigned()->nullable();
 	        $table->ipAddress('ip')->nullable(false);
 	        $table->string('uri',300);
-	        $table->string('redirect_uri',300);
+	        $table->string('redirect_uri',300)->nullable();
 	        $table->string('user_agent',200);
 	        $table->integer('request_time');
             $table->timestamps();
