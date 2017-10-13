@@ -13,9 +13,7 @@
 
 use Morilog\Jalali\jDate;
 
-Route::get('/', function () {
-    return view('test');
-});
+Route::get('/', 'View\HomeController@home');
 Route::get('/posts', function () {
     return view('post');
 });
