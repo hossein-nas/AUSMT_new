@@ -15,7 +15,7 @@ var paths = {
     cpanel: {
         dest: "public/assets/css",
         src: "resources/assets/sass/cpanel.scss",
-        watch_list: ['resources/assets/sass/partials/cpanel/**/*.scss', 'resources/assets/sass/cpanel.scss']
+        watch_list: ['resources/assets/sass/partials/cpanel/**.scss', 'resources/assets/sass/cpanel.scss']
     },
     jsFiles: {
         dest: "public/assets/js",
@@ -39,6 +39,7 @@ gulp.task('sass', function () {
         .pipe(autoprefixer('last 100 version'))
         .pipe(rename('main.min.css'))
         .pipe(gulp.dest(paths.site.dest));
+
     gulp.src(paths.cpanel.src)
         .pipe(
             sass().on("error", gutil.log)

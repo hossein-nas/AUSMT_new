@@ -25,6 +25,22 @@ Route::get("/phpinfo/", function () {
     phpinfo();
 });
 
+Route::post('/upload/images/', 'Files\FilesController@upload');
+Route::post('/upload/record/thumbnail/', 'Files\FilesController@record_thumbnail');
+Route::get('/browse/files/', 'Files\FilesController@browseFiles');
+
+Route::get("/panel", function(){
+    return view('cpanel.pages.dashboard');
+});
+
+Route::get('/temp/', function(){
+    return view('temp');
+});
+
+Route::get("/panel/new/post/news", function(){
+    return view('cpanel.pages.records.posts.news.newNews');
+});
+
 Route::post("/getLocalTime/", function (Illuminate\Http\Request $request) {
     $i = 0;
     while ($i++ < 60) {

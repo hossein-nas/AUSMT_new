@@ -8,7 +8,6 @@
     <title>@yield('title','صفحه مورد نظر یافت نشد')</title>
     {!! Html::style('css/styles.css')!!}
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @include('favicon')
 </head>
 <body>
 <div class="container">
