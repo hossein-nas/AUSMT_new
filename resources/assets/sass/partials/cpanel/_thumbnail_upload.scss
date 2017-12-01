@@ -1,0 +1,32 @@
+.thumbnail-upload-modal {
+	/* to hide file input element */
+	.file-input {
+		display: none;
+	}
+	>.image.content {
+		display: block !important;
+		.buttons {
+			position: relative;
+			label.message {
+				display: block;
+				position: absolute;
+				bottom: 0;
+				right: 18px;
+				font-size:1.1rem;
+				color: #6bb16b;
+			}
+		}
+		.image-canvas{
+			.image-wrapper{
+				width: 400px;
+				height:250px;
+				&.bgc{
+					background-color: #eee;
+				}
+			}
+			img{
+				max-width:100%;
+			}
+		}
+	}
+}

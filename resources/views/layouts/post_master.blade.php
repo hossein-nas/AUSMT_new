@@ -68,7 +68,7 @@
 
 						<div class="bottom-details">
 							<span class="date-and-time">
-								دو شنبه ۲۲ آذر ماه ۱۳۹۵ - ساعت ۲۲:۲۲
+								دوشنبه ۲۲ آذر ماه ۱۳۹۵ - ساعت ۲۲:۲۲
 							</span>
 
 							<span class="reply-btn">

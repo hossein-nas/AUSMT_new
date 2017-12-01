@@ -1,0 +1,98 @@
+/*
+* A panel in new post section that you can upload attachment file or files to that post
+*/
+.attachment-area.message{
+  .header{
+    font-size:1.05rem;
+  }
+  .divider.ui{
+    margin-top:.5rem;
+  }
+}
+.attachments {
+  text-align: center;
+
+  &::after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+  .item {
+    border: 1px solid #efefef;
+    background-color: #fbfbfb;
+    padding: 4px 8px;
+    display: inline-block;
+    width: 48%;
+    height: 65px;
+    overflow: hidden;
+    margin: 0 0 8px 8px;
+    > .filetype {
+      float: right;
+      width: 17%;
+      height: 58px;
+      height: 100%;
+      padding: 5px 0;
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+    > .body {
+      text-align: right;
+      float: right;
+      width: 70%;
+      .file-title {
+        font-size: 1rem;
+        margin-bottom: .35rem;
+        color: #005E94;
+      }
+      label {
+        display: block;
+        font-weight: bold;
+        font-size: .8rem;
+        line-height: 1.1rem;
+        color: #808080;
+        &::before {
+          font-weight: normal;
+          color: #B3B3B3;
+        }
+      }
+      .filesize {
+        &::before {
+          content: 'حجم فایل : '
+        }
+      }
+      .orig-name {
+        &::before {
+          content: 'نام اصلی :'
+        }
+      }
+    }
+
+    .delete-button {
+      height: 100%;
+      float: right;
+      width: 13%;
+      text-align: center;
+      line-height: 60px;
+      span {
+        font-size: .85rem;
+        opacity: 0;
+        display: inline;
+        cursor: pointer;
+        padding: 3px 6px;
+        color: #bbb;
+        &:hover {
+          background-color: #f0f0f0;
+          color: #fe8787;
+        }
+      }
+    }
+
+    &:hover {
+      .delete-button span {
+        opacity: 1;
+      }
+    }
+  }
+}
