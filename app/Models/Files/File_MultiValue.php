@@ -9,7 +9,7 @@ class File_MultiValue extends Model
     protected $table = 'au_file_multivalue';
     public $timestamps = false;
     protected $fillable = [
-        'id',
+        'file_related_id',
         'file_fullpath',
         'ratio',
         'filesize',
@@ -19,6 +19,6 @@ class File_MultiValue extends Model
 
     public function orig()
     {
-        return $this->belongsTo('App\Models\Files\File', 'id');
+        return $this->belongsTo('App\Models\Files\File', 'related_file_id');
     }
 }

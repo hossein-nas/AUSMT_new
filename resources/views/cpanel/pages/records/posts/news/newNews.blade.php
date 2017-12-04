@@ -237,8 +237,10 @@
                         window.thumbnail_url = data.url;
                         setTimeout(function(){button_area.find('.message').html('')},5000)
                     },
-                    error: function () {
-                        console.log('Upload error');
+                    error: function (data) {
+                        upload_photo_btn.removeClass('loading')
+                        upload_photo_btn.addClass('disabled')
+                        button_area.find('.message').html(data.text);
                     },
                 });
             });
