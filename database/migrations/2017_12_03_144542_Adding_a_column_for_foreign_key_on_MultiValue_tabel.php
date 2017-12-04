@@ -14,7 +14,7 @@ class AddingAColumnForForeignKeyOnMultiValueTabel extends Migration
     {
         Schema::table('au_file_multivalue', function (Blueprint $table) {
             $table->integer('related_file_id')->unsigned()->after('id');
-            $table->dropForeign('id');
+            $table->dropForeign(['id']);
             $table->foreign('related_file_id')
                 ->references('id')
                 ->on('au_file');
@@ -30,7 +30,6 @@ class AddingAColumnForForeignKeyOnMultiValueTabel extends Migration
     public function down()
     {
         Schema::table('au_file_multivalue', function (Blueprint $table) {
-            $table->dropForeign('related_file_id');
             $table->dropColumn('related_file_id');
         });
     }

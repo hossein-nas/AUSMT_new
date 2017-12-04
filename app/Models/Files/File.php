@@ -19,7 +19,7 @@ class File extends Model
 
     public function specs()
     {
-        return $this->hasMany('App\Models\Files\File_MultiValue', 'id');
+        return $this->hasMany('App\Models\Files\File_MultiValue', 'related_file_id');
     }
 
     public function extension()
