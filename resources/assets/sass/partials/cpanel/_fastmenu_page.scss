@@ -1,0 +1,78 @@
+#fastmenu-list-area{
+	.fastmenu-list{
+		.item{
+			&::after{
+				content: '';
+				clear:both;
+				display: block;
+			}
+			.thumbnail{
+				float: right;
+				width: 65px;
+				height: 65px;
+				overflow: hidden;
+				img{
+					width: 100%;
+					height:auto;
+				}
+			}
+			.detail{
+				width: 485px;
+				height:65px;
+				float: right;
+				margin-right:11px;
+				margin-bottom:.5rem;
+				.title{
+					padding:.4rem .25rem;
+					font-size:1.1rem;
+					font-weight:bold;
+					color:#0e566c;
+					&::before{
+						content:'عنوان:';
+						display: inline-block;
+						background-color: #f5f5f5;
+						font-weight: normal;
+						color:#999;
+						padding:.05rem .5rem;
+						font-size:.7rem;
+					}
+				}
+				.url{
+					&::before{
+						content:'آدرس:';
+						display: inline-block;
+						background-color: #f5f5f5;
+						font-weight: normal;
+						color:#999;
+						padding:.05rem .5rem;
+						font-size:.7rem;
+					}
+					overflow: hidden;
+					text-overflow: ellipsis;
+					white-space: nowrap;
+					direction: ltr;
+					text-align: left;
+					font-size:.85rem;
+				}
+			}
+			.select-box{
+				float: right;
+				width: 30px;
+				height:65px;
+				padding-right: 8px;
+				padding-top: 25px;
+			}
+
+			&:hover{
+				img{
+					opacity:.7;
+					transition-duration: .4s;
+				}
+					background-color: #fafafa;
+			}
+			&.active{
+				background-color: #f5fdff;
+			}
+		}
+	}
+}

@@ -4,14 +4,13 @@
 	</section>
 	<section class="wrapper content frame">
 		<ul class="slidee">
-			<?php $fastmenu = File::files('media/fastmenu'); ?>
-			@foreach($fastmenu as $menu)
+			@foreach($Fastmenu as $menu)
 				<li class="item">
-					<a href="#">
+					<a href="{{ $menu->uri }}">
 				<span class="icon">
-					<img src="{{$menu}}" alt="">
+					<img src="{{$menu->icon->specs[0]->file_fullpath}}" alt="">
 				</span>
-						<h1 class="title">سیستم آموزش</h1>
+						<h1 class="title">{{ $menu->title }}</h1>
 					</a>
 				</li>
 			@endforeach

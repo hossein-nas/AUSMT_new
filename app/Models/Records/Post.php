@@ -32,4 +32,6 @@ class Post extends Model
     public function incoming(){
         return $this->hasOne('App\Models\Records\Post\Incoming', 'id');
     }
+
+
 }

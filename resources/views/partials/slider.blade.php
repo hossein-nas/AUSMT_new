@@ -1,6 +1,24 @@
 <section class="slider">
 	<ul class="slidee">
-		<li class="items">
+		@if ( count($Slider) )
+			@foreach($Slider as $item)
+				<li class="items">
+					<a href="{{ route('showNews', ['title'=>$item->post->title_seo]) }}">
+						<img
+								src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
+								data-src="{{ $item->photos->specs->first()->file_fullpath }}"
+								alt="">
+						<section class="caption">
+							<h1 class="header">
+								{{ $item->title }}
+							</h1>
+							<h3 class="description">{!! substr($item->post->post->content,0,250) !!}</h3>
+						</section>
+					</a>
+				</li>
+			@endforeach
+		@endif
+		{{--<li class="items">
 			<a href="#">
 				<img
 					src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
@@ -15,7 +33,8 @@
 					<h3 class="description">به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی …</h3>
 				</section>
 			</a>
-		</li><li class="items">
+		</li>
+		<li class="items">
 			<a href="#">
 				<img
 					src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
@@ -46,7 +65,7 @@
 					<h3 class="description">به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی …</h3>
 				</section>
 			</a>
-		</li>
+		</li>--}}
 	</ul>
 	<ul class="arrow">
 		<li class="next">

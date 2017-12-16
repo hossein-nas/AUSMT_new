@@ -32,11 +32,9 @@
             </div>
 
             <div class="twelve wide column">
-                <div class="row">
 
                     @yield('main-section')
 
-                </div>
             </div>
         </div>
     </div>

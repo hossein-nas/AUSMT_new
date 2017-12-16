@@ -32,140 +32,36 @@
 
 	<section id="post-area">
 		<div class="slidee wrapper">
-			<section class="item post other">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/1.png" alt="">
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							آدرس ورود وردپرس خود را تغییر دهید
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
-					</div>
-				</div>
-			</section>
 
-			<section class="item post incoming">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/2.png" alt="">
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							گـزارش تصویری از بـرگزاری مراسم مداحی به مناسبت ایام فاطمیه و ...
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
+			@foreach ($latestNews as $news )
+				<section class="item post {{$news->record_type->name}} {{ $news->post->is_important? 'important' : '' }}">
+					<div class="thumbnail-area">
+						<img src="{{ $news->thumbnail->specs->last()->file_fullpath }}" alt="">
+						<ul class="datails">
+							<li class="author">{{$news->author->name}}</li>
+							<li class="time-ago">۳ساعت پیش</li>
+							<li class="visited">۱۲۸</li>
+						</ul>
 					</div>
-				</div>
-			</section>
-			<section class="item post seminar">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/1.png" alt="">
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							آدرس ورود وردپرس خود را تغییر دهید
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
+					<div class="text-area">
+						<h1 class="header">
+							<a href="{{ url()->route('showNews', $news->title_seo) }}">
+								{{$news->title}}
+							</a>
+						</h1>
+						<h2 class="summary">
+							{!!   $news->post->content !!}
+						</h2>
+						<div class="button-area">
+							<a href="{{ url()->route('showNews', $news->title_seo) }}" class="btn small success">
+								بیشتر بخوانید
+								<i class="material-icons">keyboard_backspace</i>
+							</a>
+						</div>
 					</div>
-				</div>
-			</section>
+				</section>
+			@endforeach
 
-			<section class="item post notfication">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/2.png" alt="">
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							گـزارش تصویری از بـرگزاری مراسم مداحی به مناسبت ایام فاطمیه و ...
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
-					</div>
-				</div>
-			</section>
-			<section class="item post news important">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/1.png" alt="">
-					<ul class="datails">
-						<li class="author">مدیر</li>
-						<li class="time-ago">۳ساعت پیش</li>
-						<li class="visited">۱۲۸</li>
-					</ul>
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							آدرس ورود وردپرس خود را تغییر دهید
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
-					</div>
-				</div>
-			</section>
-
-			<section class="item post other">
-				<div class="thumbnail-area">
-					<img src="/media/photos/very_small/2.png" alt="">
-				</div>
-				<div class="text-area">
-					<h1 class="header">
-						<a href="#">
-							گـزارش تصویری از بـرگزاری مراسم مداحی به مناسبت ایام فاطمیه و ...
-						</a>
-					</h1>
-					<h2 class="summary">
-						به راحتی آدرس ورود وردپرس خود را تغییر دهید اگر شما از وردپرس استفاده کرده باشید برای ورود به پنل وردپرسی از آدرس هایی شبیه …
-					</h2>
-					<div class="button-area">
-						<a href="#" class="btn small success">
-							بیشتر بخوانید
-							<i class="material-icons">keyboard_backspace</i>
-						</a>
-					</div>
-				</div>
-			</section>
 		</div>
 	</section>
 </section>

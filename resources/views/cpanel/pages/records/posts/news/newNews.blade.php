@@ -14,17 +14,19 @@
     </div>
 
     <div class="ui segment attached fluid column">
-        <form class="ui form" method="get">
+        <form class="ui form" method="post" action="{{ route('new_record', ['type'=>'news']) }}">
             {{-- ...Hidden Inputs... --}}
+            {{ csrf_field() }}
             <input type="hidden" name="thumbnail_id" value="">
+            <input type="hidden" name="lang_id" value="1">
 
             <div class="field required ">
                 <label>عنوان خبر</label>
-                <input type="text" name="title" placeholder="">
+                <input type="text" name="title" id="title" placeholder="">
             </div>
             <div class="field disabled">
                 <label>شناسه عنوان</label>
-                <input type="text" name="seo-title" disabled="disabled">
+                <input type="text" name="seo_title" disabled="disabled">
             </div>
             <div class="field disabled">
                 <label>نویسنده</label>
@@ -34,7 +36,16 @@
                 <label>محتوای نوشته</label>
                 <textarea name="content" id="textarea"></textarea>
             </div>
+            <div class="field tag-dropdown">
+                <label for="tags">انتخاب تگ ها:</label>
+                <select name="tags[]" id="" class="ui dropdown selection search	" multiple>
+                    @foreach($all_tags as $tag )
+                        <option value="{{ $tag->name }}"> {{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
 
+            {{--
             <div class="ui message attachment-area">
                 <h4 class="ui header">افزودن فایل ضمیمه</h4>
                 <div class="ui divider"></div>
@@ -84,7 +95,7 @@
                             <div class="ui blue button tiny fluid">انتخاب فایل</div>
                         </div>
                         <div class="ten wide field">
-                            <input type="text" name="description" placeholder="عنوان فایل را وارد کنید...">
+                            <input type="text" class="description" placeholder="عنوان فایل را وارد کنید...">
                         </div>
                         <div class="three wide field">
                             <div class="ui green button tiny fluid">آپلود فایل</div>
@@ -92,6 +103,7 @@
                     </div>
                 </div>
             </div>
+            --}}
 
             <div class="ui message upload-thumbnail">
                 <h4 class="ui header">افزودن تصویر شاخص</h4>
@@ -143,14 +155,14 @@
 
             <div class="field">
                 <div class="ui toggle checkbox">
-                    <input type="checkbox" tabindex="0" class="hidden" name="add_slider">
+                    <input type="checkbox" tabindex="0" class="hidden" name="add_slider" value="1">
                     <label>به اسلایدر افزوده شود؟</label>
                 </div>
             </div>
 
             <div class="field">
                 <div class="ui toggle checkbox">
-                    <input type="checkbox" tabindex="0" class="hidden" name="is_important">
+                    <input type="checkbox" tabindex="0" class="hidden" name="is_important" value="1">
                     <label> به اخبار مهم افزوده شود؟</label>
                 </div>
             </div>
@@ -163,6 +175,9 @@
 @section('scripts')
     <script>
         $(".ui.checkbox").checkbox();
+        $('.tag-dropdown .ui.dropdown').dropdown({
+            allowAdditions: true
+        })
     </script>
 
     <script src={{ asset('assets/js/libs/CKEditor/ckeditor.js') }}></script>
@@ -189,7 +204,7 @@
                             alert('عکسی را آپلود نکردید...');
                             return false;
                         }
-
+                        $('input[name="thumbnail_id"]').val(window.thumbnail_id);
                         var img = $('<img src="" alt="" class="ui medium rounded bordered image" />')
                         img.prop('src',window.thumbnail_url);
                         if( !$('.thumbnail-image img').size() ) // check for empty
@@ -235,6 +250,7 @@
                         upload_photo_btn.addClass('disabled')
                         button_area.find('.message').html(data.text);
                         window.thumbnail_url = data.url;
+                        window.thumbnail_id = data.thumbnail_id;
                         setTimeout(function(){button_area.find('.message').html('')},5000)
                     },
                     error: function (data) {
@@ -272,7 +288,8 @@
             upload_photo_btn.removeClass('disabled');
         });
 
-        file_input.change(function () {
+        file_input.change(function (e) {
+            e.stopPropagation();
             if ($(this).val() != "") {
                 window.thumbnail_url = undefined;
                 window.thumbnail_orig_name = $(this).val();
@@ -313,6 +330,17 @@
             });
         }
     </script>
+
+
+    <script>
+        $('input#title').on('keyup', function(){
+            var text = $(this).val().trim();
+            var res = text.replace(/[ ]/g, "-");
+            var res = res.replace(/[.]/g, "");
+            $('input[name="seo_title"]').val(res);
+        })
+    </script>
+
 @endsection
 
 @section('styles')

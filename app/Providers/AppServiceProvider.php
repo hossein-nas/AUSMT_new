@@ -18,15 +18,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->share('jalali',jDate::forge());
-        view()->composer('partial.footer','\App\Http\Composers\NavigationComposer');
-        view()->composer('partial.nav','\App\Http\Composers\NavigationComposer@navbar');
-        view()->composer('partial.slider','\App\Http\Composers\NavigationComposer@slider');
-        view()->composer('partials.fast_menu','\App\Http\Composers\NavigationComposer@fastmenu');
-        view()->composer('pages.post','\App\Http\Composers\NavigationComposer@fastmenu');
-        view()->composer('pages.homepage','\App\Http\Composers\NavigationComposer@homepage');
-        view()->composer('pages.post','\App\Http\Composers\NavigationComposer@post');
-        view()->composer('cpanel.master','\App\Http\Composers\NavigationComposer@unverifiedCommentsCount');
+        view()->share('jalali', jDate::forge());
+        view()->composer('home', '\App\Http\Composers\HomepageComposer@latestNews');
+        view()->composer('layouts.post_master', '\App\Http\Composers\HomepageComposer@hotNews');
+        view()->composer('layouts.site_master', '\App\Http\Composers\HomepageComposer@navbarItems');
+        view()->composer('home', '\App\Http\Composers\HomepageComposer@fastmenuItems');
+        view()->composer('home', '\App\Http\Composers\HomepageComposer@allActiveSliderItems');
+        view()->composer('layouts.post_master', '\App\Http\Composers\HomepageComposer@fastmenuItems');
+//        view()->composer('partial.footer','\App\Http\Composers\NavigationComposer');
     }
 
     /**

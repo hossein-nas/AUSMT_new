@@ -3,11 +3,11 @@
 		<section class="title">
 			<div class="logo">
 				<a href="/">
-					<img src="assets/img/logo.svg" alt="Amol University logo">
+					<img src="/assets/img/logo.svg" alt="Amol University logo">
 				</a>
 			</div>
 			<div class="site-header">
-				<img src="assets/img/logo_name.svg" alt="Amol University">
+				<img src="/assets/img/logo_name.svg" alt="Amol University">
 			</div>
 		</section>
 		<section class="info">

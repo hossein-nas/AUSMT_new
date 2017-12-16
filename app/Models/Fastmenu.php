@@ -32,6 +32,6 @@ class Fastmenu extends Model
 
     public function icon()
     {
-        return $this->belongsTo('App\Models\Files\File', 'svg_icon_if');
+        return $this->belongsTo('App\Models\Files\File', 'svg_icon_id');
     }
 }

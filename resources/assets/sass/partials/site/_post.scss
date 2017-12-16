@@ -1,5 +1,8 @@
 #post-page{
 	padding: 3rem 0;
+	@media screen and (min-width: 320px) and (max-width: 1200px){
+		padding:0;
+	}
 	@extend .clearfix;
 	@import "posts/main_area";
 	@import "posts/comments";

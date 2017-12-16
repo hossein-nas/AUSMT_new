@@ -38,4 +38,8 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsTo('App\Models\Files\File', 'thumbnail_id');
     }
+    public function composed(){
+        return $this->hasMany('App\Models\Records\Record', 'user_id');
+
+    }
 }

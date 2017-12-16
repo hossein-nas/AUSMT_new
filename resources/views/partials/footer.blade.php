@@ -45,7 +45,7 @@
 					<tr class="logo-with-name">
 						<td colspan="2">
 							<a href="/">
-								<img src="assets/img/logo_with_name.svg" alt="Amol University" >
+								<img src="/assets/img/logo_with_name.svg" alt="Amol University" >
 							</a>
 						</td>
 					</tr>

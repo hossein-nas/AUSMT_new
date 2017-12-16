@@ -37,4 +37,8 @@ class Navigationbar extends Model
     {
         return $this->belongsTo('App\Models\Language', 'lang_id');
     }
+
+    public function type(){
+        return $this->belongsTo('App\Models\Navbar_Type', 'navbar_type_id');
+    }
 }

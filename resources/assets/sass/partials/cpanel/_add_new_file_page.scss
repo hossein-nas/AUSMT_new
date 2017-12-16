@@ -1,0 +1,58 @@
+.add_new_file_segment {
+	.select_file_area {
+		input[type="file"] {
+			display: none;
+		}
+		.select_file_btn_area {
+
+			.select_file_btn {
+				margin-bottom: 1rem;
+				padding-right: 2.5rem;
+				padding-left: 2.5rem;
+			}
+		}
+	}
+
+	.file_details {
+		margin: .5rem .5rem;
+		border: 1px solid #ddd;
+		padding: .5rem .75rem 0;
+		border-radius: 4px;
+		& > div {
+			max-width: 100%;
+		}
+		overflow: hidden;
+		.file_orig_name, .filesize {
+			color: #ccc;
+			font-size: .9rem;
+			&:nth-of-type(2n) {
+				font-size: 1rem;
+				color: #777;
+				margin-bottom: .45rem;
+			}
+		}
+	}
+
+}
+
+.add-item-modal {
+	.icon-selection {
+		display: flex;
+		max-height:300px;
+		.icon-selection-item {
+			border: 1px solid #e6f6f9;
+			padding: .5rem .6rem;
+			margin-left: .4rem;
+			margin-bottom: .4rem;
+			cursor: pointer;
+			&:hover {
+				border: 1px solid #d7eef3;
+				background-color: #fbffff;
+			}
+			&.active {
+				border: 1px solid #c7dce0;
+				background-color: #fff;
+			}
+		}
+	}
+}
