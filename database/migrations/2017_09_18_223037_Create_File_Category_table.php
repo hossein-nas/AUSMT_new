@@ -16,7 +16,7 @@ class CreateFileCategoryTable extends Migration
         Schema::create('au_file_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 100)->nullabl(false);
-            $table->string('base_dir_path', 500)->unique()->nullable(false);
+            $table->string('base_dir_path', 250)->unique()->nullable(false);
             $table->string('dir_name', 30)->nullable(false);
             $table->boolean('removable')->nullable(false)->default(1);
             $table->string('description', 200)->nullable();
