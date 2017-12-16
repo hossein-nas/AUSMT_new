@@ -10,7 +10,7 @@
                     <div class="ui dropdown item pointing left"><i class="align right icon"></i> ایجاد پست جدید
                         <i class="icon dropdown"></i>
                         <div class="menu ">
-                            <a href="/panel/new/post/news" class="item">ایجاد خبر</a>
+                            <a href="{{ route('add_new_news') }}" class="item">ایجاد خبر</a>
                             <a href="/panel/new/post/notification" class="item">ایجاد اطلاعیه</a>
                             <a href="/panel/new/post/incoming" class="item">ایجاد پیش‌آمد</a>
                             <a href="/panel/new/post/seminar" class="item">ایجاد همایش یا سمینار</a>
@@ -56,8 +56,8 @@
         <div class="header">ابزارک‌ها</div>
         <div class="menu">
             <a href="#" class="item">اسلایدر</a>
-            <a href="#" class="item">نوار منو</a>
-            <a href="#" class="item">منو دسترسی سریع</a>
+            <a href="{{ route('navbar_page') }}" class="item">نوار منو</a>
+            <a href="{{ route('fastmenu_page') }}" class="item">منو دسترسی سریع</a>
             <a href="#" class="item">لینک‌های پاورقی</a>
         </div>
     </div>
@@ -97,9 +97,9 @@
     <div class="item">
         <div class="header">بخش فایل‌ها</div>
         <div class="menu">
-            <a class="item">مدیریت فایل‌ها</a>
-            <a class="item">افزودن فایل جدید</a>
-            <a class="item">گالری</a>
+            <a href="{{ route('files_management') }}" class="item">مدیریت فایل‌ها</a>
+            <a href="{{ route('add_new_file') }}" class="item">افزودن فایل جدید</a>
+            <div class="item disabled">گالری</div>
         </div>
     </div>
     <div class="item">

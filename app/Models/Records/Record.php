@@ -31,4 +31,24 @@ class Record extends Model
     public function lang(){
         return $this->belongsTo('App\Models\Language', 'lang_id');
     }
+
+    public function author(){
+        return $this->belongsTo('App\Models\Users\User', 'user_id');
+    }
+
+    public function comments(){
+        return $this->belongsTo('App\Models\Records\Comment', 'post_id');
+    }
+
+    /* ...Query Scope... */
+    public function scopeLatestNews($query,$limit=12)
+    {
+        return $query->where('record_type_id', 4)->latest()->limit($limit);
+    }
+
+    public function scopeHotNews($query)
+    {
+        $arr = \App\Models\Records\Post::where('is_important',1)->get()->pluck('id')->toArray();
+        return $query->whereIn('id', $arr);
+    }
 }

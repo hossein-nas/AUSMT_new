@@ -444,6 +444,38 @@ textarea {
      -moz-font-feature-settings: 'liga';
           font-feature-settings: 'liga'; }
 
+@-webkit-keyframes flash {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes flash {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@-o-keyframes flash {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes flash {
+  0% {
+    opacity: 0; }
+  50% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -917,6 +949,8 @@ nav {
           margin-top: 1.2rem;
           background-color: transparent;
           border-top: 1px solid #e6e6e6;
+          border-bottom: 1px solid #f2f2f2;
+          margin-bottom: .5rem;
           padding: .8rem 0px 0 0; }
           nav .container ul#navbar > li .dropdown-content .group .group-name {
             font-size: .875rem;
@@ -1509,7 +1543,7 @@ section.fast-menu {
           font-weight: normal;
           line-height: 1rem;
           color: #878787;
-          max-height: 3rem;
+          max-height: 3.2rem;
           overflow: hidden;
           /* sass @media query with min: 768 and max: 1200 */ }
           @media screen and (min-width: 768px) and (max-width: 1200px) {
@@ -1519,12 +1553,14 @@ section.fast-menu {
         #post-area .wrapper .item .text-area .button-area {
           text-align: left;
           display: block;
-          background-color: rgba(0, 0, 0, 0.05);
+          background-color: white;
           position: absolute;
           bottom: 0rem;
           left: 0;
           width: 100%;
           padding: .75rem 1rem; }
+          #post-area .wrapper .item .text-area .button-area .btn.small {
+            padding: .45rem .8rem; }
         @media screen and (min-width: 320px) and (max-width: 767px) {
           #post-area .wrapper .item .text-area .button-area {
             display: none; } }
@@ -1605,6 +1641,24 @@ section.fast-menu {
                 transform: rotate(-40deg);
         opacity: .65;
         /* sass @media query with min: 320 and max: 767 */ }
+        #post-area .wrapper .item.important::after {
+          opacity: 0;
+          -webkit-animation-name: flash;
+             -moz-animation-name: flash;
+               -o-animation-name: flash;
+                  animation-name: flash;
+          -webkit-animation-duration: 1.5s;
+             -moz-animation-duration: 1.5s;
+               -o-animation-duration: 1.5s;
+                  animation-duration: 1.5s;
+          -webkit-animation-timing-function: ease;
+             -moz-animation-timing-function: ease;
+               -o-animation-timing-function: ease;
+                  animation-timing-function: ease;
+          -webkit-animation-iteration-count: infinite;
+             -moz-animation-iteration-count: infinite;
+               -o-animation-iteration-count: infinite;
+                  animation-iteration-count: infinite; }
         @media screen and (min-width: 320px) and (max-width: 767px) {
           #post-area .wrapper .item.important::after {
             bottom: inherit;
@@ -2403,10 +2457,16 @@ section.slider {
 
 #post-page {
   padding: 3rem 0; }
+  @media screen and (min-width: 320px) and (max-width: 1200px) {
+    #post-page {
+      padding: 0; } }
   #post-page section#main-area {
     float: right;
     width: 784px;
     margin-left: 16px; }
+    @media screen and (min-width: 320px) and (max-width: 1200px) {
+      #post-page section#main-area {
+        width: 100%; } }
     #post-page section#main-area #postcontent {
       background-color: white;
       border: 2px solid #e3e3e3;
@@ -2732,7 +2792,7 @@ section.slider {
         float: right;
         width: 100%;
         background-color: white;
-        min-height: 10rem;
+        min-height: 9rem;
         -webkit-border-radius: 1rem;
            -moz-border-radius: 1rem;
                 border-radius: 1rem;
@@ -2892,6 +2952,39 @@ section.slider {
           display: inline-block; }
           #post-page #comment-area > #write-comment > .headline > span.headline-box::before, #post-page #comment-area > .item > .body #comment-area > #write-comment > .bottom-details > span.headline-box::before {
             content: 'نوشتن دیدگاه جدید'; }
+      #post-page #comment-area > #write-comment .replier_name {
+        padding: 0 2rem;
+        position: relative; }
+        #post-page #comment-area > #write-comment .replier_name .name {
+          color: #878787; }
+          #post-page #comment-area > #write-comment .replier_name .name::before {
+            content: 'در پاسخ به دیدگاه: ';
+            display: inline-block;
+            color: #bdbdbd;
+            font-size: .9rem;
+            background-color: #f2f2f2;
+            padding: .4rem .65rem;
+            margin-left: 1rem; }
+        #post-page #comment-area > #write-comment .replier_name span.cancel {
+          position: absolute;
+          opacity: .35;
+          -webkit-transition-duration: .1s;
+             -moz-transition-duration: .1s;
+               -o-transition-duration: .1s;
+                  transition-duration: .1s;
+          cursor: pointer;
+          top: 0;
+          left: 2rem;
+          font-size: .7rem;
+          padding: .05rem .3rem;
+          background-color: #EF5350;
+          color: white; }
+          #post-page #comment-area > #write-comment .replier_name span.cancel:hover {
+            opacity: .7;
+            -webkit-transition-duration: .3s;
+               -moz-transition-duration: .3s;
+                 -o-transition-duration: .3s;
+                    transition-duration: .3s; }
       #post-page #comment-area > #write-comment > .form-box {
         padding: 0 2rem; }
         #post-page #comment-area > #write-comment > .form-box form {
@@ -2964,9 +3057,37 @@ section.slider {
               color: #FF9100; }
               #post-page #comment-area > #write-comment > .error-box ul li.warning::before {
                 content: 'warning'; }
+    #post-page #comment-area .no-comment-yet {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #878787;
+      margin: 1rem 0 5rem; }
   #post-page #sidebar {
     float: right;
     width: 400px; }
+    @media screen and (min-width: 320px) and (max-width: 1200px) {
+      #post-page #sidebar {
+        width: 100%;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex; } }
+    @media screen and (min-width: 320px) and (max-width: 632px) {
+      #post-page #sidebar {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-flow: column;
+           -moz-box-orient: vertical;
+           -moz-box-direction: normal;
+            -ms-flex-flow: column;
+                flex-flow: column; } }
     #post-page #sidebar .sidebar-panel {
       margin-bottom: 1rem;
       background-color: white;
@@ -2975,6 +3096,13 @@ section.slider {
          -moz-border-radius: 1rem;
               border-radius: 1rem;
       overflow: hidden; }
+      @media screen and (min-width: 320px) and (max-width: 1200px) {
+        #post-page #sidebar .sidebar-panel {
+          min-width: 300px;
+          max-width: 400px; } }
+      @media screen and (min-width: 320px) and (max-width: 632px) {
+        #post-page #sidebar .sidebar-panel {
+          min-width: 100%; } }
       #post-page #sidebar .sidebar-panel.post-fastmenu {
         overflow: hidden; }
         #post-page #sidebar .sidebar-panel.post-fastmenu .body .menu {
@@ -2988,6 +3116,10 @@ section.slider {
             -moz-transition: all .15s;
             transition: all .15s;
             list-style-type: none; }
+            @media screen and (min-width: 320px) and (max-width: 1200px) {
+              #post-page #sidebar .sidebar-panel.post-fastmenu .body .menu .item {
+                min-width: 100px;
+                max-width: 200px; } }
             #post-page #sidebar .sidebar-panel.post-fastmenu .body .menu .item:hover {
               background-color: rgba(230, 230, 230, 0.7); }
               #post-page #sidebar .sidebar-panel.post-fastmenu .body .menu .item:hover .thumbnail {

@@ -13,7 +13,7 @@ class UserTableSeeder extends Seeder
     {
         factory(App\Models\Files\File::class,20)->create()->each(function($a){
             factory(App\Models\Users\User::class)->create(['thumbnail_id'=>$a->id]);
-            factory(App\Models\Files\File_MultiValue::class)->create(['id'=>$a->id]);
+            factory(App\Models\Files\File_MultiValue::class)->create(['related_file_id'=>$a->id]);
         });
     }
 }

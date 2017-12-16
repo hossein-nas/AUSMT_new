@@ -28,7 +28,7 @@ $factory->define(App\Models\Fastmenu::class, function (Faker\Generator $faker) {
         'prev' => null,
         'svg_icon_id' => function () {
             $a = factory(App\Models\Files\File::class)->create(['extension_id' => 5]);
-            factory(App\Models\Files\File_MultiValue::class)->create(['id' => $a->id]);
+            factory(App\Models\Files\File_MultiValue::class)->create(['related_file_id' => $a->id]);
             return $a->id;
         }
     ];
@@ -62,7 +62,7 @@ $factory->define(App\Models\Files\File_MultiValue::class, function (Faker\Genera
     $height = 480 * 1.6;
     $ratio = $height / ($width * 1.0);
     return [
-        'id' => null,
+        'related_file_id' => null,
         'file_fullpath' => $faker->imageUrl($width, $height, 'nature'),
         'filesize' => rand(100, 200),
         'height' => $height,

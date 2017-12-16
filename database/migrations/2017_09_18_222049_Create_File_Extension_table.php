@@ -154,7 +154,7 @@ class CreateFileExtensionTable extends Migration
 		    ],
 		    [
 			    'extension' => 'pdf',
-			    'mimetype' => 'aplication/pdf',
+			    'mimetype' => 'application/pdf',
 			    'file_type_id' => 4
 		    ],
 		    [

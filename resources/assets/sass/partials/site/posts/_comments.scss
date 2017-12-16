@@ -12,7 +12,7 @@
 			width: 100%;
 			background-color: $white;
 			//box-shadow:-2px 5px 8px rgba($black,.1);
-			min-height: 10rem;
+			min-height: 9rem;
 			border-radius: 1rem;
 			position: relative;
 			border: 2px solid darken($grayscale-2, 1);
@@ -189,11 +189,44 @@
 					content: 'نوشتن دیدگاه جدید';
 				}
 			}
+
+		}
+
+		.replier_name{
+			padding: 0 2rem;
+			position: relative;
+			.name{
+				&::before{
+					content:'در پاسخ به دیدگاه: ';
+					display: inline-block;
+					color:$grayscale-4;
+					font-size:.9rem;
+					background-color: $grayscale-1;
+					padding:.4rem .65rem;
+					margin-left: 1rem;
+				}
+				color:$grayscale-6;
+			}
+			span.cancel{
+				position: absolute;
+				opacity: .35;
+				transition-duration: .1s;
+				cursor: pointer;
+				top: 0;
+				left:2rem;
+				font-size:.7rem;
+				padding:.05rem .3rem;
+				background-color: $au-red;
+				color:white;
+				&:hover{
+					opacity: .7;
+					transition-duration: .3s;
+				}
+			}
 		}
 
 		> .form-box {
 			padding: 0 2rem;
-
 			form {
 				display: block;
 				margin: 0;
@@ -278,5 +311,12 @@
 				}
 			}
 		}
+	}
+	.no-comment-yet{
+		display: block;
+		width: 100%;
+		text-align: center;
+		color:$grayscale-6;
+		margin:1rem 0 5rem;
 	}
 }

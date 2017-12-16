@@ -109,7 +109,9 @@ $(document).ready(function () {
 })
 jQuery(function($){
     'use strict';
-
+    var elem = $('section.slider').get().length;
+    if (!elem)
+        return ;
     // -------------------------------------------------------------
     //   Slider
     // -------------------------------------------------------------
@@ -354,21 +356,28 @@ $(document).ready(function (e) {
     console.log(nav_pos);
 })
 $(document).ready(function () {
+    var box = $('.time-and-date ');
     function time_updater() {
-        var time = $('.time-box .time .seperator');
-        if(time.css('opacity')==1)
-            time.css({'opacity':0});
+        var sep = box.find('.time .separator');
+        sep.toggleClass('active')
+        if( sep.hasClass('active') )
+            sep.css('opacity',1)
         else
-            time.css({'opacity':1});
+            sep.css('opacity',0);
     }
+
     setInterval(time_updater,1000);
     setTime();
     function setTime(){
         var data = new FormData();
-        data.append('day', $('.time-box .date span').html());
-        data.append('weekDayName',$('.time-box .day').html());
-        data.append('hour',$('.time-box .time .hour').html());
-        data.append('min',$('.time-box .time .min').html());
+        data.append('min', box.find('.min').html());
+        data.append('hour', box.find('.hour').html());
+        data.append('weekday', box.find('.weekday').html());
+        data.append('day', box.find('.day').html());
+        data.append('month', box.find('.month').html());
+        data.append('year', box.find('.year').html());
+        console.log(box.find('.min').html() );
+
         $.ajax({
             url: '/getLocalTime/',
             type: 'POST',
@@ -379,24 +388,25 @@ $(document).ready(function () {
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                return myXhr;
+            success: function(data){
             },
-            error:function () {
-                console.log("time_updater fail.");
+            error:function (data) {
+                console.log(data);
             }
         }).done(function (a) {
-            var hour =$.parseJSON(a).hour;
-            var min =$.parseJSON(a).min;
-            var weekDayName =$.parseJSON(a).weekDayName;
-            var day =$.parseJSON(a).day;
-            $('.time-box .date span').html(day);
-            $('.time-box .day').html(weekDayName);
-            $('.time-box .time .hour').html(hour);
-            $('.time-box .time .min').html(min);
+            writeDate(box,a);
         });
         setTimeout(setTime,60000);
+    }
+
+    function writeDate(box,obj){
+        console.log(obj);
+        box.find('.min').html( obj.min);
+        box.find('.hour').html( obj.hour);
+        box.find('.weekday').html( obj.weekdayName);
+        box.find('.day').html( obj.day);
+        box.find('.year').html( obj.year);
+        box.find('.month').html( obj.month);
     }
 });
 
