@@ -2,11 +2,14 @@
 	<ul class="slidee">
 		@if ( count($Slider) )
 			@foreach($Slider as $item)
-				<li class="items">
+				<li class="items loading">
 					<a href="{{ route('showNews', ['title'=>$item->post->title_seo]) }}">
 						<img
-								src=data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
-								data-src="{{ $item->photos->specs->first()->file_fullpath }}"
+								class="bttrlazyloading"
+								data-bttrlazyloading-xs='{ "src":"{{ $item->photos->specs[2]->file_fullpath }}", "width": {{ $item->photos->specs[2]->width }}, "height":{{ $item->photos->specs[2]->height }}}'
+								data-bttrlazyloading-sm='{ "src":"{{ $item->photos->specs[1]->file_fullpath }}", "width": {{ $item->photos->specs[1]->width }}, "height":{{ $item->photos->specs[1]->height }}}'
+								data-bttrlazyloading-md='{ "src":"{{ $item->photos->specs[0]->file_fullpath }}", "width": {{ $item->photos->specs[0]->width }}, "height":{{ $item->photos->specs[0]->height }}}'
+								data-bttrlazyloading-lg='{ "src":"{{ $item->photos->specs[0]->file_fullpath }}", "width": {{ $item->photos->specs[0]->width }}, "height":{{ $item->photos->specs[0]->height }}}'
 								alt="">
 						<section class="caption">
 							<h1 class="header">
@@ -79,3 +82,14 @@
 
 	</ul>
 </section>
+
+@section('styles')
+	<link rel="stylesheet" href="{{ asset('assets/css/bttrlazyloading.min.css') }}">
+@endsection
+
+@section('scripts')
+	<script src="{{ asset('assets/js/libs/jquery.bttrlazyloading.min.js') }}"></script>
+	<script>
+        $('.bttrlazyloading').bttrlazyloading();
+	</script>
+@endsection

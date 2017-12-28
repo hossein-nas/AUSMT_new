@@ -1,26 +1,36 @@
-;(function() {
-    // Initialize
-    var bLazy = new Blazy({
-        selector: 'img',
-        breakpoints: [{
+/*
+$(document).ready(function(){
+    ;(function() {
+        // Initialize
+        var bLazy = new Blazy({
+            selector: '.b-lazy',
+            breakpoints: [{
                 width: 320, // max-width
                 src: 'data-src-small'
             },
-            {
-                width: 768, // max-width
-                src: 'data-src-medium'
+                {
+                    width: 480, // max-width
+                    src: 'data-src-small'
+                },
+                {
+                    width: 768, // max-width
+                    src: 'data-src-medium'
+                },
+                {
+                    width: 1200, // max-width
+                    src: 'data-src-large'
+                }
+            ],
+            error: function(e,d){
+                console.log(e);
             },
-            {
-                width: 1200, // max-width
-                src: 'data-src'
-            },
-            {
-                width: 2880, // max-width
-                src: 'data-src'
+            success: function(){
             }
-        ]
-    });
-})();
+
+        });
+    })();
+})*/
+
 $( document ).ready( function ()
 {
 
@@ -357,6 +367,7 @@ $(document).ready(function (e) {
 })
 $(document).ready(function () {
     var box = $('.time-and-date ');
+    var timeout;
     function time_updater() {
         var sep = box.find('.time .separator');
         sep.toggleClass('active')
@@ -379,7 +390,7 @@ $(document).ready(function () {
         console.log(box.find('.min').html() );
 
         $.ajax({
-            url: '/getLocalTime/',
+            url: '/getLocalTime',
             type: 'POST',
             timeout:60000,
             data:data,
@@ -389,6 +400,8 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                clearTimeout(timeout);
+                timeout = setTimeout(setTime,30000);
             },
             error:function (data) {
                 console.log(data);
@@ -396,7 +409,7 @@ $(document).ready(function () {
         }).done(function (a) {
             writeDate(box,a);
         });
-        setTimeout(setTime,60000);
+        // timeout = setTimeout(setTime,60000);
     }
 
     function writeDate(box,obj){

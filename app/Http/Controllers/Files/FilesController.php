@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Files;
 
+use App\Http\Requests\FileUploadRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -21,7 +22,7 @@ use Mockery\Exception;
 class FilesController extends Controller
 {
 
-    public function uploadNewFile(Request $req)
+    public function uploadNewFile(FileUploadRequest $req)
     {
         if ($req->hasFile('selected_file')) {
             $file = file_get_contents($req->file('selected_file')->getRealPath());

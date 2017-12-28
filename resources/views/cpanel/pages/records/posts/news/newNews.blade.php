@@ -176,7 +176,10 @@
     <script>
         $(".ui.checkbox").checkbox();
         $('.tag-dropdown .ui.dropdown').dropdown({
-            allowAdditions: true
+            allowAdditions: true,
+            keys: {
+                'delimiter' :191
+            }
         })
     </script>
 
@@ -237,7 +240,7 @@
                 var formData = new FormData();
                 formData.append('record_thumbnail', blob);
                 formData.append('orig_name', window.thumbnail_orig_name);
-                $.ajax('/upload/record/thumbnail/', {
+                $.ajax('/upload/record/thumbnail', {
                     method: "POST",
                     data: formData,
                     processData: false,

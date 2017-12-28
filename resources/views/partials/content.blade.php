@@ -35,8 +35,14 @@
 
 			@foreach ($latestNews as $news )
 				<section class="item post {{$news->record_type->name}} {{ $news->post->is_important? 'important' : '' }}">
-					<div class="thumbnail-area">
-						<img src="{{ $news->thumbnail->specs->last()->file_fullpath }}" alt="">
+					<div class="thumbnail-area bloading b-loading">
+						<img
+								class="bttrlazyloading"
+								data-bttrlazyloading-xs-src="{{ $news->thumbnail->specs->last()->file_fullpath }}"
+								data-bttrlazyloading-sm-src="{{ $news->thumbnail->specs->last()->file_fullpath }}"
+								data-bttrlazyloading-md-src="{{ $news->thumbnail->specs->last()->file_fullpath }}"
+								data-bttrlazyloading-lg-src="{{ $news->thumbnail->specs->first()->file_fullpath }}"
+								alt="{{ $news->title }}">
 						<ul class="datails">
 							<li class="author">{{$news->author->name}}</li>
 							<li class="time-ago">۳ساعت پیش</li>

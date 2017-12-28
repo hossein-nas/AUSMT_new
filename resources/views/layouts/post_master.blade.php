@@ -134,6 +134,8 @@
 					</h3>
 					<div class="replier_name">
 
+						{{ Form::open() }}
+						{{ Form::close() }}
 					</div>
 
 					<section class="form-box">

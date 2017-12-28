@@ -23,6 +23,14 @@
                         @endforeach
                     </div>
                 @endif
+
+                @if ( count ($errors) > 0)
+                    <ul>
+                        @foreach( $errors->all() as $err)
+                            <li>{{ $err }}</li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
             <ui class="ten wide column select_file_area ">
                 <div class="ui header tiny center aligned">انتخاب فایل را انتخاب کنید:</div>

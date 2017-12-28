@@ -14,15 +14,15 @@
 			<a href="#" class="change-lang">go to english website</a>
 			<div class="time-and-date">
 				<div class="time">
-					<span class="min">۴۵</span>
+					<span class="min">{{ toPersianNums( $jalali->reforge('now')->format('%M') ) }}</span>
 					<span class="separator">:</span>
-					<span class="hour">۱۹</span>
+					<span class="hour">{{ toPersianNums( $jalali->reforge('now')->format('%H') ) }}</span>
 				</div>
 				<div class="date">
-					<span class="weekday">دوشنبه</span>
-					<span class="day">۲۲</span>
-					<span class="month">آذر</span>
-					<span class="year">۹۵</span>
+					<span class="weekday">{{ toPersianNums( $jalali->reforge('now')->format('%A') ) }}</span>
+					<span class="day">{{ toPersianNums( $jalali->reforge('now')->format('%d') ) }}</span>
+					<span class="month">{{ toPersianNums( $jalali->reforge('now')->format('%B') ) }}</span>
+					<span class="year">{{ toPersianNums( $jalali->reforge('now')->format('%y') ) }}</span>
 				</div>
 			</div>
 		</section>

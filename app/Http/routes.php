@@ -13,6 +13,7 @@
 
 use Morilog\Jalali\jDate;
 use Approached\LaravelImageOptimizer\ImageOptimizer;
+use Mail;
 
 Route::get('/', 'View\HomeController@home');
 Route::get('/posts', function () {
@@ -36,7 +37,11 @@ Route::get("/panel", function(){
 })->name('cpanel');
 
 Route::get('/temp/', function(){
-    return dd(\App\Models\Records\Record::hotNews()->get());
+    Mail::raw('Test to email', function($message){
+        $message->from('notify@ausmt.ir', 'AUSMT');
+        $message->to('hossein.nasiri.sovari@gmail.com');
+
+    });
 });
 
 

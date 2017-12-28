@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var box = $('.time-and-date ');
+    var timeout;
     function time_updater() {
         var sep = box.find('.time .separator');
         sep.toggleClass('active')
@@ -22,7 +23,7 @@ $(document).ready(function () {
         console.log(box.find('.min').html() );
 
         $.ajax({
-            url: '/getLocalTime/',
+            url: '/getLocalTime',
             type: 'POST',
             timeout:60000,
             data:data,
@@ -32,6 +33,8 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data){
+                clearTimeout(timeout);
+                timeout = setTimeout(setTime,30000);
             },
             error:function (data) {
                 console.log(data);
@@ -39,7 +42,7 @@ $(document).ready(function () {
         }).done(function (a) {
             writeDate(box,a);
         });
-        setTimeout(setTime,60000);
+        // timeout = setTimeout(setTime,60000);
     }
 
     function writeDate(box,obj){
