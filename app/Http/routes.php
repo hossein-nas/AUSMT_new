@@ -12,6 +12,7 @@
 */
 
 use Morilog\Jalali\jDate;
+use Approached\LaravelImageOptimizer\ImageOptimizer;
 
 Route::get('/', 'View\HomeController@home');
 Route::get('/posts', function () {
@@ -21,8 +22,9 @@ Route::get('/server', function () {
     var_dump($GLOBALS);
 });
 
-Route::get("/phpinfo/", function () {
-    phpinfo();
+Route::get("/test/", function (ImageOptimizer $imageoptimizer) {
+    $a = $imageoptimizer->optimizeImage('1.jpg');
+    dd($a);
 });
 
 Route::post('/upload/images/', 'Files\FilesController@upload');

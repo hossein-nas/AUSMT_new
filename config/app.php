@@ -151,6 +151,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Morilog\Jalali\JalaliServiceProvider::class,
+	Approached\LaravelImageOptimizer\ServiceProvider::class,
+
 
         /*
          * Application Service Providers...
