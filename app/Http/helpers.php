@@ -7,6 +7,11 @@ function toPersianNums($num)
 	return jDateTime::convertNumbers($num);
 }
 
+function jalali(){
+    return jDate::forge();
+}
+
+
 function seoUrl($string)
 {
 	//Lower case everything
@@ -20,42 +25,13 @@ function seoUrl($string)
 	return $string;
 }
 
-function getFastMenuItems()
-{
-	if ( File::exists(public_path('fast_menu') . '/json.json') )
-	{
-		$json = File::get(public_path('fast_menu') . '/json.json');
-		return json_decode($json, TRUE);
-	} else
-	{
-		File::put(public_path('fast_menu') . '/json.json', '[]');
-		$json = File::get(public_path('fast_menu') . '/json.json');
-		return json_decode($json, TRUE);
-	}
-}
-
-function addNewItemToFastMenu($p)
-{
-	$main_json = getFastMenuItems();
-	$main_json[$p['id']] = [
-		'name'  => $p['name'],
-		'image' => $p['image'],
-		'href'  => $p['href']
-	];
-	File::put(public_path('fast_menu') . '/json.json', json_encode($main_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-}
-
-function deleteFastMenuItem($p)
-{
-	$main_json = getFastMenuItems();
-	for ( $i = $p; $i < count($main_json) - 1; $i ++ )
-	{
-		$main_json[$i] = [
-			'name'  => $main_json[$i + 1]['name'],
-			'image' => $main_json[$i + 1]['image'],
-			'href'  => $main_json[$i + 1]['href']
-		];
-	}
-	unset($main_json[$i]);
-	File::put(public_path('fast_menu') . '/json.json', json_encode($main_json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+function HumanReadableFilesize($size, $precision = 2) {
+    $units = array('بایت','کیلو‌بایت','مگابایت','گیگابایت','ترابایت','پنتابایت','اگزابایت');
+    $step = 1024;
+    $i = 0;
+    while (($size / $step) > 0.9) {
+        $size = $size / $step;
+        $i++;
+    }
+    return round($size, $precision). ' ' .$units[$i];
 }

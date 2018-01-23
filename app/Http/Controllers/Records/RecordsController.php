@@ -69,6 +69,8 @@ class RecordsController extends Controller
     }
     private function getIdsByName($arr){
         $ret = [];
+        if( !is_array($arr))
+            return $ret;
         foreach ($arr as $ar){
             $id = Tag::where('name',$ar)->get()->first()->id;
             array_push($ret,$id);

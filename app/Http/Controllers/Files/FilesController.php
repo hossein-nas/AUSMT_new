@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Files;
 
 use App\Http\Requests\FileUploadRequest;
+use Approached\LaravelImageOptimizer\ImageOptimizer;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -22,62 +24,18 @@ use Mockery\Exception;
 class FilesController extends Controller
 {
 
-    public function uploadNewFile(FileUploadRequest $req)
+    public function uploadNewFile(FileUploadRequest $requests)
     {
-        if ($req->hasFile('selected_file')) {
-            $file = file_get_contents($req->file('selected_file')->getRealPath());
-            $req->request->add(['file' => $file]);
-            if ($this->getFileByFileUniqueName(sha1($req->file)))
-                return redirect()->back()->with('status', 'این فایل قبلا در سیستم ذخیره شده');
-        } else
-            return redirect()->back()->with('status', 'مشکلی در ذخیره فایل بوجود آمد');
+        $filename_in_request = 'selected_file';
+        if ( !$this->checkForFileExistInRequest( $filename_in_request ) )
+            return $this->errorFileNotUpload();
 
-        $mime = $req->file('selected_file')->getMimeType();
-        $ext = $this->getFileExtByMimytype($mime);
-        if (!$ext)
-            return redirect()->back()->with('status', 'پسوند فایل قابل قبول نبود');
-        switch ($ext) {
-            case 'jpeg':
-            case 'jpg':
-            case 'png':
-            case 'gif':
-            case 'svg':
-                $this->save($req, $ext);
-                break;
-            case 'flv':
-            case 'mp4':
-            case 'wmv':
-            case 'avi':
-            case 'mkv':
-            case 'mov':
-                $this->save($req, $ext);
-                break;
-            case 'mp3':
-            case 'mp4':
-            case 'wav':
-            case 'ogg':
-                echo 'audio';
-                break;
-            case 'doc':
-            case 'dot':
-            case 'docx':
-            case 'dotx':
-            case 'ppt':
-            case 'pps':
-            case 'pptx':
-            case 'ppsx':
-            case 'pdf':
-            case 'txt':
-                echo 'doc';
-                break;
-            case 'zip':
-            case 'rar':
-                echo 'misc';
-                break;
-            default:
-                echo 'naboud:(';
-        }
-        return redirect()->back()->with('status', 'فایل با موفقیت ثبت شد');
+        $this->getFileFromRequest( $filename_in_request, $requests);
+        $ext = $requests->file( $filename_in_request )->extension();
+        $ret = $this->save($requests, $ext);
+        if ($ret['status'] == 'success')
+            return back()->with($ret);
+        return back()->with($ret);
     }
 
     public function showFileManagementPage()
@@ -92,53 +50,188 @@ class FilesController extends Controller
         return view('cpanel.pages.files.add_new_file', compact(['categories']));
     }
 
-    public function record_thumbnail(Request $requests)
+    public function record_thumbnail(FileUploadRequest $requests)
     {
-        if ($requests->hasFile('record_thumbnail')) {
-            $data = [];
-            $data ['filePath'] = $requests->file('record_thumbnail')->getRealPath();
-            $data ['file'] = file_get_contents($data['filePath']);
-            $data ['ext'] = $requests->file('record_thumbnail')->extension();
-            $data ['orig_name'] = $requests->get('orig_name');
-            $data ['name'] = sha1($data['file']);
-            $data ['title'] = '';
-            $data ['base_dir_path'] = 'files/images/record_thumbnails';
-            $data ['file_category_id'] = 3;
-            $data ['responsive_image'] = true;
-            if ($p = $this->responsiveImage($data)) {
-                return Response::json([
-                    'status' => 1,
-                    'text' => 'تصویر با موفقیت بارگذاری شد.',
-                    'url' => url('') . '/' . $p['multivalue'][1]['file_fullpath'],
-                    'thumbnail_id' => $p['multivalue'][1]['related_file_id'],
-                ]);
-            } else
-                return Response::json([
-                    'status' => 0,
-                    'text' => 'متأسفانه،‌ تصویر با موفقیت بارگذاری نشد!',
-                    'detail' => $p->toArry()
-                ]);
-        }
+        $filename_in_request = 'record_thumbnail';
+
+        if ( !$this->checkForFileExistInRequest( $filename_in_request ) )
+            return $this->errorFileNotUpload();
+
+        if ( !$this->checkForAjaxRequest() )
+            return $this->errorNotAjaxRequest();
+
+
+        $this->getFileFromRequest( $filename_in_request, $requests);
+        $ext = $requests->file( $filename_in_request )->extension();
+        $ret = $this->save($requests, $ext);
+
+        return Response::json($ret);
     }
 
-    private function fileStore($file, $destFullPath)
-    {
-        try {
-            $path = Storage::disk('public')->put($destFullPath, $file);
-            $size = Storage::disk('public')->size($destFullPath);
+    private function getFileFromRequest($file_name, &$req){
+        $file = file_get_contents( request()->file($file_name)->getRealPath() );
+        $req->request->add(['file' => $file] );
+        return true;
+    }
+    private function checkForFileExistInRequest($file_name){
+        if ( !request()->hasFile($file_name) )
+            return false;
+        return true;
+    }
 
-        } catch (FileNotFoundException $e) {
+    private function checkForAjaxRequest(){
+        if ( !request()->ajax() )
+            return false;
+        return true;
+    }
+
+    private function errorFileNotUpload(){
+        return Response::json([
+            'code' => 3,
+            'status' => 'failure',
+            'response' => 'file not uploaded',
+            'text' => 'فایل به درستی بارگذاری نشده است',
+        ],400);
+    }
+
+    private function errorNotAjaxRequest(){
+        return Response::json([
+            'code' => 4,
+            'status' => 'failure',
+            'response' => 'request is not ajax',
+            'text' => 'درخواست ارسالی قابل پردازش نیست',
+        ],400);
+    }
+
+    private function errorUnexpectedInSave(){
+        return [
+            'code' => 0,
+            'status' => 'failure',
+            'response' => 'unxpected error occur',
+            'text' => 'خطای نا مشخصی رخ داد'
+        ];
+    }
+
+    public function addNewAttachament(FileUploadRequest $requests)
+    {
+        $filename_in_request = 'attachment_file';
+
+        if ( !$this->checkForFileExistInRequest( $filename_in_request ) )
+            return $this->errorFileNotUpload();
+
+        if ( !$this->checkForAjaxRequest() )
+            return $this->errorNotAjaxRequest();
+
+        $this->getFileFromRequest( $filename_in_request, $requests);
+        $ext = $requests->file( $filename_in_request )->extension();
+        $ret = $this->save($requests, $ext);
+
+        if ($ret['status'] == 'success' )
+        {
+            $res = [
+                'id' => $ret['id'],
+                'name' => $ret['name'],
+                'filesize' => HumanReadableFilesize( (int) $ret['multivalue']['filesize'],2),
+                'extension' => $ret['ext'],
+                'orig_name' => $ret['orig_name'] . '.' . $ret['ext'],
+                'title' => $ret['title'],
+                'icon_path' => $this->getFileExtensionIconByExtId($ret['extension_id'])
+            ];
+            return Response::json($res);
+        }
+        return Response::json($ret,400) ;
+    }
+
+    public function saveNewFile(Array $data)
+    {
+        /*
+         * $data = [
+         *      'filepath' =>
+         *      'file_orig_name' =>
+         *      'file_title' =>
+         *      'file_description' =>
+         *      'cat_id' =>
+         *      'ext' =>
+         *      'responsive_image' =>
+         * */
+        if ( !is_array($data) )
+            return null;
+
+        $d = collect();
+        $d->file =  file_get_contents($data['filepath']) ;
+        $d->file_orig_name = $data['file_orig_name'] ;
+        $d->file_title = $data['file_title'] ;
+        $d->file_description = $data['file_description'] ;
+        $d->cat_id = $data['cat_id'] ;
+        $d->ext = $data['ext'] ;
+        $d->responsive_image = $data['responsive_image'] ;
+        $ret = $this->save($d, $d->ext);
+        return collect($ret);
+
+    }
+
+    private function physicalSave($data, $fullpath)
+    {
+        $file = $data['file'];
+        try {
+            Storage::disk('public')->put($fullpath, $file);
+            $filesize = Storage::disk('public')->size($fullpath);
+            if ( $this->isImage($data))
+                (new ImageOptimizer())->optimizeImage(public_path().$fullpath);
+        } catch (Exception $e) {
             return false;
         }
-        return [
-            'fullPath' => $destFullPath,
-            'filesize' => $size,
-        ];;
+        $data['multivalue']= [
+            'filesize' => $filesize,
+            'file_fullpath' => $fullpath,
+            'related_file_id' => $data['id'],
+            'ratio' => '',
+            'height' => 0,
+            'width' => 0
+        ];
+        return $data;
     }
 
-    private function responsiveImage($data)
+    private function saveResponsiveImage($data)
     {
-        $frames = [
+        $frames = $this->getResponsiveImageFrame();
+
+        foreach( $frames  as $fname => $frame ){
+
+            $basepath = $this->generateBasepathByCatId( $data['file_category_id'], [$fname] );
+            $fullpath = $this->generateFileFullPath($basepath,$data['name'].'_'.$frame['width'], $data['ext'] );
+
+
+            // Checking for file exists in disk
+            if ( !$this->checkFileExists($fullpath) )
+                $data = $this->physicalSave($data, $fullpath);
+
+            // Resizing Image
+            Image::make('.'. $fullpath)->resize($frame['width'], $frame['height'])->save();
+
+            // Adding file to multivalue table
+            $this->saveMultiVal($data);
+        }
+
+        return $data;
+    }
+
+    private function getExtIDByName($ext)
+    {
+        if ($ret = File_Extension::where('extension', $ext)->first() )
+            return $ret->id;
+        return false;
+    }
+
+    private function getCatIDByFolderPath($dirName)
+    {
+        return File_Category::where('dir_name', $dirName)->first()->id;
+
+    }
+
+    private function getResponsiveImageFrame()
+    {
+        return [
             'large' => [
                 'width' => 1200,
                 'height' => 750
@@ -150,76 +243,28 @@ class FilesController extends Controller
             'small' => [
                 'width' => 480,
                 'height' => 300
+            ],
+            'extra_small' => [
+                'width' => 192,
+                'height' => 120
             ]
         ];
-
-        /* ...Storing file data to database... */
-        if (!$rel_id = $this->saveFileToDB($data)) {
-            return $this->getFileByFileUniqueName($data['name']);
-        }
-
-        foreach ($frames as $key => $frame) {
-            $path = $data['base_dir_path'] . '/' . $key . '/';
-            $name = $data['name'] . '_' . $frame['width'];
-            $destFullPath = $path . $name . '.' . $data['ext'];
-            $image = Image::make($data['filePath'])->resize($frame['width'], $frame['height'])->encode();
-            $r = $this->fileStore($image->encoded, $destFullPath);
-            if ($r) {
-                $detail = [
-                    'related_file_id' => $rel_id,
-                    'filesize' => $r['filesize'],
-                    'file_fullpath' => $r['fullPath'],
-                    'width' => $frame['width'],
-                    'height' => $frame['height'],
-                    'ratio' => $frame['width'] / $frame['height']
-                ];
-                $data['multivalue'] = $detail;
-                $this->saveMultiVal($data);
-                $tmp[] = $detail;
-            }
-        }
-        $data['multivalue'] = $tmp;
-        return $data;
-    }
-
-    private function generateFilePathFromExtension($file, $ext)
-    {
-
-    }
-
-    public function browseFiles()
-    {
-        $files = File::files('media/fastmenu');
-        return ($files);
-    }
-
-    private function getExtIDByName($ext)
-    {
-        return File_Extension::where('extension', $ext)->first()->id;
-    }
-
-    private function getCatIDByFolderPath($dirName)
-    {
-        return File_Category::where('dir_name', $dirName)->first()->id;
-
     }
 
     private function saveFileToDB($data)
     {
-        if ($this->checkFileExistsOnDB($data['name']))
-            return false;
-
         $f = new FFile;
         $f->orig_name = $data['orig_name'];
         $f->name = $data['name'];
         $f->extension_id = $this->getExtIDByName($data['ext']);
         $f->file_category_id = $data['file_category_id'];
         $f->title = $data['title'];
-        $f->responsive_image = isset($data['responsive_image']) ? 1 : 0;
+        $f->responsive_image = isset($data['responsive_image']) ? $data['responsive_image'] : 0;
         $f->description = isset($data['description']) ? $data['description'] : '';
         try {
             $f->save();
-            return $f->id;
+            $data['id'] = $f->id;
+            return $data;
         } catch (Exception $e) {
             return false;
         }
@@ -230,28 +275,11 @@ class FilesController extends Controller
         $m = new MVFile;
         $m->related_file_id = $data['multivalue']['related_file_id'];
         $m->file_fullpath = $data['multivalue']['file_fullpath'];
-        $m->ratio = isset($data['multivalue']['ratio']) ? $data['multivalue']['ratio']: '';
+        $m->ratio = isset($data['multivalue']['ratio']) ? $data['multivalue']['ratio'] : '';
         $m->filesize = $data['multivalue']['filesize'];
         $m->height = isset($data['multivalue']['height']) ? $data['multivalue']['height'] : '';
         $m->width = isset($data['multivalue']['width']) ? $data['multivalue']['width'] : '';
         $m->save();
-    }
-
-    public function test()
-    {
-        dd($this->getFileByFileUniqueName('test22www22'));
-        $data = [
-            'filePath' => 'media/photos/medium/3.png',
-            'name' => 'test22www22',
-            'orig_name' => 'test1.png',
-            'base_dir_path' => 'files/images/record_thumbnails',
-            'ext' => 'png',
-            'title' => 'png',
-            'responsive_image' => true,
-            'file_category_id' => 3,
-        ];
-        $data['file'] = file_get_contents($data['filePath']);
-        $this->responsiveImage($data);
     }
 
     private function checkFileExists($filePath)
@@ -266,14 +294,23 @@ class FilesController extends Controller
         return false;
     }
 
-    private function getFileByFileUniqueName($UName)
+    public function getFileByFileUniqueName($data)
     {
-        $file = FFile::where('name', $UName)->get()->first();
+        $file = FFile::where('name', $data['name'])->get()->first();
         if ($file) {
-            $file->multivalue = MVFile::where('related_file_id', $file->id)->get()->toArray();
-            return $file->toArray();
+            $mv = $file->specs->first();
+            $data['id'] = $file->id;
+            $data['status'] = 'success';
+            $data['multivalue']['related_file_id'] = $file->id;
+            $data['multivalue']['file_fullpath'] = $mv->file_fullpath;
+            $data['multivalue']['ratio'] = $mv->ratio;
+            $data['multivalue']['filesize'] = $mv->filesize;
+            $data['multivalue']['height'] = $mv->height;
+            $data['multivalue']['width'] = $mv->width;
+            unset($data['file']);
+            return $data;
         }
-        return false;
+        return $this->errorUnexpectedInSave();
     }
 
     private function getFileExtByMimytype($mime)
@@ -284,8 +321,73 @@ class FilesController extends Controller
         return false;
     }
 
+    private function getFileBasepathByCatId($cat_id)
+    {
+        $ret = File_Category::where('id', $cat_id)->first();
+        if ($ret)
+            return $ret->base_dir_path;
+    }
+
+    private function getFileExtensionIconByExtId($ext_id){
+        return File_Extension::findOrFail($ext_id)->icon->specs->first()->file_fullpath;
+    }
+
+    private function generateBasepathByCatId($cat_id, $new_dir=null)
+    {
+        $basepath = $this->getFileBasepathByCatId($cat_id);
+        $append = '';
+        if($new_dir and is_array($new_dir) ){
+            foreach ($new_dir as $dir){
+                $append .= '/' . $dir;
+            }
+        }
+        return $basepath . $append;
+    }
+
+    private function isAcceptedExt($ext){
+        if ( $ret = File_Extension::where('extension', $ext)->first() )
+            return true;
+        return false;
+    }
+    private function checkAcceptedFileType($mime){
+        $ext = $this->getFileExtByMimytype($mime);
+        if (!$ext)
+            return false;
+        return true;
+    }
+
+    private function generateFileFullPath($basepath, $name, $ext){
+        return $basepath . '/' . $name . '.' . $ext;
+    }
+
+    private function isImage($data)
+    {
+        $ext = $data['ext'];
+        switch ($ext) {
+            case 'jpeg':
+            case 'jpg':
+            case 'png':
+            case 'gif':
+            case 'svg':
+                return true;
+                break;
+        }
+        return false;
+    }
+
     private function save($req, $ext)
     {
+        /*
+         * Checking Accepted Extension
+         * */
+        if ( !$this->isAcceptedExt($ext) )
+            return [
+                'code' => 0,
+                'status' => 'failure',
+                'response' => 'extension doesn\'n exists ',
+                'text' => 'فایل انتخابی قابل قبول نیست',
+            ];
+
         $data = [
             'file' => $req->file,
             'name' => sha1($req->file),
@@ -294,25 +396,47 @@ class FilesController extends Controller
             'description' => $req->file_description,
             'title' => $req->file_title,
             'ext' => $ext,
+            'extension_id' => $this->getExtIDByName( $ext ),
+            'responsive_image' => (int) $req->responsive_image,
+            'multivalue' => []
         ];
-        $base_dir_path = File_Category::find($data['file_category_id'])->base_dir_path;
-        $data['dest_fullpath'] = $base_dir_path . '/' . $data['name'] . '.' . $data['ext'];
 
-        if ($this->fileStore($data['file'], $data['dest_fullpath'])) {
-            $id = $this->saveFileToDB($data);
-            $data['multivalue'] = [
-                'related_file_id' => $id,
-                'file_fullpath' => $data['dest_fullpath'],
-                'filesize' => $req->filesize
-            ];
-            if (FFile::find($id)->extension->filetype->name == "Image" and FFile::find($id)->extension->extension != 'svg' ){
-                $data['multivalue'] = [
-                    'width' => Image::make($data['file'])->getWidth(),
-                    'height' => Image::make($data['file'])->getHeight(),
-                    'ratio' => Image::make($data['file'])->getWidth() / Image::make($data['file'])->getHeight(),
-                ];
-            }
-            $this->saveMultiVal($data);
+        /*
+         * Check for file exist in DB or Not
+         * */
+        if( $this->checkFileExistsOnDB( $data['name'] ) )
+        {
+            return $this->getFileByFileUniqueName($data);
         }
+
+        $data = $this->saveFileToDB($data);
+
+        /*
+         * Check for Responsive Image
+         * */
+        if ( $data['responsive_image'] === 1)
+        {
+            $ret = $this->saveResponsiveImage($data);
+            $ret['status'] = 'success';
+            unset($ret['file']);
+            return $ret;
+        }
+
+        /*
+         * Storing file in disk
+         * */
+        $basepath = $this->generateBasepathByCatId( $data['file_category_id'] );
+        $fullpath = $this->generateFileFullPath($basepath, $data['name'], $data['ext']);
+        // Check for file exist on disk or Not
+        if( !$this->checkFileExists($fullpath) )
+            $data = $this->physicalSave($data, $fullpath);
+
+        /*
+         * Adding file to MultiValue table
+         * */
+        $this->saveMultiVal($data);
+        $data['status'] = 'success';
+        unset( $data['file'] );
+        return $data;
     }
 }

@@ -26,7 +26,7 @@
                 @if (session('status'))
                     <div class="ui message ">
                         <ul>
-                            <li>{{ session('status') }}</li>
+                            <li>{{ session('text') }}</li>
                         </ul>
                     </div>
                 @endif

@@ -56,17 +56,25 @@
                     <input type="hidden" name="cat_id"/>
                     <input type="hidden" name="file_orig_name" class="file_orig_name">
                     <input type="hidden" name="filesize" class="filesize">
+                    <input type="hidden" name="responsive_image" class="filesize" value="0">
                     <div class="ui error message">
 
                     </div>
 
                     @if (session('status'))
                         <div class="ui message ">
-                            <ul>
-                                <li>{{ session('status') }}</li>
-                            </ul>
+                            @if ( session('status') == 'failure' )
+                                <ul>
+                                    <li>{{ session('text') }}</li>
+                                </ul>
+                            @else
+                                <ul>
+                                    <li>فایل با موفقیت افزوده شد.</li>
+                                </ul>
+                            @endif
                         </div>
                     @endif
+                    {{ var_dump(session()->all() ) }}
                 </form>
 
             </ui>

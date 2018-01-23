@@ -13,7 +13,6 @@
 
 use Morilog\Jalali\jDate;
 use Approached\LaravelImageOptimizer\ImageOptimizer;
-use Mail;
 
 Route::get('/', 'View\HomeController@home');
 Route::get('/posts', function () {
@@ -80,6 +79,8 @@ Route::group(['prefix' => 'panel'], function(){
     Route::get('/files/add/file/page', "Files\FilesController@addNewFilePage")->name('add_new_file');
     // Upload new file
     Route::post('/files/upload/file/', "Files\FilesController@uploadNewFile")->name('upload_new_file');
+    // Upload new Attachment
+    Route::post('/files/upload/attachment/', 'Files\FilesController@addNewAttachament')->name('upload_new_attachment');
     //add New Category method in File Category table
     Route::post('/files/new/category/file', "Files\FilesCategoryController@addNewCategory")->name("add_file_category");
     //Edit Old Category method in File Category table
@@ -96,6 +97,14 @@ Route::group(['prefix' => 'panel'], function(){
     Route::get('/fastmenu/show/management/page', "Fastmenu@FastmenuManagementPage")->name('fastmenu_page');
     Route::post('/fastmenu/delete/item', "Fastmenu@deleteFastmenuItem")->name('delete_fastmenu_item');
     Route::post('/fastmenu/add/item', "Fastmenu@addFastmenuItem")->name('add_fastmenu_item');
+
+
+    /* ...Routes for Comments Management in Cpanel... */
+    Route::get('/comment/manage/page', "CommentsController@commentManagementPage")->name('comment_page');
+    Route::post('/comment/{cm_id}/retrive', "CommentsController@getCommentById")->name('get_comment');
+    Route::post('/comment/{cm_id}/verify', "CommentsController@verifyComment")->name('verify_comment');
+    Route::post('/comment/{cm_id}/delete', "CommentsController@deleteComment")->name('delete_comment');
+    Route::post('/comment/{cm_id}/update', "CommentsController@updateComment")->name('text/plain');
 });
 
 /* ...Route for insert comment... */

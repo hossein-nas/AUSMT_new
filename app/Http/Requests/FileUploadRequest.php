@@ -24,13 +24,21 @@ class FileUploadRequest extends Request
     public function rules()
     {
         return [
-            'description' => 'required'
+            'file_description' => 'string',
+            'file_title' => 'string',
+            'file_orig_name' => 'required|string',
+            'cat_id' => 'required|numeric'
         ];
     }
 
     public function messages(){
         return [
-            'description.required' => 'فیلد توضیحات ضروری است.'
+            'file_description.string' => 'فیلد توضیحات بایستی فقط شامل نوشته فارسی یا لاتین باشد',
+            'file_title.string' => 'فیلد عنوان بایستی فقط شامل نوشته فارسی یا لاتین باشد',
+            'file_orig_name.string' => 'نام فایل انتخابی قابل قبول نیست',
+            'file_orig_name.required' => 'مشکلی در فایل انتخابی وجود دارد',
+            'cat_id.numeric' => 'دسته انتخابی برای فایل قابل قبول نیست',
+            'cat_id.required' => 'انتخاب دسته برای فایل ضروری است',
         ];
     }
 }

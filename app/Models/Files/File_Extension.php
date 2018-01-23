@@ -11,7 +11,8 @@ class File_Extension extends Model
     protected $fillable = [
         'extension',
         'mimetype',
-        'file_type_id'
+        'file_type_id',
+        'file_icon_id'
     ];
 
     public function filetype()
@@ -22,5 +23,8 @@ class File_Extension extends Model
     public function files()
     {
         return $this->hasMany('App\Models\Files\File', 'extension_id');
+    }
+    public function icon(){
+        return $this->belongsTo('App\Models\Files\File', 'file_icon_id');
     }
 }
