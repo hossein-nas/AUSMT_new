@@ -12,7 +12,7 @@ class Fastmenu extends Controller
     public function FastmenuManagementPage()
     {
         $Fastmenu = $this->getAllFastmenuItem();
-        $all_Icons = (new Files\FilesCategoryController)->getAllFilesInCat('fastmenu');
+        $all_Icons = (new Files\FilesCategoryController)->getAllFilesInCat('fastmenu_icons');
         return view('cpanel.pages.fastmenu.fastmenu_management', compact(['Fastmenu','all_Icons']));
     }
 

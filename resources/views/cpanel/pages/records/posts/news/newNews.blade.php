@@ -45,12 +45,11 @@
                 </select>
             </div>
 
-            {{--
             <div class="ui message attachment-area">
                 <h4 class="ui header">افزودن فایل ضمیمه</h4>
                 <div class="ui divider"></div>
                 <div class="attachments">
-                    <div class="item">
+                    {{--<div class="item">
                         <div class="filetype">
                             <img src="/media/filetypes/jpg.svg" alt="">
                         </div>
@@ -68,42 +67,24 @@
                         <div class="delete-button">
                             <span>حذف</span>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="filetype">
-                            <img src="/media/filetypes/pdf.svg" alt="">
-                        </div>
-                        <div class="body">
-                            <h3 class="file-title">
-                                فرم درخواست مهمانی
-                            </h3>
-                            <label for="file size" class="filesize">
-                                ۳.۲ مگابایت
-                            </label>
-                            <label for="original name" class="orig-name">
-                                form-mehmani.pdf
-                            </label>
-                        </div>
-                        <div class="delete-button">
-                            <span>حذف</span>
-                        </div>
-                    </div>
+                    </div>--}}
+
                 </div>
                 <div class="ui form">
                     <div class="fields inline">
                         <div class="three wide field">
-                            <div class="ui blue button tiny fluid">انتخاب فایل</div>
+                            <div class="ui blue button tiny fluid" id="select-attachment-btn">انتخاب فایل</div>
+                            <input type="file" id="attachment_file" class="attachment-file-input">
                         </div>
                         <div class="ten wide field">
-                            <input type="text" class="description" placeholder="عنوان فایل را وارد کنید...">
+                            <input type="text" id="attachment" class="description" placeholder="عنوان فایل را وارد کنید...">
                         </div>
                         <div class="three wide field">
-                            <div class="ui green button tiny fluid">آپلود فایل</div>
+                            <div class="ui green button tiny fluid" id="upload_attachment_btn">آپلود فایل</div>
                         </div>
                     </div>
                 </div>
             </div>
-            --}}
 
             <div class="ui message upload-thumbnail">
                 <h4 class="ui header">افزودن تصویر شاخص</h4>
@@ -239,7 +220,10 @@
             window.cropper.getCroppedCanvas().toBlob(function (blob) {
                 var formData = new FormData();
                 formData.append('record_thumbnail', blob);
-                formData.append('orig_name', window.thumbnail_orig_name);
+                formData.append('file_orig_name', window.thumbnail_orig_name);
+                formData.append('cat_id', 7);
+                formData.append('file_title', '');
+                formData.append('responsive_image', 1);
                 $.ajax('/upload/record/thumbnail', {
                     method: "POST",
                     data: formData,
@@ -251,9 +235,9 @@
                     success: function (data,result) {
                         upload_photo_btn.removeClass('loading')
                         upload_photo_btn.addClass('disabled')
-                        button_area.find('.message').html(data.text);
-                        window.thumbnail_url = data.url;
-                        window.thumbnail_id = data.thumbnail_id;
+                        button_area.find('.message').html('فایل با موفقیت افزوده شد');
+                        window.thumbnail_url = data.multivalue.file_fullpath;
+                        window.thumbnail_id = data.id;
                         setTimeout(function(){button_area.find('.message').html('')},5000)
                     },
                     error: function (data) {
@@ -341,6 +325,82 @@
             var res = text.replace(/[ ]/g, "-");
             var res = res.replace(/[.]/g, "");
             $('input[name="seo_title"]').val(res);
+        })
+    </script>
+
+    <script>
+
+        $('#select-attachment-btn').click(function(){
+            $('#attachment_file').click();
+        })
+
+        $('#upload_attachment_btn').click(function(){
+            var _this = $(this);
+            var formData = new FormData();
+            var attachment_file = $('#attachment_file')[0].files[0];
+            var description = $('.description').val();
+            var index = attachment_file.name.lastIndexOf('.');
+            var name = attachment_file.name.substr(0,index);
+            formData.append('attachment_file', attachment_file )
+            formData.append('cat_id', 1 )
+            formData.append('file_title', description )
+            formData.append('file_description', description )
+            formData.append('file_orig_name', name )
+            $.ajax('/panel/files/upload/attachment', {
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function(){
+                    _this.addClass('loading')
+                },
+                success: function (data,result) {
+                    var _attachments = $('.attachments');
+                    var _item = $('<div>').addClass('item');
+                    var _file_type = $('<div>').addClass('filetype').html('<img src="'+ data.icon_path+'" alt="'+ data.orig_name +'"/>');
+                    _file_type.appendTo(_item);
+                    var _body = $('<div>').addClass('body');
+                    $('<h3>').addClass('file-title').html(data.title).appendTo(_body);
+                    $('<label>').addClass('filesize').html(data.filesize).appendTo(_body);
+                    var elem = $('<label>').addClass('orig-name').html(data.orig_name).appendTo(_body);
+                    _body.appendTo(_item);
+                    _item.appendTo(_attachments);
+                    ellipseInMiddle(elem);
+                },
+                error: function (data) {
+                    alert('ss');
+                },
+            }).done(function(){
+                _this.removeClass('loading');
+            });
+
+            function ellipseInMiddle(el){
+                var middle
+                var str = el.html();
+                var el_width = el.width();
+                var el_height = parseInt( el.height() )
+                var el_line_height = parseInt( el.css('line-height') );
+                var i = 0;
+                console.log(el_height)
+                console.log(el_line_height);
+
+                if (el_height-1 <= el_line_height )
+                    return ;
+
+                while ( el_height > el_line_height ){
+                    console.log('width : ' + el.width() );
+                    console.log('height : ' + el.height() );
+                    middle = parseInt( el.html().length/2 )
+                    str = el.html().substr(0,middle-2) + el.html().substr(middle+2);
+                    el_height = parseInt( el.height() );
+                    el.html(str);
+                }
+                str = str = el.html().substr(0,middle-1) + ' ... ' + el.html().substr(middle);
+                el.html(str);
+            }
         })
     </script>
 
