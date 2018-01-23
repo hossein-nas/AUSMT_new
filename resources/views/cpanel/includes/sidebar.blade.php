@@ -49,7 +49,7 @@
         <div class="menu">
             <a class="item">تأیید دیدگاه‌ها</a>
             <a class="item">مشاهده آخرین دیدگاه‌ها</a>
-            <a class="item">مدیریت دیدگاه‌ها</a>
+            <a href="{{ route('comment_page') }}" class="item">مدیریت دیدگاه‌ها</a>
         </div>
     </div>
     <div class="item">

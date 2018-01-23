@@ -1,9 +1,9 @@
 <header class="ui fixed inverted menu">
     <div class="ui container">
-        <a href="#" class="header item ui tiny">
+        <a href="/" class="header item ui tiny">
             <img class="logo" src="/assets/img/logo.svg">
         </a>
-        <a href="#" class="item ui icon compact big">
+        <a href="/panel" class="item ui icon compact big">
             <i class="icon home large"></i>
         </a>
         <div class="ui menu right inverted">

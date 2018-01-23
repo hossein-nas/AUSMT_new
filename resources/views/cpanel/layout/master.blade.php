@@ -17,8 +17,9 @@
     @yield('styles')
 <!---------------------------------- Style Sheet End -------------------------------------->
 
-    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32"/>
-    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16"/>
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32"/>
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16"/>
+    <meta name="theme-color" content="#0F595E">
 </head>
 <body>
 
@@ -40,10 +41,11 @@
     </div>
 <!------------------------------------------- JS ---------------------------------------------->
 <script src=" {{ asset('assets/js/libs/jquery-1.12.4.min.js') }}"></script>
-<script src="{{ asset('assets/js/libs/semantic.min.js') }}"></script>
+<script src="{{ asset('assets/js/cpanel/vendors.min.js') }}"></script>
+<script src="{{ asset('assets/js/cpanel/bundle.min.js') }}"></script>
 {{--<script src="{{asset('cpanel/js/js.js')}}"></script>--}}
 <script>
-    $('.ui.dropdown').dropdown();
+
 </script>
 @yield('scripts')
 <!----------------------------------------- JS End -------------------------------------------->
