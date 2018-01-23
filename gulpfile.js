@@ -5,6 +5,10 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var gutil = require('gulp-util');
+var browserify = require('browserify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 
 var paths = {
     site: {
@@ -22,6 +26,11 @@ var paths = {
         jquery: "resources/assets/jsFiles/jq.js",
         frameworks: "resources/assets/jsFiles/frameworks/*.js",
         custom: "resources/assets/jsFiles/custom/*.js"
+    },
+    cpanelJsFiles: {
+        vendors: 'resources/assets/jsFiles/cpanel/vendor/*.js',
+        bundles: 'resources/assets/jsFiles/cpanel/scripts.js',
+        dest: 'public/assets/js/cpanel'
     }
 };
 
@@ -57,28 +66,65 @@ gulp.task('sass', function () {
 
 
 gulp.task('minify', function () {
-    gulp.src(paths.jsFiles.jquery)
+    // gulp.src(paths.jsFiles.jquery)
+    //     .pipe(uglify())
+    //     .pipe(gulp.dest(paths.jsFiles.dest));
+    // gulp.src(paths.jsFiles.frameworks)
+    //     .pipe(concat('plugins.js'))
+    //     .pipe(gulp.dest(paths.jsFiles.dest))
+    //     .pipe(rename('plugins.min.js'))
+    //     .pipe(uglify())
+    //     .pipe(gulp.dest(paths.jsFiles.dest));
+    // gulp.src(paths.jsFiles.custom)
+    //     .pipe(concat('scripts.js'))
+    //     .pipe(gulp.dest(paths.jsFiles.dest))
+    //     .pipe(rename('scripts.min.js'))
+    //     .pipe(
+    //         uglify().on('error', gutil.log)
+    //     )
+    //     .pipe(gulp.dest(paths.jsFiles.dest));
+
+});
+
+gulp.task('cpanel-scripts', function () {
+    /*
+    * minifying cpanel JS files
+    * */
+    browserify({
+        entries: 'resources/assets/jsFiles/cpanel/scripts.js',
+        debug: true
+    })
+        .transform(babelify)
+        .on('error', gutil.log)
+        .bundle()
+        .on('error', gutil.log)
+        .pipe(source('bundle.js'))
+        .pipe(gulp.dest(paths.cpanelJsFiles.dest))
+        .pipe(buffer())
         .pipe(uglify())
-        .pipe(gulp.dest(paths.jsFiles.dest));
-    gulp.src(paths.jsFiles.frameworks)
-        .pipe(concat('plugins.js'))
-        .pipe(gulp.dest(paths.jsFiles.dest))
-        .pipe(rename('plugins.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(paths.jsFiles.dest));
-    gulp.src(paths.jsFiles.custom)
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest(paths.jsFiles.dest))
-        .pipe(rename('scripts.min.js'))
-        .pipe(
-            uglify().on('error', gutil.log)
-        )
-        .pipe(gulp.dest(paths.jsFiles.dest));
+        .on('error', gutil.log)
+        .pipe( rename('bundle.min.js') )
+        .pipe( gulp.dest( paths.cpanelJsFiles.dest ));
+});
+
+gulp.task('cpanel-vendors', function () {
+    /*
+    * minifying cpanel vendors JS files
+    * */
+    gulp.src(paths.cpanelJsFiles.vendors)
+        .pipe(concat('vendors.js'))
+        .pipe(gulp.dest(paths.cpanelJsFiles.dest))
+        .pipe(rename('vendors.min.js'))
+        .pipe(uglify().on('error', gutil.log))
+        .pipe(gulp.dest(paths.cpanelJsFiles.dest));
 });
 
 gulp.task('watch', function () {
     gulp.watch([paths.cpanel.watch_list, paths.site.watch_list], ['sass']);
-    gulp.watch('resources/assets/jsFiles/**/*.js', ['minify']);
+    // gulp.watch('resources/assets/jsFiles/**/*.js', ['minify']);
+
+    gulp.watch('resources/assets/jsFiles/cpanel/scripts/**/*.js', ['cpanel-scripts'])
+    gulp.watch('resources/assets/jsFiles/cpanel/vendor/*.js', ['cpanel-vendors'])
 });
 
-gulp.task('default', ['sass', 'minify', 'watch']);
+gulp.task('default', ['sass', 'minify', 'cpanel-scripts', 'watch']);
