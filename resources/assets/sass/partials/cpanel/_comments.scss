@@ -1,0 +1,217 @@
+.cpanel-comment-area {
+	display: block;
+	width: 100%;
+	.stats-section {
+		@include clear-fix;
+		> span {
+			position: relative;
+			display: block;
+			float: right;
+			width: 25%;
+			background: #fbfbfb;
+			height: 100px;
+			&::before {
+				display: block;
+				color: #b3b2b2;
+				text-align: center;
+				padding: 1.25rem;
+				font-size: .95rem;
+			}
+			&::after {
+				content: '';
+				display: block;
+				position: absolute;
+				width: 1px;
+				height: 65px;
+				background-color: gainsboro;
+				top: 0;
+				left: 0;
+				margin-top: 8%;
+			}
+			&:last-child::after {
+				width: 0;
+				height: 0;
+			}
+		}
+		> span.not-verified::before {
+			content: 'تأیید نشده ها';
+		}
+		> span.today::before {
+			content: 'ارسال شده‌های امروز';
+		}
+		> span.month::before {
+			content: 'ارسال شده‌های این ماه';
+		}
+		> span.total::before {
+			content: 'کل ارسالی ها';
+		}
+
+		text-align: center;
+		font-size: 2.75rem;
+		@include ellips;
+		color: #6b6b6b;
+		border-bottom: 1px solid #e4e4e4;
+		@include no-text_selection;
+	}
+
+	.management-section {
+		margin-top: .75rem;
+		@include clear-fix;
+
+		> .header {
+			@include no-text_selection;
+			width: 100%;
+			background-color: #f5f5f5;
+			text-align: center;
+			color: #848484;
+			padding: .5rem 0;
+			font-size: 1.2rem;
+			margin-bottom: 1rem;
+		}
+		> .item {
+			position: relative;
+			width: 204px;
+			border-radius: .4rem;
+			overflow: hidden;
+			float: right;
+			margin:0 0 .5rem .5rem;
+			&:nth-of-type(4n){
+				margin-left: 0;
+			}
+			.header {
+				background-color: #efefef;
+				border-bottom: 1px solid #eee;
+				width: 100%;
+				color: #c59a9e ;
+				text-align: center;
+				padding: .25rem;
+				font-weight: bold;
+				@include ellips;
+				font-size:.9rem;
+			}
+			.body {
+				position: relative;
+				width: 100%;
+				height: 80px;
+				padding: .4rem .75rem;
+				color: #6d6d6d;
+				overflow-y: hidden;
+				font-size:.85rem;
+				line-height:1.2rem;
+				border-right: 1px solid #efefef;
+				border-left: 1px solid #efefef;
+				&::after{
+					content: '';
+					position: absolute;
+					display: block;
+					right: 0;
+					bottom: 0;
+					width: 100%;
+					height:20px;
+					background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,.75) 40%, rgba(255,255,255,1) 100%);
+				}
+			}
+			.verification{
+				position: absolute;
+				bottom:20px;
+				width: 100%;
+				background-color: #f2f9fb;
+				color: #7d95a0;
+				font-size: .8rem;
+				padding: .1rem .2rem .05rem;
+				i.checkmark{
+					float: left;
+					padding:0 0 0 .5rem;
+					font-size:1.05rem;
+					color:#89a989;
+					cursor: pointer;
+				}
+			}
+			.footer {
+				background-color: #efefef;
+				width: 100%;
+				height: 20px;
+				@include clear-fix;
+				.date {
+					float: right;
+					display: block;
+					width: 60%;
+					font-size: .9rem;
+					padding: .35rem .75rem 0 .25rem;
+					color: #868686;
+					line-height: 1.1rem;
+				}
+				.more-detail {
+					float: right;
+					display: block;
+					width: 40%;
+					font-size: .75rem;
+					color: #8e8e8e;
+					text-align: left;
+					padding: .1rem 0 0 .75rem;
+					line-height:1.3rem;
+					&:hover {
+						color: #545454;
+						cursor: pointer;
+					}
+				}
+			}
+		}
+	}
+}
+
+.cm-table{
+	>div::before{
+		content: '';
+		display: inline-block;
+		background-color: #f3f3f3;
+		padding: .2rem .75rem;
+		font-size: .9rem;
+		color: #909090;
+		margin-bottom:.5rem;
+		position: absolute;
+		top: 0;
+	}
+	>div{
+		position: relative;
+		padding:2rem 0 .75rem;
+		color: #5f5f5f;
+		font-size: 1.2rem;
+
+		&.name::before {
+			content: 'نام شخص:';
+		}
+		&.email{
+			direction: ltr;
+			text-align: left;
+			&::before {
+				content: 'Email :';
+				padding:.3rem .75rem .1rem;
+			}
+		}
+		&.content::before {
+			content: 'متن دیدگاه:';
+		}
+		&.ip{
+			direction: ltr;
+			text-align: left;
+			&::before {
+				content: 'IP :';
+			}
+		}
+		&.verified::before{
+			content:'تأیید شده ؟'
+		}
+		&.verified_at::before{
+			content:'تأیید شده در'
+		}
+
+		&.created_at::before{
+			content: 'ارسال شده در';
+		}
+	}
+
+	.events{
+
+	}
+}

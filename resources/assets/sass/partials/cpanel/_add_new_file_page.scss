@@ -37,14 +37,18 @@
 
 .add-item-modal {
 	.icon-selection {
-		display: flex;
-		max-height:300px;
+		display: block;
+		max-height: 300px;
+		text-align: center;
+		max-height: 300px;
+		overflow-y: scroll;
 		.icon-selection-item {
 			border: 1px solid #e6f6f9;
 			padding: .5rem .6rem;
 			margin-left: .4rem;
 			margin-bottom: .4rem;
 			cursor: pointer;
+			display: inline-block;
 			&:hover {
 				border: 1px solid #d7eef3;
 				background-color: #fbffff;
@@ -52,6 +56,10 @@
 			&.active {
 				border: 1px solid #c7dce0;
 				background-color: #fff;
+			}
+			img {
+				width: 55px;
+				height: auto;
 			}
 		}
 	}
