@@ -17,6 +17,7 @@ class CreateFileExtensionTable extends Migration
 	        $table->string('extension',5)->nullable(false);
 	        $table->string('mimetype',100)->nullable(false);
 	        $table->integer('file_type_id')->unsigned();
+	        $table->integer('file_icon_id')->unsigned()->nullable();
         });
 	    
 	    //adding "file_type_id" foreign key to table
@@ -24,14 +25,17 @@ class CreateFileExtensionTable extends Migration
 	    	$table->foreign('file_type_id')
 			    ->references('id')
 			    ->on('au_file_type');
+	    	$table->foreign('file_icon_id')
+                ->references('id')
+                ->on('au_file');
 	    });
-	    
+
 	    $tuples = [
 	    	// Images
 		    [
 			    'extension' => 'jpeg',
 			    'mimetype' => 'image/jpeg',
-			    'file_type_id' => 1
+			    'file_type_id' => 1,
 		    ],
 		    [
 			    'extension' => 'jpg',
@@ -53,9 +57,9 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'image/svg+xml',
 			    'file_type_id' => 1
 		    ],
-		
-		
-		    
+
+
+
 		    // Videos
 		    [
 			    'extension' => 'flv',
@@ -87,7 +91,7 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'video/quicktime',
 			    'file_type_id' => 2
 		    ],
-		
+
 			// Audios
 		    [
 			    'extension' => 'mp3',
@@ -109,8 +113,8 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'audio/ogg',
 			    'file_type_id' => 3
 		    ],
-		    
-		    
+
+
 		    // Documents
 		    [
 			    'extension' => 'doc',
@@ -152,6 +156,26 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
 			    'file_type_id' => 4
 		    ],
+            [
+			    'extension' => 'xls',
+			    'mimetype' => 'application/vnd.ms-excel',
+			    'file_type_id' => 4
+		    ],
+		    [
+			    'extension' => 'xlt',
+			    'mimetype' => 'application/vnd.ms-excel',
+			    'file_type_id' => 4
+		    ],
+		    [
+			    'extension' => 'xlsx',
+			    'mimetype' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+			    'file_type_id' => 4
+		    ],
+		    [
+			    'extension' => 'xltx',
+			    'mimetype' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.template',
+			    'file_type_id' => 4
+		    ],
 		    [
 			    'extension' => 'pdf',
 			    'mimetype' => 'application/pdf',
@@ -162,8 +186,8 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'text/plain',
 			    'file_type_id' => 4
 		    ],
-		    
-		    
+
+
 		    //MISC
 		    [
 			    'extension' => 'zip',
@@ -175,13 +199,26 @@ class CreateFileExtensionTable extends Migration
 			    'mimetype' => 'application/x-rar-compressed',
 			    'file_type_id' => 5
 		    ],
-		    
-	
+            [
+                'extension' => 'rar',
+                'mimetype' => 'application/x-rar',
+                'file_type_id' => 5
+            ],
+
+
 	    ];
-	    
+
 	    foreach ($tuples as $tuple){
-	    	DB::table('au_file_extension')->insert($tuple);
-	    }
+            $data = [
+                'file_orig_name' => $tuple['extension'] . '.svg',
+                'file_title' => strtoupper($tuple['extension']),
+                'file_description' => '',
+                'cat_id' => 9,
+                'ext' => 'svg',
+                'responsive_image' => 0
+            ];
+            $a = DB::table('au_file_extension')->insert($tuple);
+        }
     }
 
     /**

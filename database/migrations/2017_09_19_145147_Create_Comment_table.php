@@ -15,8 +15,8 @@ class CreateCommentTable extends Migration
         Schema::create('au_comment', function (Blueprint $table) {
             $table->increments('id');
 	        $table->string('name',30)->nullable(false);
-	        $table->string('email',30);
-	        $table->string('content',300)->nullable(false);
+	        $table->string('email',100);
+	        $table->string('content',500)->nullable(false);
 			$table->boolean('verified')->nullable(false)->default(0);
 			$table->boolean('is_admin')->nullable(false)->default(0);
 			$table->ipAddress('ip')->nullable(false);
