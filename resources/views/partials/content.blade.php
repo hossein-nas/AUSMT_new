@@ -56,7 +56,7 @@
 							</a>
 						</h1>
 						<h2 class="summary">
-							{!!   $news->post->content !!}
+							{!!   $news->post->briefDescription !!}
 						</h2>
 						<div class="button-area">
 							<a href="{{ url()->route('showNews', $news->title_seo) }}" class="btn small success">

@@ -9,6 +9,7 @@ class Post extends Model
     protected $table = 'au_post';
     protected $touches = ['orig'];
     public $timestamps = false;
+    protected $appends = ['briefDescription'];
     protected $fillable = [
         'id',
         'content',
@@ -33,5 +34,12 @@ class Post extends Model
         return $this->hasOne('App\Models\Records\Post\Incoming', 'id');
     }
 
+
+    public function getBriefDescriptionAttribute(){
+        $plain_text = trim (strip_tags($this->content) );
+        $pos = strpos($plain_text, ' ', 210);
+        $text = substr($plain_text,0, $pos);
+        return $text. ' ...';
+    }
 
 }
