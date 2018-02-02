@@ -11,6 +11,10 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 
 var paths = {
+    initialStorageFile:{
+        fontsSrcDir: ["./storage/app/fonts/**/*"],
+        fontsDistDir: "./public/assets/fonts/"
+    },
     site: {
         dest: "public/assets/css",
         src: "resources/assets/sass/main.scss",
@@ -118,6 +122,14 @@ gulp.task('cpanel-vendors', function () {
         .pipe(uglify().on('error', gutil.log))
         .pipe(gulp.dest(paths.cpanelJsFiles.dest));
 });
+
+gulp.task('file_copy', function(){
+    /* ------------------------------------
+        Copying Fonts to public folder
+    ------------------------------------ */
+    gulp.src(paths.initialStorageFile.fontsSrcDir)
+    .pipe(gulp.dest(paths.initialStorageFile.fontsDistDir));
+})
 
 gulp.task('watch', function () {
     gulp.watch([paths.cpanel.watch_list, paths.site.watch_list], ['sass']);
