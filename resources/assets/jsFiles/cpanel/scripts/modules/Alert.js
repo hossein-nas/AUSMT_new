@@ -8,7 +8,7 @@ export class Alert {
             this.initiatingAlertElem();
             return this;
         }
-
+  
     }
 
     initiatingAlertElem() {

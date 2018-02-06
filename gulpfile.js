@@ -25,18 +25,32 @@ var paths = {
         src: "resources/assets/sass/cpanel.scss",
         watch_list: ['resources/assets/sass/partials/cpanel/**.scss', 'resources/assets/sass/cpanel.scss']
     },
-    jsFiles: {
-        dest: "public/assets/js",
-        frameworks: "resources/assets/jsFiles/frameworks/*.js",
-        custom: "resources/assets/jsFiles/custom/*.js"
-    },
     cpanelJsFiles: {
         vendors: 'resources/assets/jsFiles/cpanel/vendor/*.js',
-        bundles: 'resources/assets/jsFiles/cpanel/scripts.js',
+        bundle: 'resources/assets/jsFiles/cpanel/scripts.js',
         dest: 'public/assets/js/cpanel',
         ckeditor: {
             src : ['./storage/app/assets/js/CKEditor/**/*'],
             dist: './public/assets/js/libs/ckeditor/'
+        },
+        watchlist: {
+            vendor : ['resources/assets/jsFiles/cpanel/vendor/**/*.js'],
+            script : [
+                'resources/assets/jsFiles/cpanel/scripts.js',
+                'resources/assets/jsFiles/cpanel/scripts/**/*.js'
+            ]
+        }
+    },
+    siteJsFiles : {
+        vendors : 'resources/assets/jsFiles/site/vendor/**/*.js',
+        bundle : 'resources/assets/jsFiles/site/scripts.js',
+        dest : 'public/assets/js/site',
+        watchlist: {
+            vendor : ['resources/assets/jsFiles/site/vendor/**/*.js'],
+            script : [
+                'resources/assets/jsFiles/site/scripts.js',
+                'resources/assets/jsFiles/site/scripts/**/*.js'
+            ]
         }
     },
     jquery: {
@@ -97,25 +111,49 @@ gulp.task('minify', function () {
 
 });
 
+gulp.task('site-scripts', function () {
+    /*
+    * minifying site JS files
+    * */
+    browserify({
+        entries: paths.siteJsFiles.bundle,
+        debug: true
+    })
+    .transform(babelify)
+    .on('error', gutil.log)
+    .bundle()
+    .on('error', gutil.log)
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest(paths.siteJsFiles.dest))
+    .pipe(buffer())
+    .pipe(uglify())
+    .on('error', gutil.log)
+    .pipe( rename('bundle.min.js') )
+    .pipe( gulp.dest( paths.siteJsFiles.dest ));
+
+});
+
+
 gulp.task('cpanel-scripts', function () {
     /*
     * minifying cpanel JS files
     * */
     browserify({
-        entries: 'resources/assets/jsFiles/cpanel/scripts.js',
+        entries: paths.cpanelJsFiles.bundle,
         debug: true
     })
-        .transform(babelify)
-        .on('error', gutil.log)
-        .bundle()
-        .on('error', gutil.log)
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest(paths.cpanelJsFiles.dest))
-        .pipe(buffer())
-        .pipe(uglify())
-        .on('error', gutil.log)
-        .pipe( rename('bundle.min.js') )
-        .pipe( gulp.dest( paths.cpanelJsFiles.dest ));
+    .transform(babelify)
+    .on('error', gutil.log)
+    .bundle()
+    .on('error', gutil.log)
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest(paths.cpanelJsFiles.dest))
+    .pipe(buffer())
+    .pipe(uglify())
+    .on('error', gutil.log)
+    .pipe( rename('bundle.min.js') )
+    .pipe( gulp.dest( paths.cpanelJsFiles.dest ));
+
 });
 
 gulp.task('cpanel-vendors', function () {
@@ -136,6 +174,18 @@ gulp.task('cpanel-vendors', function () {
         .pipe(gulp.dest(paths.cpanelJsFiles.dest));
 });
 
+gulp.task('site-vendors', function () {
+    /*
+    * minifying cpanel vendors JS files
+    * */
+    gulp.src(paths.siteJsFiles.vendors)
+        .pipe(concat('vendors.js'))
+        .pipe(gulp.dest(paths.siteJsFiles.dest))
+        .pipe(rename('vendors.min.js'))
+        .pipe(uglify().on('error', gutil.log))
+        .pipe(gulp.dest(paths.siteJsFiles.dest));
+});
+
 gulp.task('file_copy', function(){
     /* ------------------------------------
         Copying Fonts to public folder
@@ -149,10 +199,21 @@ gulp.task('file_copy', function(){
 
 gulp.task('watch', function () {
     gulp.watch([paths.cpanel.watch_list, paths.site.watch_list], ['sass']);
-    // gulp.watch('resources/assets/jsFiles/**/*.js', ['minify']);
 
-    gulp.watch('resources/assets/jsFiles/cpanel/scripts/**/*.js', ['cpanel-scripts'])
-    gulp.watch('resources/assets/jsFiles/cpanel/vendor/*.js', ['cpanel-vendors'])
+    gulp.watch(paths.cpanelJsFiles.watchlist.vendor, ['cpanel-vendors'])
+    gulp.watch(paths.cpanelJsFiles.watchlist.script, ['cpanel-scripts'])
+
+    gulp.watch(paths.siteJsFiles.watchlist.vendor, ['site-vendors'])
+    gulp.watch(paths.siteJsFiles.watchlist.script, ['site-scripts'])
 });
 
-gulp.task('default', ['sass', 'minify', 'cpanel-scripts', 'watch']);
+
+gulp.task('build', [
+    'sass',
+    'file_copy',
+    'cpanel-vendors',
+    'site-vendors',
+    'site-scripts',
+    'cpanel-scripts',
+])
+gulp.task('default', ['build', 'watch']);

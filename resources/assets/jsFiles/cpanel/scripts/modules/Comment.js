@@ -8,8 +8,8 @@ export class Comment {
         this.data = dataAttr
         this.data.dates = ['created_at', 'updated_at', 'verified_at'];
         this.convertDates();
-    }
-
+    } 
+ 
     showDetailModal() {
         var options = {
             modalClassName : 'ui modal small',

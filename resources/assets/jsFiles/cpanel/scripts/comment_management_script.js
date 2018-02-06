@@ -6,7 +6,7 @@ import {Alert} from './modules/Alert';
 
 
     // terminating if elem not present
-    if (!elem.length)
+    if (!elem.length) 
         return;
 
     /*

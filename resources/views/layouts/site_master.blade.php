@@ -35,9 +35,9 @@
 
 </section>
 <!-- java script  -->
-{!! Html::script("assets/js/jq.js")!!}
-{!! Html::script("assets/js/plugins.min.js")!!}
-{!! Html::script("assets/js/scripts.min.js")!!}
+{!! Html::script("assets/js/libs/jquery-1.9.1.min.js")!!}
+{!! Html::script("assets/js/site/vendors.min.js")!!}
+{!! Html::script("assets/js/site/bundle.min.js")!!}
 @yield('scripts')
 <!-- java script  -->
 </body>
