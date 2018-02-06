@@ -1,0 +1,56 @@
+/*******************************
+         Site Overrides
+*******************************/
+ 
+
+.insertFonts() {
+    @font-face {
+    font-family: @fontName;
+    src: @fallbackSRC;
+    src: @src;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+    @font-face {
+    font-family: @fontName;
+    src: @src_bold;
+    font-style: normal;
+    font-weight: bold;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+
+    @font-face {
+    font-family: @secondaryFontName;
+    src: @secondaryFallbackSRC;
+    src: @secondarySrc;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    }
+
+    @font-face {
+    font-family: @secondaryFontName;
+    src: @secondarySrc_light;
+    font-style: normal;
+    font-weight: 300;
+    font-variant: normal;
+    text-transform: none;
+    } 
+
+    @font-face {
+    font-family: @secondaryFontName;
+    src: @secondarySrc_bold;
+    font-style: normal;
+    font-weight: bold;
+    font-variant: normal;
+    text-transform: none;
+    }
+}
+
+.insertFonts();

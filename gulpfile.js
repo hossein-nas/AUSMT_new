@@ -27,14 +27,21 @@ var paths = {
     },
     jsFiles: {
         dest: "public/assets/js",
-        jquery: "resources/assets/jsFiles/jq.js",
         frameworks: "resources/assets/jsFiles/frameworks/*.js",
         custom: "resources/assets/jsFiles/custom/*.js"
     },
     cpanelJsFiles: {
         vendors: 'resources/assets/jsFiles/cpanel/vendor/*.js',
         bundles: 'resources/assets/jsFiles/cpanel/scripts.js',
-        dest: 'public/assets/js/cpanel'
+        dest: 'public/assets/js/cpanel',
+        ckeditor: {
+            src : ['./storage/app/assets/js/CKEditor/**/*'],
+            dist: './public/assets/js/libs/ckeditor/'
+        }
+    },
+    jquery: {
+        src: 'storage/app/assets/js/jquery-1.9.1.js',
+        dist: 'public/assets/js/libs/'
     }
 };
 
@@ -115,6 +122,12 @@ gulp.task('cpanel-vendors', function () {
     /*
     * minifying cpanel vendors JS files
     * */
+    gulp.src( paths.jquery.src )
+        .pipe( gulp.dest( paths.jquery.dist ))
+        .pipe( uglify().on('error', gutil.log) )
+        .pipe( rename('jquery-1.9.1.min.js'))
+        .pipe( gulp.dest(paths.jquery.dist) );
+
     gulp.src(paths.cpanelJsFiles.vendors)
         .pipe(concat('vendors.js'))
         .pipe(gulp.dest(paths.cpanelJsFiles.dest))
@@ -129,6 +142,9 @@ gulp.task('file_copy', function(){
     ------------------------------------ */
     gulp.src(paths.initialStorageFile.fontsSrcDir)
     .pipe(gulp.dest(paths.initialStorageFile.fontsDistDir));
+    
+    gulp.src( paths.cpanelJsFiles.ckeditor.src )
+    .pipe( gulp.dest( paths.cpanelJsFiles.ckeditor.dist ))
 })
 
 gulp.task('watch', function () {

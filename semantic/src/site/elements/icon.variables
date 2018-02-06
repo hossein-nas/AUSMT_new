@@ -1,0 +1,16 @@
+/*******************************
+    User Variable Overrides
+*******************************/
+
+
+
+@fontName: 'icons';
+@fontDir: 'semantic_icon_font';
+@fallbackSRC: url("@{fontPath}/@{fontDir}/@{fontName}.eot");
+@src:
+  url("@{fontPath}/@{fontDir}/@{fontName}.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{fontDir}/@{fontName}.woff2") format('woff2'),
+  url("@{fontPath}/@{fontDir}/@{fontName}.woff") format('woff'),
+  url("@{fontPath}/@{fontDir}/@{fontName}.ttf") format('truetype'),
+  url("@{fontPath}/@{fontDir}/@{fontName}.svg#icons") format('svg')
+;

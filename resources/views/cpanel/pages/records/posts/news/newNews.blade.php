@@ -164,8 +164,7 @@
         })
     </script>
 
-    <script src={{ asset('assets/js/libs/CKEditor/ckeditor.js') }}></script>
-    <script src={{ asset('assets/js/libs/cropper.min.js') }}></script>
+    <script src={{ asset('assets/js/libs/ckeditor/ckeditor.js') }}></script>
     <script>
         CKEDITOR.replace('textarea', {
             language: 'fa',

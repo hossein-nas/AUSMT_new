@@ -40,7 +40,7 @@
         </div>
     </div>
 <!------------------------------------------- JS ---------------------------------------------->
-<script src=" {{ asset('assets/js/libs/jquery-1.12.4.min.js') }}"></script>
+<script src=" {{ asset('assets/js/libs/jquery-1.9.1.min.js') }}"></script>
 <script src="{{ asset('assets/js/cpanel/vendors.min.js') }}"></script>
 <script src="{{ asset('assets/js/cpanel/bundle.min.js') }}"></script>
 {{--<script src="{{asset('cpanel/js/js.js')}}"></script>--}}

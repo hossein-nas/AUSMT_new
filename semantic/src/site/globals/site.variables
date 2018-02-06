@@ -1,0 +1,61 @@
+/*******************************
+     User Global Variables
+*******************************/
+
+@importGoogleFonts : false;
+
+
+@fontName          : 'IranSans-Web';
+@secondaryFontName : 'Shabnam-Web';
+
+@headerFont        : @fontName, @secondaryFontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+@pageFont          : @fontName, @secondaryFontName, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+ 
+
+@fontPath  : '../fonts';
+
+@fontFileName: 'IRANSansWeb';
+@fontDir: 'iransans_font';
+@fallbackSRC: url("@{fontPath}/@{fontDir}/@{fontFileName}.eot");
+@src:
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Light.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Light.woff2") format('woff2'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Light.woff") format('woff'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Light.ttf") format('truetype'),
+;
+
+@src_bold:
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Medium.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Medium.woff2") format('woff2'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Medium.woff") format('woff'),
+  url("@{fontPath}/@{fontDir}/@{fontFileName}_Medium.ttf") format('truetype'),
+;
+
+
+/* Secondary Font */
+@secondaryFontFileName: 'Shabnam';
+@secondaryFontDir: 'shabnam_font_v2.3.0';
+@secondaryFallbackSRC: url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}.eot");
+@secondarySrc:
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}.woff2") format('woff2'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}.woff") format('woff'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}.ttf") format('truetype'),
+;
+
+@secondarySrc_light:
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Light.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Light.woff2") format('woff2'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Light.woff") format('woff'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Light.ttf") format('truetype'),
+;
+
+@secondarySrc_bold:
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Bold.eot?#iefix") format('embedded-opentype'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Bold.woff2") format('woff2'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Bold.woff") format('woff'),
+  url("@{fontPath}/@{secondaryFontDir}/@{secondaryFontFileName}-Bold.ttf") format('truetype'),
+;
+
+
