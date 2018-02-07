@@ -11,4 +11,4 @@ _ide_helper.php
 public/
 !public/files/
 *.log
-/**/*.gitignore
+!/storage
