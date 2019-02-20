@@ -12,3 +12,6 @@ public/
 !public/files/
 *.log
 !/storage
+semantic/node_modules
+package-lock.json
+composer.lock
