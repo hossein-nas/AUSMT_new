@@ -11,9 +11,27 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 
 var paths = {
-    initialStorageFile:{
-        fontsSrcDir: ["./storage/app/fonts/**/*"],
-        fontsDistDir: "./public/assets/fonts/"
+    systemFiles:{
+        fonts: {
+            src : ["./storage/app/fonts/**/*"],
+            dest : "./public/assets/fonts/"
+        },
+        imgs: {
+            src: ["./storage/app/assets/img/**/*"],
+            dest: "./public/assets/img/"
+        },
+        js: {
+            src: ["./storage/app/assets/js/**/*"],
+            dest: "./public/assets/js/"
+        },
+        fastmenu: {
+            src: ["./storage/app/fastmenu/**/*"],
+            dest: "./public/files/images/fastmenu_icons/"
+        },
+        filetypes: {
+            src: ["./storage/app/filetypes/**/*"],
+            dest: "./public/files/images/filetypes_icons/"
+        },
     },
     site: {
         dest: "public/assets/css",
@@ -72,7 +90,10 @@ gulp.task('sass', function () {
         )
         .pipe(autoprefixer('last 100 version'))
         .pipe(rename('main.min.css'))
-        .pipe(gulp.dest(paths.site.dest));
+        .pipe(gulp.dest(paths.site.dest))
+        .on( 'end' , function(){
+            console.log("Site StyleSheet Bundle Successfully created at '" + paths.site.dest + "'\t\t\t \x1b[42m \u2713 \x1b[0m")
+        })
 
     gulp.src(paths.cpanel.src)
         .pipe(
@@ -86,30 +107,12 @@ gulp.task('sass', function () {
         )
         .pipe(autoprefixer('last 100 version'))
         .pipe(rename('cpanel.min.css'))
-        .pipe(gulp.dest(paths.cpanel.dest));
+        .pipe(gulp.dest(paths.cpanel.dest))
+        .on( 'end' , function(){
+            console.log("CPanel StyleSheet Bundle Successfully created at '" + paths.cpanel.dest + "'\t\t \x1b[42m \u2713 \x1b[0m")
+        })
 });
 
-
-gulp.task('minify', function () {
-    // gulp.src(paths.jsFiles.jquery)
-    //     .pipe(uglify())
-    //     .pipe(gulp.dest(paths.jsFiles.dest));
-    // gulp.src(paths.jsFiles.frameworks)
-    //     .pipe(concat('plugins.js'))
-    //     .pipe(gulp.dest(paths.jsFiles.dest))
-    //     .pipe(rename('plugins.min.js'))
-    //     .pipe(uglify())
-    //     .pipe(gulp.dest(paths.jsFiles.dest));
-    // gulp.src(paths.jsFiles.custom)
-    //     .pipe(concat('scripts.js'))
-    //     .pipe(gulp.dest(paths.jsFiles.dest))
-    //     .pipe(rename('scripts.min.js'))
-    //     .pipe(
-    //         uglify().on('error', gutil.log)
-    //     )
-    //     .pipe(gulp.dest(paths.jsFiles.dest));
-
-});
 
 gulp.task('site-scripts', function () {
     /*
@@ -129,7 +132,10 @@ gulp.task('site-scripts', function () {
     .pipe(uglify())
     .on('error', gutil.log)
     .pipe( rename('bundle.min.js') )
-    .pipe( gulp.dest( paths.siteJsFiles.dest ));
+    .pipe( gulp.dest( paths.siteJsFiles.dest ))
+    .on( 'end' , function(){
+        console.log("Site JS Bundle Successfully created at '" + paths.siteJsFiles.dest + "'\t\t \x1b[42m \u2713 \x1b[0m")
+    })
 
 });
 
@@ -152,7 +158,11 @@ gulp.task('cpanel-scripts', function () {
     .pipe(uglify())
     .on('error', gutil.log)
     .pipe( rename('bundle.min.js') )
-    .pipe( gulp.dest( paths.cpanelJsFiles.dest ));
+    .pipe( gulp.dest( paths.cpanelJsFiles.dest ))
+    .on( 'end' , function(){
+        console.log("CPanel JS Bundle Successfully created at '" + paths.cpanelJsFiles.dest + "'\t\t \x1b[42m \u2713 \x1b[0m")
+    })
+
 
 });
 
@@ -164,14 +174,20 @@ gulp.task('cpanel-vendors', function () {
         .pipe( gulp.dest( paths.jquery.dist ))
         .pipe( uglify().on('error', gutil.log) )
         .pipe( rename('jquery-1.9.1.min.js'))
-        .pipe( gulp.dest(paths.jquery.dist) );
+        .pipe( gulp.dest(paths.jquery.dist) )
+        .on( 'end' , function(){
+            console.log("Jquery Library Successfully created at '" + paths.jquery.dist + "'\t\t\t \x1b[42m \u2713 \x1b[0m")
+        })
 
     gulp.src(paths.cpanelJsFiles.vendors)
         .pipe(concat('vendors.js'))
         .pipe(gulp.dest(paths.cpanelJsFiles.dest))
         .pipe(rename('vendors.min.js'))
         .pipe(uglify().on('error', gutil.log))
-        .pipe(gulp.dest(paths.cpanelJsFiles.dest));
+        .pipe(gulp.dest(paths.cpanelJsFiles.dest))
+        .on( 'end' , function(){
+            console.log("CPanel Vendors Successfully created at '" + paths.cpanelJsFiles.dest + "'\t\t \x1b[42m \u2713 \x1b[0m")
+        })
 });
 
 gulp.task('site-vendors', function () {
@@ -183,18 +199,58 @@ gulp.task('site-vendors', function () {
         .pipe(gulp.dest(paths.siteJsFiles.dest))
         .pipe(rename('vendors.min.js'))
         .pipe(uglify().on('error', gutil.log))
-        .pipe(gulp.dest(paths.siteJsFiles.dest));
+        .pipe(gulp.dest(paths.siteJsFiles.dest))
+        .on( 'end' , function(){
+            console.log("Site Vendors Successfully created at '" + paths.siteJsFiles.dest + "'\t\t\t \x1b[42m \u2713 \x1b[0m")
+        })
 });
 
 gulp.task('file_copy', function(){
-    /* ------------------------------------
-        Copying Fonts to public folder
-    ------------------------------------ */
-    gulp.src(paths.initialStorageFile.fontsSrcDir)
-    .pipe(gulp.dest(paths.initialStorageFile.fontsDistDir));
-    
-    gulp.src( paths.cpanelJsFiles.ckeditor.src )
-    .pipe( gulp.dest( paths.cpanelJsFiles.ckeditor.dist ))
+    /*
+    * Copying Fonts to public path
+    * */
+    gulp.src( paths.systemFiles.fonts.src )
+        .pipe( gulp.dest( paths.systemFiles.fonts.dest ) )
+        .on( 'end', function() {
+            console.log("Fonts Successfully Copied at '"+ paths.systemFiles.fonts.dest +"'\t\t\t\t \x1b[42m \u2713 \x1b[0m")
+        });
+
+    /*
+    * Copying System Images to public path
+    * */
+    gulp.src( paths.systemFiles.imgs.src )
+        .pipe( gulp.dest( paths.systemFiles.imgs.dest ))
+        .on( 'end', function() {
+            console.log("System Images Successfully Copied at '"+ paths.systemFiles.imgs.dest +"'\t\t\t \x1b[42m \u2713 \x1b[0m")
+        });
+
+    /*
+    * Copying JS files to public path
+    * */
+    gulp.src( paths.systemFiles.js.src )
+        .pipe( gulp.dest( paths.systemFiles.js.dest ))
+        .on( 'end', function() {
+            console.log("JS Files Successfully Copied at '"+ paths.systemFiles.js.dest +"\'\t\t\t\t \x1b[42m \u2713 \x1b[0m")
+        });
+
+    /*
+    * Copying Fastmenu Icons to public path
+    * */
+    gulp.src( paths.systemFiles.fastmenu.src )
+        .pipe( gulp.dest( paths.systemFiles.fastmenu.dest ))
+        .on( 'end', function() {
+            console.log("Fastmenu Icons Successfully Copied at '"+ paths.systemFiles.fastmenu.dest +"'\t \x1b[42m \u2713 \x1b[0m")
+        });
+
+    /*
+    * Copying Filetypes Icons to public path
+    * */
+    gulp.src( paths.systemFiles.filetypes.src )
+        .pipe( gulp.dest( paths.systemFiles.filetypes.dest ))
+        .on( 'end', function() {
+            console.log("Filetype Icons Successfully Copied at '"+ paths.systemFiles.filetypes.dest +"'\t \x1b[42m \u2713 \x1b[0m")
+        });
+
 })
 
 gulp.task('watch', function () {
@@ -216,4 +272,5 @@ gulp.task('build', [
     'site-scripts',
     'cpanel-scripts',
 ])
+
 gulp.task('default', ['build', 'watch']);
