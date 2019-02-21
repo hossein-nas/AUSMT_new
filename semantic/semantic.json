@@ -12,7 +12,8 @@
       "uncompressed": "dist/components/",
       "compressed": "dist/components/",
       "themes": "dist/themes/",
-      "cssDevelopment" : "../public/assets/css/"
+      "cssDevelopment" : "../public/assets/css/",
+      "jsDevelopment" : "../resources/assets/jsFiles/cpanel/vendor/"
     },
     "clean": "dist/"
   },
