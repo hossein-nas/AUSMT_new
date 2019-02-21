@@ -72,7 +72,7 @@ var paths = {
         }
     },
     jquery: {
-        src: 'storage/app/assets/js/jquery-1.9.1.js',
+        src: 'storage/app/assets/js/jquery*.js',
         dist: 'public/assets/js/libs/'
     }
 };
