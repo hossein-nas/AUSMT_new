@@ -104,6 +104,9 @@ module.exports = function(gulp) {
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))
         .pipe(gulp.dest(output.packaged))
         .pipe(print(log.created))
+        .on('end', function(){
+            filepublisher.js();
+        })
     ;
   });
 
@@ -136,7 +139,7 @@ module.exports = function(gulp) {
           .pipe(gulp.dest(output.packaged))
           .pipe(print(log.created))
           .on('end', function(){
-            filepublisher();
+            filepublisher.css();
           })
       ;
     });
@@ -226,7 +229,7 @@ module.exports = function(gulp) {
         .pipe(header(banner, settings.header))
         .pipe(gulpif(config.hasPermission, chmod(config.permission)))
         .pipe(gulp.dest(docsOutput.packaged))
-        .pipe(print(log.created))
+        .pipe(print(log.created));
     ;
   });
 
