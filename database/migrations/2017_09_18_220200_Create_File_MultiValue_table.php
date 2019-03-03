@@ -15,10 +15,10 @@ class CreateFileMultiValueTable extends Migration
         Schema::create('au_file_multivalue', function (Blueprint $table) {
             $table->increments('id');
 	        $table->string('file_fullpath',250)->unique()->nullable(false);
-	        $table->string('ratio',5);
+	        $table->string('ratio',5)->nullable(true);
 	        $table->integer('filesize')->nullable(false);
-	        $table->integer('width');
-	        $table->integer('height');
+	        $table->integer('width')->nullable(true);
+	        $table->integer('height')->nullable(true);
         });
 	    
 	    Schema::table('au_file_multivalue', function (Blueprint $table){

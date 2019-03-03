@@ -12,25 +12,25 @@ class AddingInitialTuplesForAuFileExtensionTable extends Migration
      */
     public function up()
     {
-        $ret =\App\Models\Files\File_Extension::get();
-        foreach($ret as $it){
-            $ext = $it->extension;
-            $related_file_path = storage_path('app/filetypes/') . $ext . '.svg';
+        $ret = \App\Models\Files\File_Extension::get();
+        foreach ($ret as $ext) {
             $data = [
-                'filepath' => $related_file_path,
-                'file_orig_name' => $ext . '.svg',
-                'file_title' => strtoupper($ext),
-                'file_description' => '',
-                'cat_id' => 9,
+                'orig_name' => $ext->extension . '.svg',
                 'ext' => 'svg',
-                'responsive_image' => 0
+                'basedir' => '/files/images/mimetype_icons',
+                'name' => md5($ext->extension),
+                'hashName' => md5($ext->extension) . '.svg',
+                'sourcedir' => storage_path('app/') . 'filetypes',
+                'is_responsive' => false,
+                'is_image' => false,
             ];
-            $ret = (new \App\Http\Controllers\Files\FilesController())->saveNewFile($data);
-            $id = $ret->get('id');
-            $it->file_icon_id = $id;
-            $it->save();
-
+            $ret = (new \App\Http\Controllers\Files\FilesController())->localFileToDB($data);
+            $ext->file_icon_id = $ret['id'];
+            $ext->save();
         }
+
+        echo  ('File Extension Mimetype Icons Added Successfully ') . PHP_EOL;
+
     }
 
     /**

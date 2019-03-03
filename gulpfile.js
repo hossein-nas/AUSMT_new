@@ -13,24 +13,16 @@ var buffer = require('vinyl-buffer');
 var paths = {
     systemFiles:{
         fonts: {
-            src : ["./storage/app/fonts/**/*"],
+            src : ["./storage/app/private/fonts/**/*"],
             dest : "./public/assets/fonts/"
         },
         imgs: {
-            src: ["./storage/app/assets/img/**/*"],
+            src: ["./storage/app/private/assets/img/**/*"],
             dest: "./public/assets/img/"
         },
         js: {
-            src: ["./storage/app/assets/js/**/*"],
+            src: ["./storage/app/private/assets/js/**/*"],
             dest: "./public/assets/js/"
-        },
-        fastmenu: {
-            src: ["./storage/app/fastmenu/**/*"],
-            dest: "./public/files/images/fastmenu_icons/"
-        },
-        filetypes: {
-            src: ["./storage/app/filetypes/**/*"],
-            dest: "./public/files/images/filetypes_icons/"
         },
     },
     site: {
@@ -215,14 +207,6 @@ gulp.task('file_copy', function(){
             console.log("Fonts Successfully Copied at '"+ paths.systemFiles.fonts.dest +"'\t\t\t\t \x1b[42m \u2713 \x1b[0m")
         });
 
-    /*
-    * Copying System Images to public path
-    * */
-    gulp.src( paths.systemFiles.imgs.src )
-        .pipe( gulp.dest( paths.systemFiles.imgs.dest ))
-        .on( 'end', function() {
-            console.log("System Images Successfully Copied at '"+ paths.systemFiles.imgs.dest +"'\t\t\t \x1b[42m \u2713 \x1b[0m")
-        });
 
     /*
     * Copying JS files to public path
@@ -233,23 +217,6 @@ gulp.task('file_copy', function(){
             console.log("JS Files Successfully Copied at '"+ paths.systemFiles.js.dest +"\'\t\t\t\t \x1b[42m \u2713 \x1b[0m")
         });
 
-    /*
-    * Copying Fastmenu Icons to public path
-    * */
-    gulp.src( paths.systemFiles.fastmenu.src )
-        .pipe( gulp.dest( paths.systemFiles.fastmenu.dest ))
-        .on( 'end', function() {
-            console.log("Fastmenu Icons Successfully Copied at '"+ paths.systemFiles.fastmenu.dest +"'\t \x1b[42m \u2713 \x1b[0m")
-        });
-
-    /*
-    * Copying Filetypes Icons to public path
-    * */
-    gulp.src( paths.systemFiles.filetypes.src )
-        .pipe( gulp.dest( paths.systemFiles.filetypes.dest ))
-        .on( 'end', function() {
-            console.log("Filetype Icons Successfully Copied at '"+ paths.systemFiles.filetypes.dest +"'\t \x1b[42m \u2713 \x1b[0m")
-        });
 
 })
 

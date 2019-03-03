@@ -39,70 +39,77 @@ class CreateFileCategoryTable extends Migration
                 'dir_name' => 'files',
                 'removable' => 0
             ],
-                [
-                    'name' => 'تصاویر',
-                    'base_dir_path' => '/files/images',
-                    'dir_name' => 'images',
-                    'removable' => 0,
-                    'parent_category_id' => 1
-                ],
-                [
-                    'name' => 'ویدئوها',
-                    'base_dir_path' => '/files/videos',
-                    'dir_name' => 'videos',
-                    'removable' => 0,
-                    'parent_category_id' => 1
-                ],
-                [
-                    'name' => 'صوت‌ها',
-                    'base_dir_path' => '/files/audios',
-                    'dir_name' => 'audios',
-                    'removable' => 0,
-                    'parent_category_id' => 1
-                ],
-                [
-                    'name' => 'اسناد',
-                    'base_dir_path' => '/files/docs',
-                    'dir_name' => 'docs',
-                    'removable' => 0,
-                    'parent_category_id' => 1
-                ],
-                [
-                    'name' => 'متفرقه',
-                    'base_dir_path' => '/files/misc',
-                    'dir_name' => 'misc',
-                    'removable' => 0,
-                    'parent_category_id' => 1
-                ],
-                    [
-                        'name' => 'تصاویر شاخص',
-                        'base_dir_path' => '/files/images/record_thumbnails',
-                        'dir_name' => 'record_thumbnails',
-                        'removable' => 0,
-                        'parent_category_id' => 2
-                    ],
-                    [
-                        'name' => 'آیکون‌های منوی دسترسی سریع',
-                        'base_dir_path' => '/files/images/fastmenu_icons',
-                        'dir_name' => 'fastmenu_icons',
-                        'removable' => 0,
-                        'parent_category_id' => 2
-                    ],
-                    [
-                        'name' => 'آیکون‌های فایل‌ها',
-                        'base_dir_path' => '/files/images/mimetype_icons',
-                        'dir_name' => 'mimetype_icons',
-                        'removable' => 0,
-                        'parent_category_id' => 2
-                    ],
+            [
+                'name' => 'تصاویر',
+                'base_dir_path' => '/files/images',
+                'dir_name' => 'images',
+                'removable' => 0,
+                'parent_category_id' => 1
+            ],
+            [
+                'name' => 'ویدئوها',
+                'base_dir_path' => '/files/videos',
+                'dir_name' => 'videos',
+                'removable' => 0,
+                'parent_category_id' => 1
+            ],
+            [
+                'name' => 'صوت‌ها',
+                'base_dir_path' => '/files/audios',
+                'dir_name' => 'audios',
+                'removable' => 0,
+                'parent_category_id' => 1
+            ],
+            [
+                'name' => 'اسناد',
+                'base_dir_path' => '/files/docs',
+                'dir_name' => 'docs',
+                'removable' => 0,
+                'parent_category_id' => 1
+            ],
+            [
+                'name' => 'متفرقه',
+                'base_dir_path' => '/files/misc',
+                'dir_name' => 'misc',
+                'removable' => 0,
+                'parent_category_id' => 1
+            ],
+            [
+                'name' => 'تصاویر شاخص',
+                'base_dir_path' => '/files/images/record_thumbnails',
+                'dir_name' => 'record_thumbnails',
+                'removable' => 0,
+                'parent_category_id' => 2
+            ],
+            [
+                'name' => 'تصاویر کاربران',
+                'base_dir_path' => '/files/images/users_thumbnails',
+                'dir_name' => 'users_thumbnails',
+                'removable' => 0,
+                'parent_category_id' => 2
+            ],
+            [
+                'name' => 'آیکون‌های منوی دسترسی سریع',
+                'base_dir_path' => '/files/images/fastmenu_icons',
+                'dir_name' => 'fastmenu_icons',
+                'removable' => 0,
+                'parent_category_id' => 2
+            ],
+            [
+                'name' => 'آیکون‌های فایل‌ها',
+                'base_dir_path' => '/files/images/mimetype_icons',
+                'dir_name' => 'mimetype_icons',
+                'removable' => 0,
+                'parent_category_id' => 2
+            ],
 
-                    [
-                        'name' => 'فایل‌های ضمیمه',
-                        'base_dir_path' => '/files/misc/attachment_files',
-                        'dir_name' => 'attachment_files',
-                        'removable' => 0,
-                        'parent_category_id' => 6
-                    ],
+            [
+                'name' => 'فایل‌های ضمیمه',
+                'base_dir_path' => '/files/misc/attachment_files',
+                'dir_name' => 'attachment_files',
+                'removable' => 0,
+                'parent_category_id' => 6
+            ],
 
         ];
         foreach ($tuples as $tuple):
