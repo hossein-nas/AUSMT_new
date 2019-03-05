@@ -1,7 +1,7 @@
 homestead.yaml
 Homestead.json
 .*
-!.env
+!.env.example
 !.gitignore
 !.htaccess
 !.babelrc
@@ -14,3 +14,4 @@ public/
 semantic/node_modules
 package-lock.json
 composer.lock
+semantic/dist/
